@@ -1,0 +1,25 @@
+name: foci-review
+
+x-tools: &tools
+  build:
+    context: .
+    dockerfile: Dockerfile.tools
+  env_file: .env
+  environment:
+    HOST_DIR: ${PWD}
+  working_dir: ${PWD}
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    # Same absolute path as on the host, so the app's relative bind mounts resolve.
+    - ${PWD}:${PWD}
+
+services:
+  verify:
+    <<: *tools
+    command: ['bash', 'scripts/verify.sh']
+  stress:
+    <<: *tools
+    command: ['bash', 'scripts/stress.sh']
+  scans:
+    <<: *tools
+    command: ['bash', 'scripts/scans.sh']
