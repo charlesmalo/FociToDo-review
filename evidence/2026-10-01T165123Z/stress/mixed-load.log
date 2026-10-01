@@ -1,0 +1,55 @@
+# mixed-load.log was truncated for evidence size (original:    59858 lines, 18MB).
+# It consisted almost entirely of one repeated per-iteration exception (k6's console error
+# for createTodo() inside the default function, called on every VU iteration, each printing
+# a full stack trace -- see mixed-load.invariants.txt for one example).
+# Occurrences of "Error: setup create failed: 502" in the original log: counted via grep -c below.
+59809
+
+## First 5 occurrences (deduped pattern):
+time="2026-10-01T16:53:24Z" level=error msg="Error: setup create failed: 502\n\tat createTodo (file:///Users/cyber/workspace/FociToDo-review/k6/common.js:8:38(29))\n\tat default (file:///Users/cyber/workspace/FociToDo-review/k6/mixed-load.js:20:26(10))\n" executor=ramping-vus scenario=default source=stacktrace
+time="2026-10-01T16:53:24Z" level=error msg="Error: setup create failed: 502\n\tat createTodo (file:///Users/cyber/workspace/FociToDo-review/k6/common.js:8:38(29))\n\tat default (file:///Users/cyber/workspace/FociToDo-review/k6/mixed-load.js:20:26(10))\n" executor=ramping-vus scenario=default source=stacktrace
+time="2026-10-01T16:53:24Z" level=error msg="Error: setup create failed: 502\n\tat createTodo (file:///Users/cyber/workspace/FociToDo-review/k6/common.js:8:38(29))\n\tat default (file:///Users/cyber/workspace/FociToDo-review/k6/mixed-load.js:20:26(10))\n" executor=ramping-vus scenario=default source=stacktrace
+time="2026-10-01T16:53:24Z" level=error msg="Error: setup create failed: 502\n\tat createTodo (file:///Users/cyber/workspace/FociToDo-review/k6/common.js:8:38(29))\n\tat default (file:///Users/cyber/workspace/FociToDo-review/k6/mixed-load.js:20:26(10))\n" executor=ramping-vus scenario=default source=stacktrace
+time="2026-10-01T16:53:24Z" level=error msg="Error: setup create failed: 502\n\tat createTodo (file:///Users/cyber/workspace/FociToDo-review/k6/common.js:8:38(29))\n\tat default (file:///Users/cyber/workspace/FociToDo-review/k6/mixed-load.js:20:26(10))\n" executor=ramping-vus scenario=default source=stacktrace
+
+## Final k6 output (thresholds + totals):
+
+    http_req_failed
+    ✗ 'rate==0' rate=67.96%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 22648  464.198495/s
+    checks_succeeded...: 99.65% 22569 out of 22648
+    checks_failed......: 0.34%  79 out of 22648
+
+    ✗ list 200
+      ↳  99% — ✓ 5654 / ✗ 8
+    ✗ edit 200
+      ↳  99% — ✓ 5648 / ✗ 14
+    ✗ complete 200
+      ↳  99% — ✓ 5638 / ✗ 24
+    ✗ delete 204
+      ↳  99% — ✓ 5629 / ✗ 33
+
+    HTTP
+    http_req_duration..............: avg=22.52ms min=10.37µs med=25.53ms max=106.29ms p(90)=37.91ms p(95)=41.32ms
+      { expected_response:true }...: avg=10.87ms min=10.37µs med=4.9ms   max=106.29ms p(90)=26.03ms p(95)=31.41ms
+      { name:GET /todos }..........: avg=10.59ms min=20.2µs  med=4.59ms  max=106.29ms p(90)=25.57ms p(95)=30.83ms
+    http_req_failed................: 67.96% 59888 out of 88119
+    http_reqs......................: 88119  1806.106816/s
+
+    EXECUTION
+    iteration_duration.............: avg=30.51ms min=1.48ms  med=28.99ms max=331.75ms p(90)=41.39ms p(95)=46.92ms
+    iterations.....................: 65471  1341.908321/s
+    vus............................: 1      min=1              max=50
+    vus_max........................: 50     min=50             max=50
+
+    NETWORK
+    data_received..................: 48 MB  984 kB/s
+    data_sent......................: 13 MB  271 kB/s
+
+
+
+time="2026-10-01T16:54:02Z" level=error msg="thresholds on metrics 'checks, http_req_failed' have been crossed"

@@ -1,0 +1,32 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 800     1552.860262/s
+    checks_succeeded...: 100.00% 800 out of 800
+    checks_failed......: 0.00%   0 out of 800
+
+    ✓ keyed create is 201
+
+    HTTP
+    http_req_duration..............: avg=25.27ms min=11.38ms med=21.54ms max=108.52ms p(90)=35.88ms p(95)=51.76ms
+      { expected_response:true }...: avg=25.27ms min=11.38ms med=21.54ms max=108.52ms p(90)=35.88ms p(95)=51.76ms
+    http_req_failed................: 0.00%  0 out of 800
+    http_reqs......................: 800    1552.860262/s
+
+    EXECUTION
+    iteration_duration.............: avg=25.42ms min=11.42ms med=21.63ms max=110.84ms p(90)=35.93ms p(95)=52.95ms
+    iterations.....................: 800    1552.860262/s
+
+    NETWORK
+    data_received..................: 367 kB 713 kB/s
+    data_sent......................: 142 kB 276 kB/s
+
+
+
