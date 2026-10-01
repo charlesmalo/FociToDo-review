@@ -47,5 +47,6 @@ cp -R reports "../../${EVIDENCE}/reports" 2>/dev/null || true
 cd ../..
 echo "- Test gate (lint, typecheck, tests, 100% coverage): $([ $gate -eq 0 ] && echo PASS || echo FAIL)" | tee -a "${EVIDENCE}/summary.md"
 echo "- End-to-end: $([ $e2e -eq 0 ] && echo PASS || echo FAIL)" | tee -a "${EVIDENCE}/summary.md"
-grep -E 'Statements|Branches|Functions|Lines' "${EVIDENCE}/test-gate.log" | tail -4 >> "${EVIDENCE}/summary.md" || true
+jq -r '.total | "- Coverage: lines \(.lines.pct)%, statements \(.statements.pct)%, functions \(.functions.pct)%, branches \(.branches.pct)%"' \
+  "${EVIDENCE}/reports/coverage/coverage-summary.json" >> "${EVIDENCE}/summary.md" || true
 exit $(( gate || e2e ))
