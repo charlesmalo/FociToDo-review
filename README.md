@@ -11,6 +11,15 @@ Independent quality assurance for [FociToDo](https://github.com/charlesmalo/Foci
 | `evidence/<date>/` | Raw outputs: test and coverage summaries, e2e report, k6 results, scans, timings |
 | `signoff.md` | One-page release recommendation |
 
+## Release sign-off
+
+**[signoff.md](signoff.md)** — FociToDo @ `de70329`, recommendation: Ready to submit.
+
+Latest evidence (release candidate `de70329bc74e7be8172821d2cc9da887dbfdbcca`):
+- Verify: [`evidence/2026-10-02T035235Z/`](evidence/2026-10-02T035235Z/)
+- Stress: [`evidence/2026-10-02T035425Z/stress/`](evidence/2026-10-02T035425Z/stress/)
+- Scans: [`evidence/2026-10-02T034745Z/scans/`](evidence/2026-10-02T034745Z/scans/)
+
 ## Running the checks
 
 ```bash

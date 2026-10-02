@@ -1,0 +1,1 @@
+PASS Σ(version − 1) equals successful PATCHes (no lost or phantom updates) (actual 21203, expected 21203)

@@ -1,0 +1,312 @@
+ Image review-verify-migrate Building 
+ Image review-verify-api Building 
+ Image review-verify-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.79kB done
+#1 DONE 0.0s
+
+#2 [web internal] load build definition from Dockerfile
+#2 transferring dockerfile:
+#2 transferring dockerfile: 3.67kB done
+#2 DONE 0.0s
+
+#3 [migrate] resolve image config for docker-image://docker.io/docker/dockerfile:1
+#3 DONE 0.3s
+
+#4 [migrate] docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#4 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e done
+#4 CACHED
+
+#5 [api internal] load metadata for docker.io/library/node:24.21-alpine
+#5 DONE 0.2s
+
+#6 [web internal] load metadata for docker.io/nginxinc/nginx-unprivileged:1.31-alpine
+#6 DONE 0.2s
+
+#7 [web internal] load .dockerignore
+#7 transferring context: 135B done
+#7 DONE 0.0s
+
+#8 [web base 1/2] FROM docker.io/library/node:24.21-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1
+#8 resolve docker.io/library/node:24.21-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1 done
+#8 DONE 0.0s
+
+#9 [api base 2/2] WORKDIR /repo
+#9 CACHED
+
+#10 [web web 1/3] FROM docker.io/nginxinc/nginx-unprivileged:1.31-alpine@sha256:26b0bf6fbf07297983cb341998d79c831508787de26627dd2a112321b9c3a4af
+#10 resolve docker.io/nginxinc/nginx-unprivileged:1.31-alpine@sha256:26b0bf6fbf07297983cb341998d79c831508787de26627dd2a112321b9c3a4af done
+#10 CACHED
+
+#11 [migrate internal] load build context
+#11 transferring context: 1.19MB 0.0s done
+#11 DONE 0.1s
+
+#12 [web web 2/3] COPY apps/web/nginx.conf /etc/nginx/conf.d/default.conf
+#12 DONE 0.0s
+
+#13 [web manifests 1/4] COPY package.json package-lock.json ./
+#13 DONE 0.0s
+
+#14 [web manifests 2/4] COPY packages/shared/package.json packages/shared/
+#14 DONE 0.0s
+
+#15 [api manifests 3/4] COPY apps/api/package.json apps/api/
+#15 DONE 0.0s
+
+#16 [api manifests 4/4] COPY apps/web/package.json apps/web/
+#16 DONE 0.0s
+
+#17 [web deps 1/1] RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
+#17 ...
+
+#18 [migrate api-prod-deps 1/1] RUN --mount=type=cache,target=/root/.npm     npm ci --omit=dev --no-audit --no-fund -w @foci/api -w @foci/shared
+#18 2.547 
+#18 2.547 added 127 packages in 2s
+#18 2.549 npm warn install-scripts 1 package has install scripts not yet covered by allowScripts:
+#18 2.549 npm warn install-scripts   @scarf/scarf@1.4.0 (postinstall: node ./report.js)
+#18 2.549 npm warn install-scripts
+#18 2.549 npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+#18 2.550 npm notice
+#18 2.550 npm notice New major version of npm available! 11.19.0 -> 12.2.0
+#18 2.550 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#18 2.550 npm notice To update run: npm install -g npm@12.2.0
+#18 2.550 npm notice
+#18 DONE 2.8s
+
+#19 [api api 3/9] COPY --from=api-prod-deps --chown=node:node /repo/node_modules ./node_modules
+#19 DONE 0.3s
+
+#20 [api api 4/9] COPY --chown=node:node packages/shared/package.json packages/shared/
+#20 DONE 0.1s
+
+#17 [web deps 1/1] RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
+#17 7.833 
+#17 7.833 added 646 packages in 8s
+#17 7.835 npm warn install-scripts 2 packages have install scripts not yet covered by allowScripts:
+#17 7.835 npm warn install-scripts   @scarf/scarf@1.4.0 (postinstall: node ./report.js)
+#17 7.835 npm warn install-scripts   unrs-resolver@1.12.2 (postinstall: node postinstall.js)
+#17 7.835 npm warn install-scripts
+#17 7.835 npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+#17 7.836 npm notice
+#17 7.836 npm notice New major version of npm available! 11.19.0 -> 12.2.0
+#17 7.836 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#17 7.836 npm notice To update run: npm install -g npm@12.2.0
+#17 7.836 npm notice
+#17 DONE 8.3s
+
+#21 [api source 1/1] COPY . .
+#21 DONE 0.1s
+
+#22 [migrate build-api 1/1] RUN npm run build -w @foci/shared -w @foci/api
+#22 0.350 
+#22 0.350 > @foci/shared@1.0.0 build
+#22 0.350 > tsc -p tsconfig.build.json
+#22 0.350 
+#22 1.155 
+#22 1.155 > @foci/api@1.0.0 build
+#22 1.155 > tsc -p tsconfig.build.json
+#22 1.155 
+#22 ...
+
+#23 [web build-web 1/1] RUN BUILD_DATE="$(date -u +%Y-%m-%d)" npm run build -w @foci/web
+#23 0.350 
+#23 0.350 > @foci/web@1.0.0 build
+#23 0.350 > vite build
+#23 0.350 
+#23 0.540 vite v8.3.2 building client environment for production...
+#23 0.548 transforming...
+#23 1.097 ✓ 2635 modules transformed.
+#23 1.266 rendering chunks...
+#23 1.571 computing gzip size...
+#23 1.606 dist/index.html                                           0.48 kB │ gzip:   0.29 kB
+#23 1.606 dist/assets/screenshot-BmQ9WtAA.png                      24.10 kB
+#23 1.606 dist/assets/DevPortal-CnR6kdae.css                        0.98 kB │ gzip:   0.41 kB
+#23 1.606 dist/assets/index-Ds-ty4gC.css                            2.92 kB │ gzip:   0.98 kB
+#23 1.606 dist/assets/array-BifhSqXX.js                             0.10 kB │ gzip:   0.11 kB
+#23 1.606 dist/assets/channel-OhprZ98X.js                           0.11 kB │ gzip:   0.12 kB
+#23 1.606 dist/assets/pie-WAS4IAKB-CeeOXKlz.js                      0.12 kB │ gzip:   0.12 kB
+#23 1.606 dist/assets/info-A6RAGUB7-C3bQ8Wm-.js                     0.12 kB │ gzip:   0.12 kB
+#23 1.606 dist/assets/radar-RG4KPBEZ-BE3aNb6g.js                    0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/packet-AYTQ26CC-Tn6EcIfc.js                   0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/cynefin-OW5HDTMX-BzBoG-nA.js                  0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/treemap-WGGIJYW6-CzW_dkgQ.js                  0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/wardley-WFR3VGLG-D4Saf3kU.js                  0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/gitGraph-4MIJSDKK-CLZrbejA.js                 0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/railroad-74A4TZTK-BpTmOVV3.js                 0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/treeView-Q6P3EWNA-DP2ilYtd.js                 0.12 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/railroad-peg-WCYAUIDC-Cx9tFWxt.js             0.13 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/architecture-7GRP2DOG-D44RIBXb.js             0.13 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/railroad-abnf-HS5TGJTU-BndBeuOu.js            0.13 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/railroad-ebnf-LZEXJU2U-CSrW3xvn.js            0.13 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/eventmodeling-NTZA5JFV-DHR3gLyX.js            0.13 kB │ gzip:   0.13 kB
+#23 1.606 dist/assets/init-C-OQMol4.js                              0.14 kB │ gzip:   0.12 kB
+#23 1.606 dist/assets/chunk-Y2CYZVJY-DsF7k-Jl.js                    0.15 kB │ gzip:   0.14 kB
+#23 1.606 dist/assets/chunk-2Q5K7J3B-C1jixKkw.js                    0.19 kB │ gzip:   0.16 kB
+#23 1.606 dist/assets/chunk-JWPE2WC7-DVXcaiue.js                    0.22 kB │ gzip:   0.17 kB
+#23 1.606 dist/assets/chunk-XXDRQBXY-BvKO0v-W.js                    0.26 kB │ gzip:   0.22 kB
+#23 1.606 dist/assets/chunk-5VM5RSS4-ZNzvKenW.js                    0.36 kB │ gzip:   0.27 kB
+#23 1.606 dist/assets/chunk-WEXAMYUT-B9Ztgkwb.js                    0.57 kB │ gzip:   0.40 kB
+#23 1.606 dist/assets/flowDiagram-KWPJA3E3-CFiTMIOI.js              0.57 kB │ gzip:   0.31 kB
+#23 1.606 dist/assets/chunk-J5ZVWO5B-oDCd-gWO.js                    0.63 kB │ gzip:   0.43 kB
+#23 1.606 dist/assets/infoDiagram-VRGFBTTK-B85uN3GR.js              0.65 kB │ gzip:   0.41 kB
+#23 1.606 dist/assets/swimlanesDiagram-TC7HE7FX-C_PQtNAy.js         0.83 kB │ gzip:   0.48 kB
+#23 1.606 dist/assets/sizeCapture-INFHLROL-3uHXrFqA.js              0.87 kB │ gzip:   0.51 kB
+#23 1.606 dist/assets/chunk-DUW6YSOI-Dgx8z5s3.js                    0.89 kB │ gzip:   0.46 kB
+#23 1.606 dist/assets/line-Wgz3tXQ5.js                              0.94 kB │ gzip:   0.47 kB
+#23 1.606 dist/assets/rolldown-runtime-Dd_uD5pT.js                  1.10 kB │ gzip:   0.62 kB
+#23 1.606 dist/assets/ordinal-BDEzSJ7C.js                           1.17 kB │ gzip:   0.56 kB
+#23 1.606 dist/assets/chunk-5DYCD2WN-Ths3GjWM.js                    1.41 kB │ gzip:   0.79 kB
+#23 1.606 dist/assets/railroadDiagram-XR7U4H2S-BjTYoLUn.js          1.65 kB │ gzip:   0.77 kB
+#23 1.606 dist/assets/abnfDiagram-O67JEVCF-BKfcAPnY.js              1.84 kB │ gzip:   0.89 kB
+#23 1.606 dist/assets/chunk-7PRAP22T-Cd1bS1Ja.js                    1.95 kB │ gzip:   0.95 kB
+#23 1.606 dist/assets/chunk-GWA4HPMP-DF5SZOR7.js                    1.97 kB │ gzip:   0.88 kB
+#23 1.606 dist/assets/pegDiagram-GJSIUBJH-CMeMgETG.js               2.01 kB │ gzip:   0.94 kB
+#23 1.606 dist/assets/ebnfDiagram-ZINNZB2B-Be9XJH3G.js              2.05 kB │ gzip:   0.89 kB
+#23 1.606 dist/assets/dist-B_J_HbC0.js                              2.17 kB │ gzip:   0.97 kB
+#23 1.606 dist/assets/path-fybaL0A-.js                              2.27 kB │ gzip:   0.98 kB
+#23 1.606 dist/assets/arc-DgcGdgmL.js                               3.47 kB │ gzip:   1.46 kB
+#23 1.606 dist/assets/diagram-MLGK6HIB-BOaha3mu.js                  4.28 kB │ gzip:   1.84 kB
+#23 1.606 dist/assets/defaultLocale-BFoDCU3G.js                     4.63 kB │ gzip:   2.12 kB
+#23 1.606 dist/assets/chunk-NETBCI7D-yuZG7BXf.js                    5.43 kB │ gzip:   2.50 kB
+#23 1.606 dist/assets/linear-BUnzfXgk.js                            5.51 kB │ gzip:   2.25 kB
+#23 1.606 dist/assets/chunk-742MDFTN-BAf9kHfM.js                    5.83 kB │ gzip:   2.68 kB
+#23 1.606 dist/assets/graphlib-C9Tl7QrK.js                          5.85 kB │ gzip:   1.82 kB
+#23 1.606 dist/assets/diagram-MPIPVDR6-DQhXCha5.js                  6.06 kB │ gzip:   2.56 kB
+#23 1.606 dist/assets/pieDiagram-5QR66LMP-DgWWpaF3.js               6.22 kB │ gzip:   2.59 kB
+#23 1.606 dist/assets/_basePickBy-QJXUw_pr.js                       7.58 kB │ gzip:   3.15 kB
+#23 1.606 dist/assets/diagram-CDSNMT55-BxYgg6EY.js                  8.19 kB │ gzip:   3.65 kB
+#23 1.606 dist/assets/cynefinDiagram-VND7K2PF-DuMfG9-u.js           9.93 kB │ gzip:   3.50 kB
+#23 1.606 dist/assets/diagram-ATOU4E4O-Bf5-kbF_.js                 10.65 kB │ gzip:   4.12 kB
+#23 1.606 dist/assets/chunk-3FUC2YCW-C2djftja.js                   10.72 kB │ gzip:   4.30 kB
+#23 1.606 dist/assets/chunk-UA2S7LBM-BOydAEF0.js                   14.83 kB │ gzip:   4.19 kB
+#23 1.606 dist/assets/chunk-GTNCS2PH-HEJXW0_s.js                   15.64 kB │ gzip:   4.35 kB
+#23 1.606 dist/assets/diagram-3UASUU5V-Ce5wJXT_.js                 15.75 kB │ gzip:   5.52 kB
+#23 1.606 dist/assets/mermaid-parser.core-CVtIkHFJ.js              16.58 kB │ gzip:   3.92 kB
+#23 1.606 dist/assets/ishikawaDiagram-OU5B5YK6-C3L5EGqU.js         17.31 kB │ gzip:   6.53 kB
+#23 1.606 dist/assets/_baseUniq-DR4vVjyC.js                        18.23 kB │ gzip:   6.72 kB
+#23 1.606 dist/assets/kanban-definition-PNTS6WVX-PYXxE1Fk.js       20.26 kB │ gzip:   7.14 kB
+#23 1.606 dist/assets/sankeyDiagram-IPEJSGJF-D28Emx9R.js           22.78 kB │ gzip:   8.25 kB
+#23 1.606 dist/assets/journeyDiagram-ZHPQQLJL-CSerfxg2.js          23.16 kB │ gzip:   8.16 kB
+#23 1.606 dist/assets/mindmap-definition-NLK3R4M7-BAFDiJ3T.js      23.44 kB │ gzip:   7.99 kB
+#23 1.606 dist/assets/wardleyDiagram-VNRHLVJA-B5amUAO6.js          25.20 kB │ gzip:   6.54 kB
+#23 1.606 dist/assets/rough.esm-Dy-Kn_BL.js                        27.10 kB │ gzip:   8.85 kB
+#23 1.606 dist/assets/gitGraphDiagram-X574FWY7-ngsTj5zv.js         29.00 kB │ gzip:   8.55 kB
+#23 1.606 dist/assets/timeline-definition-EJHVYXUP-BCLgUevb.js     30.45 kB │ gzip:  10.03 kB
+#23 1.606 dist/assets/erDiagram-OPXOYQCR-BfUWurBn.js               30.64 kB │ gzip:  10.56 kB
+#23 1.606 dist/assets/chunk-ZIGJFQKS-BUtjBH-0.js                   30.74 kB │ gzip:   8.51 kB
+#23 1.606 dist/assets/requirementDiagram-PLB6GJNP-BgoFSVT9.js      31.06 kB │ gzip:   9.82 kB
+#23 1.606 dist/assets/quadrantDiagram-O4NWA36T-DWBbRiUR.js         33.52 kB │ gzip:   9.74 kB
+#23 1.606 dist/assets/chunk-Z7XXMR3K-sih8iP6P.js                   37.41 kB │ gzip:   8.06 kB
+#23 1.606 dist/assets/dagre-6A5THRUB-DcCZdJbN.js                   40.76 kB │ gzip:  14.56 kB
+#23 1.606 dist/assets/vennDiagram-UO4OBE2U-JTuugFoo.js             41.18 kB │ gzip:  15.12 kB
+#23 1.606 dist/assets/stateDiagram-v2-GCMORJYK-Fx37Cygz.js         41.54 kB │ gzip:  13.89 kB
+#23 1.606 dist/assets/blockDiagram-BEXU5L5S-ioExYuNO.js            42.46 kB │ gzip:  13.88 kB
+#23 1.606 dist/assets/xychartDiagram-PMCCYNJV-C4Hg22sy.js          44.14 kB │ gzip:  12.22 kB
+#23 1.606 dist/assets/src-oBChb5qS.js                              45.68 kB │ gzip:  16.00 kB
+#23 1.606 dist/assets/classDiagram-v2-NBCMYWYE-BOqkbKwh.js         49.70 kB │ gzip:  16.14 kB
+#23 1.606 dist/assets/chunk-MBY4JIJT-CcANCdb3.js                   51.87 kB │ gzip:  16.63 kB
+#23 1.606 dist/assets/chunk-7M6MHVWA-B3ck6WCG.js                   62.72 kB │ gzip:  20.33 kB
+#23 1.606 dist/assets/c4Diagram-YGBWAQC7-qw42RFGU.js               65.08 kB │ gzip:  18.60 kB
+#23 1.606 dist/assets/ganttDiagram-FUAMR5RP-CO_tQHXz.js            69.35 kB │ gzip:  22.74 kB
+#23 1.606 dist/assets/diagram-22UHCM2B-BtaZZ53V.js                 80.49 kB │ gzip:  25.15 kB
+#23 1.606 dist/assets/cose-bilkent-JH36ORCC-COXSdE6a.js            81.25 kB │ gzip:  21.54 kB
+#23 1.606 dist/assets/mermaid.core-B6dvrwZv.js                     84.17 kB │ gzip:  29.09 kB
+#23 1.606 dist/assets/swimlanes-2SLR337P-ZJJB-70u.js              106.24 kB │ gzip:  36.11 kB
+#23 1.606 dist/assets/chunk-7INBJB4K-DER1n95g.js                  115.49 kB │ gzip:  29.18 kB
+#23 1.606 dist/assets/sequenceDiagram-PO4LG4MO-2hFbRVDp.js        117.31 kB │ gzip:  31.31 kB
+#23 1.606 dist/assets/architectureDiagram-NJMV4G6O-BariXqOW.js    148.90 kB │ gzip:  41.13 kB
+#23 1.606 dist/assets/usecaseDiagram-POWQR4AR-DGtz-IAy.js         186.67 kB │ gzip:  50.10 kB
+#23 1.606 dist/assets/DevPortal-BerK1OYD.js                       203.11 kB │ gzip:  62.36 kB
+#23 1.606 dist/assets/chunk-O7XYJQB3-rKDCHTT-.js                  239.46 kB │ gzip:  39.57 kB
+#23 1.606 dist/assets/katex-ZlcWpGUi.js                           258.68 kB │ gzip:  77.43 kB
+#23 1.606 dist/assets/index-BcvznyIR.js                           391.69 kB │ gzip: 119.75 kB
+#23 1.606 dist/assets/cytoscape.esm-Yq6u8L66.js                   434.85 kB │ gzip: 137.78 kB
+#23 1.606 dist/assets/chunk-FOHPRMQF-DzxwRta7.js                  662.10 kB │ gzip: 143.16 kB
+#23 1.606 dist/assets/elk-276RUBZZ-BruR32Fg.js                  1,456.41 kB │ gzip: 453.23 kB
+#23 1.606 
+#23 1.607 [plugin builtin:vite-reporter] 
+#23 1.607 (!) Some chunks are larger than 500 kB after minification. Consider:
+#23 1.607 - Using dynamic import() to code-split the application
+#23 1.607 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+#23 1.607 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+#23 1.610 ✓ built in 1.07s
+#23 1.639 npm notice
+#23 1.639 npm notice New major version of npm available! 11.19.0 -> 12.2.0
+#23 1.639 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#23 1.639 npm notice To update run: npm install -g npm@12.2.0
+#23 1.639 npm notice
+#23 DONE 1.7s
+
+#24 [web web 3/3] COPY --from=build-web /repo/apps/web/dist /usr/share/nginx/html
+#24 DONE 0.0s
+
+#25 [web] exporting to image
+#25 exporting layers
+#25 exporting layers 0.2s done
+#25 exporting manifest sha256:dec7bdfd9ed9919d407b4a06ad0885230f03734f01a58d2e148baaf7c29e4eda done
+#25 exporting config sha256:6968da37421245caf97bc03501fae18c1a13c26b5cc25521a0576c6d4ce31bc1 done
+#25 exporting attestation manifest sha256:bf7a3ee0a27b263b7dceddba76040557f7cc60139206e1a49e0c6d0da00f8056 done
+#25 exporting manifest list sha256:1ef842c3d4404b7b75d74ce8044b6845255cada7300c4ae09e780c0ec415d75d done
+#25 naming to docker.io/library/review-verify-web:latest done
+#25 unpacking to docker.io/library/review-verify-web:latest 0.0s done
+#25 DONE 0.3s
+
+#22 [migrate build-api 1/1] RUN npm run build -w @foci/shared -w @foci/api
+#22 ...
+
+#26 [web] resolving provenance for metadata file
+#26 DONE 0.0s
+
+#22 [migrate build-api 1/1] RUN npm run build -w @foci/shared -w @foci/api
+#22 2.681 npm notice
+#22 2.681 npm notice New major version of npm available! 11.19.0 -> 12.2.0
+#22 2.681 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#22 2.681 npm notice To update run: npm install -g npm@12.2.0
+#22 2.681 npm notice
+#22 DONE 2.7s
+
+#27 [migrate api 5/9] COPY --from=build-api --chown=node:node /repo/packages/shared/dist packages/shared/dist
+#27 DONE 0.0s
+
+#28 [api api 6/9] COPY --chown=node:node apps/api/package.json apps/api/
+#28 DONE 0.0s
+
+#29 [migrate api 7/9] COPY --from=build-api --chown=node:node /repo/apps/api/dist apps/api/dist
+#29 DONE 0.0s
+
+#30 [api api 8/9] COPY --chown=node:node apps/api/migrations apps/api/migrations
+#30 DONE 0.0s
+
+#31 [api api 9/9] RUN rm -rf     /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack     /usr/local/bin/yarn /usr/local/bin/yarnpkg     /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack     /opt/yarn-v*   && ! command -v npm && ! command -v npx && ! command -v corepack   && ! command -v yarn && ! command -v yarnpkg
+#31 DONE 0.3s
+
+#32 [migrate] exporting to image
+#32 exporting layers 0.9s done
+#32 exporting manifest sha256:c6ea4241c5f9d412dfa0e698932094a17e50942a3d867f2c1e59a56ea45489d2 0.0s done
+#32 exporting config sha256:94c8e0b689853e636d1e6f4a8441cbe211acf00e1b2da068852f714e884677d8 done
+#32 exporting attestation manifest sha256:46299918c64a4c818f7adbde8a3080e30026c0bf0eaf8f9cd39c94dc71c72dc3 0.0s done
+#32 exporting manifest list sha256:5d8bc3504a9b564cafa19a1a6e12b4cbacaedebd48215c9c760cf8627d042131 done
+#32 naming to docker.io/library/review-verify-migrate:latest done
+#32 unpacking to docker.io/library/review-verify-migrate:latest
+#32 unpacking to docker.io/library/review-verify-migrate:latest 0.3s done
+#32 DONE 1.3s
+
+#33 [api] exporting to image
+#33 exporting layers 0.9s done
+#33 exporting manifest sha256:c91f70d07a47d47c484e51e1deb9e6351bd492710b4fef9042a0397a57bc8e6f done
+#33 exporting config sha256:c86e790af3311bb92e538b4ee3871f2ea55828393b48cb992104cb19fd6a568f done
+#33 exporting attestation manifest sha256:359c9b1ea47d0e5f32510ffc6743e7b40048c35cc07ee2ff5ec46dc0e6e222c9 0.0s done
+#33 exporting manifest list sha256:a18ece53df5073ad96e5a76b63a00c5fc4412c4e798707ea114e314a43a7a2a5 done
+#33 naming to docker.io/library/review-verify-api:latest done
+#33 unpacking to docker.io/library/review-verify-api:latest 0.3s done
+#33 DONE 1.3s
+
+#34 [migrate] resolving provenance for metadata file
+#34 DONE 0.0s
+
+#35 [api] resolving provenance for metadata file
+#35 DONE 0.0s
+ Image review-verify-migrate Built 
+ Image review-verify-web Built 
+ Image review-verify-api Built 
