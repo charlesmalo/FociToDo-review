@@ -19,7 +19,7 @@ All 38 traceability rows (FR/DR/NFR/D) read `Done`; none `In progress` or `Plann
 - End-to-end: 9/9 journeys
 - Concurrency stress: 7/7 invariants hold across 5 scenarios (race-patch, parallel-complete, delete-storm, idempotent-replay, mixed-load); p95 list latency (`GET /todos` under mixed load) 10.48 ms
 - Images: 0 HIGH/CRITICAL vulnerabilities (Trivy, both `api` and `web` images, `--ignore-unfixed`); 0 `npm audit --omit=dev --audit-level=high` findings. 3 Hadolint findings accepted as style-only (DL3066 non-numeric `node` user; DL3025 shell-form `HEALTHCHECK` ×2 — functionally identical to the JSON-array alternative)
-- Cold start (clean clone → healthy): 29 s arm64 (local, Colima); amd64 via the app's own CI run on this commit — https://github.com/charlesmalo/FociToDo/actions/runs/36934017792 (`images` job, multi-arch build, green)
+- Cold start (clean clone → healthy): 29 s arm64 (local, Colima). CI's `images` job builds the `migrate`/`api`/`web` targets on amd64 (`ubuntu-latest`, plain `docker compose build`, no buildx/qemu/`--platform`) — https://github.com/charlesmalo/FociToDo/actions/runs/36934017792, green; no cross-arch cold-start timing was taken there. Every base image the shipped targets build from (`node:24.21-alpine`, `nginxinc/nginx-unprivileged:1.31-alpine`) is an official image published for both amd64 and arm64
 
 ## Findings
 
@@ -27,14 +27,14 @@ By severity (60 findings, F-1..F-60): Critical 1 · High 3 · Important 3 · Med
 
 By decision: Fix 12 · Accept 48.
 
-**Open items: none.** All 14 app PRs (#1–#14) are merged to `main` (confirmed: `git log --merges main` shows 14 `Merge pull request` commits, #1 through #14, the last being `de70329`). Every `Fix`-decision finding was independently confirmed present in the `de70329` source tree or re-verified by this sign-off's own evidence:
-- F-3, F-4 (PR #2), F-21 (PR #12), F-38 (PR #8) — folded into their merged branches.
-- F-19 (PR #12, shutdown re-entrancy guard) — merged.
-- F-50 (Critical, stale-version overwrite on Save/Delete), F-51/F-52 (Important, year-0000 date and NUL-byte validation), F-53 (Minor, PATCH 415 doc) — all four read "(pending merge)" in `findings/log.md`, but PR #12 merged as `a3d1af3` well before `de70329`; directly confirmed in source: `editBase`/`deleteBase` capture in `apps/web/src/todos/components/TodoDetailsPanel.tsx`, `hasNoNul`/the `0000`-prefix refinement in `packages/shared/src/todo.ts`, and the PATCH `415` entry in `apps/api/src/http/openapi.ts`. The "(pending merge)" text is stale triage wording, not an open item.
+**Open items: none.** All 14 app PRs (#1–#14) are merged to `main` (confirmed: `git log --merges main` shows 14 `Merge pull request` commits, #1 through #14, the last being `de70329`), and `findings/log.md` now records the merged commit for every finding. Every `Fix`-decision finding was independently confirmed present in the `de70329` source tree or re-verified by this sign-off's own evidence:
+- F-3, F-4 (PR #2, merged `a698697`), F-21 (PR #12, merged `a3d1af3`), F-38 (PR #8, merged `18c6664`) — folded into their merged branches.
+- F-19 (PR #12, merged `a3d1af3`, shutdown re-entrancy guard).
+- F-50 (Critical, stale-version overwrite on Save/Delete), F-51/F-52 (Important, year-0000 date and NUL-byte validation), F-53 (Minor, PATCH 415 doc) — all four Fixed in PR #12, merged `a3d1af3`; directly confirmed in source: `editBase`/`deleteBase` capture in `apps/web/src/todos/components/TodoDetailsPanel.tsx`, `hasNoNul`/the `0000`-prefix refinement in `packages/shared/src/todo.ts`, and the PATCH `415` entry in `apps/api/src/http/openapi.ts`.
 - F-55 (High, nginx keepalive) — Fixed in PR #13 (merged `47eb261`); re-confirmed by this sign-off's own stress re-run (`http_req_failed` rate 0 across all 5 scenarios, 410–316,670 requests per scenario, see Evidence).
 - F-56, F-60 (High, Trivy npm-CLI CVEs / lodash-es advisories) — Fixed in PR #14 (merged `de70329`, this release candidate); re-confirmed by this sign-off's own scan re-run (0 HIGH/CRITICAL, 0 audit findings, see Evidence).
 
-Many `Accept`-decision Low-severity rows also still read "pending PR #N merge" — the same stale pre-merge wording; none represent outstanding work, since every numbered PR has since merged.
+Every `Accept`-decision row now cites "Accepted in PR #N (merged \<sha\>)" for its originating PR; none represent outstanding work.
 
 ## Accepted risks and trade-offs
 
@@ -51,6 +51,6 @@ Many `Accept`-decision Low-severity rows also still read "pending PR #N merge" �
 - Verify (clean clone → cold build → test gate → e2e, de70329): [`evidence/2026-10-02T035235Z/`](evidence/2026-10-02T035235Z/)
 - Stress (k6 scenarios + invariant checks, de70329): [`evidence/2026-10-02T035425Z/stress/`](evidence/2026-10-02T035425Z/stress/)
 - Scans (Trivy, Hadolint, npm audit, de70329): [`evidence/2026-10-02T034745Z/scans/`](evidence/2026-10-02T034745Z/scans/)
-- App CI run on de70329 (test, e2e, images — multi-arch amd64+arm64 build, green): https://github.com/charlesmalo/FociToDo/actions/runs/36934017792
+- App CI run on de70329 (test, e2e, images — `images` builds `migrate`/`api`/`web` on amd64, green): https://github.com/charlesmalo/FociToDo/actions/runs/36934017792
 - Full traceability: [`traceability/matrix.md`](traceability/matrix.md)
 - Full findings log: [`findings/log.md`](findings/log.md)
