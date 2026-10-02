@@ -13,7 +13,7 @@ Independent quality assurance for [FociToDo](https://github.com/charlesmalo/Foci
 
 ## Release sign-off
 
-**[signoff.md](signoff.md)** — FociToDo @ `de70329`, recommendation: Ready to submit.
+**[signoff.md](signoff.md)** — FociToDo @ `de70329`, recommendation: Ready with noted risks (upstream `postgres:17.11-alpine` `gosu` CVEs, F-64/F-65).
 
 Latest evidence (release candidate `de70329bc74e7be8172821d2cc9da887dbfdbcca`; each `summary.md` records the SHA it ran against):
 - Verify: [`evidence/2026-10-02T043210Z/`](evidence/2026-10-02T043210Z/)

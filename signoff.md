@@ -1,6 +1,8 @@
 # Release sign-off — FociToDo @ de70329
 
-**Recommendation:** Ready to submit
+**Recommendation:** Ready with noted risks
+
+Noted risks: F-64/F-65 — the unmodified upstream `postgres:17.11-alpine` image ships `gosu` with Go-stdlib CVEs (1 CRITICAL, 21 HIGH). No patched tag is published yet (the floating `postgres:17-alpine` has the same digest), and `gosu` runs once at container start to drop root. Remediation: bump the pin when a patched tag ships.
 
 ## Scope delivered vs requested
 
