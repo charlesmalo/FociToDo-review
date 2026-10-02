@@ -46,6 +46,13 @@ Diff reviewed line-by-line (`review-cc98692..93ca505.diff`) against spec §5.5 (
 | F-19 `server.ts`'s `shutdown()` has no re-entrancy guard: a second `SIGTERM`/`SIGINT` re-closes an already-ended pool, which rejects, causing `process.exit(1)` on what is otherwise a clean shutdown | Medium | correctness | Fix | Deferred: fix before release (final review). Real robustness gap (wrong exit code / log noise under a double signal, e.g. some process supervisors or orchestrators sending `SIGTERM` twice), but does not affect request-serving correctness or data integrity, so it does not block merging this PR. |
 | F-20 `errorHandler.ts` carries a type-only `import type {} from 'pino-http'` purely for the `req.log` ambient augmentation | Low | design | Accept | Intentional, commented pattern, pre-approved during per-task review; makes the augmentation available regardless of which other file in the compilation unit imports `pino-http`'s value export. No behavioural effect. |
 
+> **Correction (later finding, recorded during PR #10's docs work).** F-17 does not reproduce. Checked empirically
+> in the app's dev container while PR #10 was being written: Express 5 with `app.set('etag', false)` returns
+> `200`, not `304`, for a `GET` whose `If-None-Match` matches the todo's `ETag`. The `304` claim above (and in the
+> F-17 row) was not verified at review time and is wrong; `docs/api.md` therefore documents no conditional `GET`
+> (Ruling R14 amended). F-17's decision in `findings/log.md` is **Reject — not reproducible**. The rest of this
+> review stands.
+
 ## Checklist
 
 Copy of `checklists/milestone-review.md` with results for PR #5:

@@ -1,11 +1,11 @@
 # Review — PR #2 feat(api): domain model, in-memory storage and repository contract
 
-- App commit range: `c2eb6ae..5ae431e` · Date: 2026-10-01 · Reviewer: Claude Code (automated) + solution-lead triage
+- App commit range: `c2eb6ae..5ae431e` (`5ae431e` is a pre-squash SHA, not on main; the curated branch merged as `a698697`) · Date: 2026-10-01 · Reviewer: Claude Code (automated) + solution-lead triage
 - PR not yet merged; this review is recorded ahead of merge per the controller's instruction.
 
 ## Automated review output
 
-Scope of PR #2 (commits `ed58363` domain model/errors/clock/id ports, `c54f188` repository ports and deterministic ordering, `5ae431e` in-memory adapters and the repository contract suite): the `@foci/api` workspace's pure domain layer, the storage-port interfaces (`TodoRepository`, `IdempotencyStore`, `UnitOfWork`, `Storage`, `DatabaseProbe`), the first (in-memory) storage adapter, and the adapter-agnostic `repository.contract.ts` suite that will also run against the Postgres adapter in PR 3. No `service`, `http`, or `app.ts` code exists yet — out of scope for this PR by plan sequencing.
+Scope of PR #2 (commits `ed58363` domain model/errors/clock/id ports, `c54f188` repository ports and deterministic ordering, `5ae431e` in-memory adapters and the repository contract suite; `c54f188` and `5ae431e` are pre-squash SHAs, not on main — curated to `985e363` and `7efd1c2`): the `@foci/api` workspace's pure domain layer, the storage-port interfaces (`TodoRepository`, `IdempotencyStore`, `UnitOfWork`, `Storage`, `DatabaseProbe`), the first (in-memory) storage adapter, and the adapter-agnostic `repository.contract.ts` suite that will also run against the Postgres adapter in PR 3. No `service`, `http`, or `app.ts` code exists yet — out of scope for this PR by plan sequencing.
 
 Diff reviewed line-by-line (`review-c2eb6ae..5ae431e.diff`, 999 insertions across 28 files) against `docs/superpowers/specs/2026-09-30-foci-todo-design.md` §5.2–5.3, §6, and `global-constraints.md`. Also read the three per-task reports and their embedded TDD transcripts (RED/GREEN/full-gate), and cross-checked the working tree's local `reports/coverage/coverage-summary.json` against the current `vitest.config.ts` coverage config.
 
