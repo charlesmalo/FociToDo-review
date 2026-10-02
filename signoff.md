@@ -29,9 +29,9 @@ Release readiness: [`checklists/release-readiness-de70329.md`](checklists/releas
 
 ## Findings
 
-By severity (65 findings, F-1..F-65): Critical 2 · High 4 · Important 4 · Medium 2 · Minor 3 · Low 50.
+By severity (67 findings, F-1..F-67): Critical 2 · High 4 · Important 4 · Medium 2 · Minor 4 · Low 51.
 
-By decision: Fix 20 · Accept 44 · Reject 1 (F-17, not reproducible).
+By decision: Fix 21 · Accept 45 · Reject 1 (F-17, not reproducible).
 
 **Open items: none.** All 14 app PRs (#1–#14) are merged to `main` (confirmed: `git log --merges main` shows 14 `Merge pull request` commits, #1 through #14, the last being `de70329`). In `findings/log.md`, every row names what raised it — an app PR's review, or a run of this repository's harness (`stress @ a3d1af3`, `scans @ 47eb261`, `scans @ de70329`) — and every Fix row names the PR and merge commit that fixed it. All 20 `Fix`-decision findings were independently confirmed present in the `de70329` source tree or re-verified by this sign-off's own evidence:
 - F-3, F-4 (PR #2, merged `a698697`), F-38 (PR #8, merged `18c6664`) — folded into their branches before merge; confirmed in source (`structuredClone` copies in the in-memory adapter, no `ports.ts` coverage exclusion, `onCloseAutoFocus` opener restore in `TodoDialog.tsx`).
@@ -67,3 +67,12 @@ Final runs on `de70329`, all with the current harness (`docker compose run --rm 
 - Full findings log: [`findings/log.md`](findings/log.md)
 
 Earlier evidence directories stay committed as history (pre-fix harness runs and the runs that found F-55..F-60); this sign-off cites only the three above.
+
+## Post-sign-off
+
+`main` is now `c39af72` (PR #15, merged after this sign-off was written). It differs from the signed-off `de70329` only in `README.md` and `AGENTS.md` — a docs-only change (`git diff --stat de70329 c39af72`: 2 files changed, no code, Dockerfile, compose or test file touched).
+
+- CI on `c39af72` (test, e2e, images — all three jobs): green — https://github.com/charlesmalo/FociToDo/actions/runs/36980193267
+- The rewritten README's boot/verify/smoke/test commands were re-verified by two independent fresh-clone walkthroughs, each following the README literally: the implementer's walkthrough found and fixed one pre-merge bug (the teardown snippet's `status` variable name collided with zsh's read-only `$status`, renamed to `rc`; F-66); an independent reviewer's cold-read of only the README in a second fresh clone confirmed boot, readiness, smoke test (`ETag` `"1"`→`"2"`→`"3"`, stale `If-Match` → 412) and teardown all exit 0 under both zsh and sh. Details: [`reviews/PR-15-boot-and-test.md`](reviews/PR-15-boot-and-test.md).
+
+Recommendation unchanged: **Ready with noted risks** (F-64/F-65, unmodified upstream `postgres:17.11-alpine` `gosu` CVEs).

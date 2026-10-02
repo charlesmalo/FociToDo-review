@@ -5,7 +5,7 @@ Independent quality assurance for [FociToDo](https://github.com/charlesmalo/Foci
 | Folder | Contents |
 |---|---|
 | `traceability/` | Every requirement → implementing code → verifying tests → status |
-| `reviews/` | One review per app PR (#1–#14): automated review output + solution-lead triage |
+| `reviews/` | One review per app PR (#1–#15): automated review output + solution-lead triage |
 | `findings/log.md` | Every finding with severity, decision and the commit that resolved it |
 | `checklists/` | Milestone-review and release-readiness checklists, plus the filled release-readiness copy for `de70329` |
 | `evidence/<date>/` | Raw outputs: test and coverage summaries, e2e report, k6 results, scans, timings |
@@ -22,6 +22,8 @@ Latest evidence (release candidate `de70329bc74e7be8172821d2cc9da887dbfdbcca`; e
 - Release readiness: [`checklists/release-readiness-de70329.md`](checklists/release-readiness-de70329.md)
 
 Older `evidence/` directories are kept as history.
+
+`main` is now `c39af72` (PR #15, docs-only — README/AGENTS clarity fixes re-verified by two independent fresh-clone walkthroughs); the sign-off recommendation above is unchanged — see [`signoff.md`](signoff.md#post-sign-off).
 
 ## Running the checks
 
