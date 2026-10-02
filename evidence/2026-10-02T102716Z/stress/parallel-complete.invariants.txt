@@ -1,0 +1,3 @@
+PASS all 10 completed todos present (actual 10, expected 10)
+PASS every todo completed (actual true, expected true)
+PASS each todo bumped exactly once (actual true, expected true)
