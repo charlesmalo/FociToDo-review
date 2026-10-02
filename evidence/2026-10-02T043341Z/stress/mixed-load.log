@@ -1,0 +1,44 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+    http_req_duration{name:GET /todos}
+    ✓ 'p(95)<250' p(95)=10.14ms
+
+    http_req_failed
+    ✓ 'rate==0' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 254404  5087.800284/s
+    checks_succeeded...: 100.00% 254404 out of 254404
+    checks_failed......: 0.00%   0 out of 254404
+
+    ✓ list 200
+    ✓ edit 200
+    ✓ complete 200
+    ✓ delete 204
+
+    HTTP
+    http_req_duration..............: avg=6.2ms   min=353.58µs med=6.41ms  max=43.62ms p(90)=9.09ms  p(95)=10.53ms
+      { expected_response:true }...: avg=6.2ms   min=353.58µs med=6.41ms  max=43.62ms p(90)=9.09ms  p(95)=10.53ms
+      { name:GET /todos }..........: avg=5.94ms  min=369.29µs med=6.16ms  max=43.62ms p(90)=8.84ms  p(95)=10.14ms
+    http_req_failed................: 0.00%  0 out of 318005
+    http_reqs......................: 318005 6359.750356/s
+
+    EXECUTION
+    iteration_duration.............: avg=31.51ms min=2.24ms   med=34.09ms max=87.13ms p(90)=43.44ms p(95)=47.39ms
+    iterations.....................: 63601  1271.950071/s
+    vus............................: 1      min=1           max=50
+    vus_max........................: 50     min=50          max=50
+
+    NETWORK
+    data_received..................: 507 MB 10 MB/s
+    data_sent......................: 48 MB  951 kB/s
+
+
+
