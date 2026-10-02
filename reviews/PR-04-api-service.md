@@ -1,7 +1,7 @@
 # Review — PR #4 feat(api): service layer
 
 - App commit range: `bdbb54b..c2445fb` · Date: 2026-10-01 · Reviewer: Claude Code (automated) + solution-lead triage
-- PR not yet merged; this review is recorded ahead of merge per the controller's instruction.
+- Recorded ahead of merge; PR #4 merged as `cc98692`.
 
 ## Automated review output
 

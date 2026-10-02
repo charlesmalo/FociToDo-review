@@ -1,7 +1,7 @@
 # Review — PR #3 feat(api): Postgres storage and migrations
 
 - App commit range: `a698697..ef4bc8c` · Date: 2026-10-01 · Reviewer: Claude Code (automated) + solution-lead triage
-- PR not yet merged; this review is recorded ahead of merge per the controller's instruction.
+- Recorded ahead of merge; PR #3 merged as `bdbb54b`.
 
 ## Automated review output
 

@@ -1,7 +1,7 @@
 # Review — PR #2 feat(api): domain model, in-memory storage and repository contract
 
 - App commit range: `c2eb6ae..5ae431e` (`5ae431e` is a pre-squash SHA, not on main; the curated branch merged as `a698697`) · Date: 2026-10-01 · Reviewer: Claude Code (automated) + solution-lead triage
-- PR not yet merged; this review is recorded ahead of merge per the controller's instruction.
+- Recorded ahead of merge; PR #2 merged as `a698697`.
 
 ## Automated review output
 

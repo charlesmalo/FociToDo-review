@@ -8,9 +8,11 @@
 
 ## Automated review output
 
-Scope of PR #14 as first reviewed (`47eb261..3bf9c72`: `813d784` drop the npm CLI from the `api` image, `3bf9c72`
+Scope of PR #14 as first reviewed (`47eb261..3bf9c72`: `813d784` (a pre-squash SHA, not on main; curated as
+`20aef37`) drop the npm CLI from the `api` image, `3bf9c72` (a pre-squash SHA, not on main; curated as `3178f14`)
 override `lodash-es`; `Dockerfile`, `e2e/todos.spec.ts`, `package.json`, plus a 6-line `package-lock.json` bump),
-then the fix round (`3bf9c72..3178f14`, a range-diff of one `Dockerfile` hunk). Reviewed against the scan evidence,
+then the fix round (`3bf9c72..3178f14`, a range-diff of one `Dockerfile` hunk); the curated branch merged in
+`de70329`. Reviewed against the scan evidence,
 the fix implementer's report (Trivy re-scan, `npm ls`/`npm audit`, diagram render check, RED/GREEN e2e, gate) and
 the merged tree at `de70329`.
 

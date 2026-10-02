@@ -1,7 +1,7 @@
 # Review — PR #1 feat: foundation tooling and shared contract
 
 - App commit range: `e4965d0..16b814b` · Date: 2026-10-01 · Reviewer: Claude Code (automated) + solution-lead triage
-- PR not yet merged; this review is recorded ahead of merge per the controller's instruction.
+- Recorded ahead of merge; PR #1 merged as `c2eb6ae`.
 
 ## Automated review output
 

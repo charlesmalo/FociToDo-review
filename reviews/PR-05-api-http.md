@@ -1,7 +1,7 @@
 # Review — PR #5 feat(api): HTTP API, runtime and container images
 
 - App commit range: `cc98692..93ca505` · Date: 2026-10-01 · Reviewer: Claude Code (automated) + solution-lead triage
-- PR not yet merged; this review is recorded ahead of merge per the controller's instruction.
+- Recorded ahead of merge; PR #5 merged as `8424d19`.
 
 ## Automated review output
 
