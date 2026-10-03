@@ -38,7 +38,7 @@ Every box links the evidence it rests on; every harness run below records the ch
   DOC-2, D-1–D-9), unchanged in count. FR-10 reads **Removed** (ADR 0015, PR #16) by deliberate design decision, not
   an open gap; every other row reads `Done`. DR-4 and DR-8 are re-pointed to the `dueAt` / `isDueSoon` code and tests
   at `3dbb2eb`; NFR-10 reads "served: no; local artifact `docs/api/index.html`" with AD-02 and AD-03 (both 404) as
-  independent evidence; the **Independent acceptance** column carries the new IDs (DS-01..DS-04, DR-20).
+  independent evidence; the **Independent acceptance** column carries the new IDs (DS-01..DS-04, DR-20). Independent runs at `3dbb2eb`: acceptance 104/104 PASS ([`evidence/2026-10-03T222058Z/acceptance/`](../evidence/2026-10-03T222058Z/acceptance/)); storyboard 30 frames, 12 journeys, 13/13 wireframes paired ([`evidence/2026-10-03T222326Z/storyboard/storyboard.md`](../evidence/2026-10-03T222326Z/storyboard/storyboard.md)).
 - [x] Findings log: no open High findings —
   [`findings/log.md`](../findings/log.md): every Critical/High finding is either fixed and merged (carried forward:
   F-50→`a3d1af3`, F-55→`47eb261`, F-56/F-60→`de70329`/`141356a`, F-91→`3b76cfa`, F-98→`153d719`) or accepted with a

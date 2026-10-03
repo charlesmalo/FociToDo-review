@@ -16,8 +16,8 @@ Independent quality assurance for [FociToDo](https://github.com/charlesmalo/Foci
 **[signoff.md](signoff.md)** — FociToDo @ `3dbb2eb`, recommendation: Ready with noted risks (upstream `postgres:17.11-alpine` `gosu` CVEs, F-64/F-65 — the only remaining noted risk).
 
 Latest evidence (release candidate `3dbb2ebc374e2e783f1164e35b1104224cdd6033`, the commit after PR #22 "API docs as a local artifact, not an endpoint" and PR #23 "deadlines as UTC instants with a due-soon flag"; each `summary.md`/`results.md` records the SHA it ran against):
-- Independent acceptance (black-box curl checks against every expectation): [`evidence/2026-10-03T215055Z/acceptance/`](evidence/2026-10-03T215055Z/acceptance/) — 104/104 PASS
-- Storyboard (every UI journey as captioned screenshots beside its wireframe): [`evidence/2026-10-03T215412Z/storyboard/storyboard.md`](evidence/2026-10-03T215412Z/storyboard/storyboard.md) — 29 frames, 12 journeys, 13/13 wireframes paired
+- Independent acceptance (black-box curl checks against every expectation): [`evidence/2026-10-03T222058Z/acceptance/`](evidence/2026-10-03T222058Z/acceptance/) — 104/104 PASS
+- Storyboard (every UI journey as captioned screenshots beside its wireframe): [`evidence/2026-10-03T222326Z/storyboard/storyboard.md`](evidence/2026-10-03T222326Z/storyboard/storyboard.md) — 30 frames, 12 journeys, 13/13 wireframes paired
 - Verify: [`evidence/2026-10-03T215759Z/`](evidence/2026-10-03T215759Z/)
 - Scans: [`evidence/2026-10-03T220217Z/scans/`](evidence/2026-10-03T220217Z/scans/) — 0 HIGH/CRITICAL on both `api` and `web`
 - Stress: [`evidence/2026-10-03T215927Z/stress/`](evidence/2026-10-03T215927Z/stress/) — 5/5 scenarios PASS, 13/13 invariants
