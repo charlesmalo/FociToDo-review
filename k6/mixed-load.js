@@ -17,9 +17,11 @@ export const options = {
 };
 
 export default function () {
+  // An RFC 3339 instant with an offset, 30 days after this iteration starts.
+  const dueAt = new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString().replace('Z', '+00:00');
   const todo = createTodo(`mixed-${__VU}-${__ITER}`);
-  const list = http.get(`${BASE}/todos?sort=dueDate&order=asc`, { tags: { name: 'GET /todos' } });
-  const edited = patch(todo.id, 1, { dueDate: '2030-01-01' });
+  const list = http.get(`${BASE}/todos?sort=dueAt&order=asc`, { tags: { name: 'GET /todos' } });
+  const edited = patch(todo.id, 1, { dueAt });
   const completed = http.post(`${BASE}/todos/${todo.id}/complete`, null, { tags: { name: 'POST complete' } });
   const removed = http.del(`${BASE}/todos/${todo.id}`, null, {
     headers: { ...jsonHeaders, 'If-Match': '"3"' },
