@@ -26,3 +26,6 @@ services:
   acceptance:
     <<: *tools
     command: ['bash', 'scripts/acceptance.sh']
+  storyboard:
+    <<: *tools
+    command: ['bash', 'scripts/storyboard.sh']
