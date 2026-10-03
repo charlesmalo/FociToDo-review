@@ -25,5 +25,5 @@ Every expectation the independent acceptance run checks, with where it comes fro
 | BR-17 | brief: sort (optional) | default order is newest first (`createdAt` desc) |
 | BR-18 | brief: sort (optional) | `?sort=createdAt&order=asc` is oldest first |
 | BR-19 | brief: sort (optional) | `?sort=title` orders by title, asc and desc |
-| BR-20 | brief: Persistence | a todo survives restarting the api and db containers |
+| BR-20 | brief: Persistence | After restarting the api and db containers the app recovers on its own and the todo is still there |
 | BR-21 | brief: Containerize (optional) | the web front end is served at `/` and deep links fall back to it (200 HTML) |

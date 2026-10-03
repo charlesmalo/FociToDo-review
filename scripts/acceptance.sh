@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Independent black-box acceptance: clean clone → app stack without a host port → curl checks
 # from acceptance/expectations.md → evidence. Never uses the app's own tests.
-set -euo pipefail
+set -Eeuo pipefail
 : "${APP_REPO:?set APP_REPO (see .env.example)}"
 : "${APP_REF:?set APP_REF (see .env.example)}"
 ROOT="$(pwd)"
@@ -29,6 +29,7 @@ teardown() {
   app_compose down -v --remove-orphans > /dev/null 2>&1 || true
 }
 trap teardown EXIT
+trap 'echo "acceptance.sh: unexpected error at line ${LINENO}" >&2' ERR
 
 wait_healthy() {
   for _ in $(seq 1 180); do
@@ -38,6 +39,7 @@ wait_healthy() {
   return 1
 }
 
+app_compose down -v --remove-orphans > /dev/null 2>&1 || true
 app_compose up -d --build > "${OUT}/up.log" 2>&1 || fail "compose up failed — see ${OUT}/up.log"
 wait_healthy || { app_compose logs --no-color > "${OUT}/health-timeout.log" 2>&1 || true; fail "web did not become healthy within 180 s — see ${OUT}/health-timeout.log"; }
 docker network connect "${PROJECT}_default" "${SELF}" || fail "cannot join network ${PROJECT}_default"

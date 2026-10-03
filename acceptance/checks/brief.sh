@@ -244,7 +244,21 @@ check_BR_20() {
     if curl -fsS --max-time 3 "${BASE}/api/health" > /dev/null 2>&1; then up=1; break; fi
     sleep 1
   done
-  [ "${up}" = 1 ] || harness_fail "api not healthy 90 s after restart"
+  if [ "${up}" != 1 ]; then
+    (cd "${APP}" && docker compose -p "${PROJECT}" logs --no-color) > "${TRANSCRIPT%.txt}.logs.txt" 2>&1 || true
+    fail_check "app not healthy 90 s after restarting db and api — see ${TRANSCRIPT%.txt}.logs.txt"
+    # The front end's own proxy does not recover on its own (see the finding above);
+    # restart it so BR-21 and later checks run against a working stack.
+    (cd "${APP}" && docker compose -p "${PROJECT}" restart web > /dev/null 2>&1) || true
+    local recovered=0
+    for _ in $(seq 1 60); do
+      if curl -fsS --max-time 3 "${BASE}/api/health" > /dev/null 2>&1; then recovered=1; break; fi
+      sleep 1
+    done
+    echo "NOTE: web was restarted to recover the stack so the run could continue past BR-20." >> "${TRANSCRIPT}"
+    [ "${recovered}" = 1 ] || harness_fail "web still not healthy 60 s after restarting it to recover from BR-20"
+    return
+  fi
   req GET "/api/todos/${ID}"
   expect_status 200
   expect_json .title 'Survives a restart'

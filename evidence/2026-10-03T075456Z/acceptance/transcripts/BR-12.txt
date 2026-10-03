@@ -1,0 +1,57 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR12-7a435847c5f2-done\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:55:14 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+Location: /api/todos/5e1e1ea0-eb07-4202-8349-427ee72f7a84
+ETag: "1"
+
+{"id":"5e1e1ea0-eb07-4202-8349-427ee72f7a84","title":"acc-BR12-7a435847c5f2-done","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:55:14.698Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos/5e1e1ea0-eb07-4202-8349-427ee72f7a84/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:55:14 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 204
+Connection: keep-alive
+ETag: "2"
+
+{"id":"5e1e1ea0-eb07-4202-8349-427ee72f7a84","title":"acc-BR12-7a435847c5f2-done","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T07:55:14.698Z","version":2,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR12-7a435847c5f2-future\"\,\"dueDate\":\"2026-10-06\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:55:14 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 215
+Connection: keep-alive
+Location: /api/todos/7b333bb7-a148-4441-a832-e1ba3a89f3c8
+ETag: "1"
+
+{"id":"7b333bb7-a148-4441-a832-e1ba3a89f3c8","title":"acc-BR12-7a435847c5f2-future","description":null,"dueDate":"2026-10-06","isCompleted":false,"createdAt":"2026-10-03T07:55:14.718Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR12-7a435847c5f2-overdue\"\,\"dueDate\":\"2026-09-30\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:55:14 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 215
+Connection: keep-alive
+Location: /api/todos/240d79c3-245a-437a-98f5-7999ab7a636b
+ETag: "1"
+
+{"id":"240d79c3-245a-437a-98f5-7999ab7a636b","title":"acc-BR12-7a435847c5f2-overdue","description":null,"dueDate":"2026-09-30","isCompleted":false,"createdAt":"2026-10-03T07:55:14.730Z","version":1,"isOverdue":true}
+
+>>> GET /api/todos?status=incomplete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:55:14 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 2417
+Connection: keep-alive
+
+[{"id":"240d79c3-245a-437a-98f5-7999ab7a636b","title":"acc-BR12-7a435847c5f2-overdue","description":null,"dueDate":"2026-09-30","isCompleted":false,"createdAt":"2026-10-03T07:55:14.730Z","version":1,"isOverdue":true},{"id":"7b333bb7-a148-4441-a832-e1ba3a89f3c8","title":"acc-BR12-7a435847c5f2-future","description":null,"dueDate":"2026-10-06","isCompleted":false,"createdAt":"2026-10-03T07:55:14.718Z","version":1,"isOverdue":false},{"id":"6778e8ad-ef0b-4865-8990-a5496896d064","title":"acc-BR11-868215b19337-overdue","description":null,"dueDate":"2026-09-30","isCompleted":false,"createdAt":"2026-10-03T07:55:14.675Z","version":1,"isOverdue":true},{"id":"bd5f34f5-5f42-4624-9da2-1fa8e46d4ab9","title":"acc-BR11-868215b19337-future","description":null,"dueDate":"2026-10-06","isCompleted":false,"createdAt":"2026-10-03T07:55:14.663Z","version":1,"isOverdue":false},{"id":"6f120c56-0f2a-463c-b223-abc0e8033b93","title":"Incomplete me","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:55:14.588Z","version":3,"isOverdue":false},{"id":"58c7f9dd-c432-4ab3-b99f-80a983060433","title":"Due","description":null,"dueDate":"2030-02-02","isCompleted":false,"createdAt":"2026-10-03T07:55:14.542Z","version":2,"isOverdue":false},{"id":"6ca667bb-cee7-4c17-9908-cd5a3aff7abb","title":"Desc","description":"new","dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:55:14.517Z","version":2,"isOverdue":false},{"id":"94210037-9a29-43f5-884f-dd3bbef0d608","title":"New","description":"keep","dueDate":"2030-01-02","isCompleted":false,"createdAt":"2026-10-03T07:55:14.476Z","version":2,"isOverdue":false},{"id":"082ff13b-79ef-4498-8cb5-b75402936cb5","title":"View me","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:55:14.448Z","version":1,"isOverdue":false},{"id":"83f2f018-f538-4a92-a245-24a5abf0e430","title":"acc-BR03-f4ba0e68ed93-a","description":null,"dueDate":"2030-01-02","isCompleted":false,"createdAt":"2026-10-03T07:55:14.422Z","version":1,"isOverdue":false},{"id":"09529952-f00b-436a-8bb6-2c4cec4df577","title":"Buy milk","description":"2% organic","dueDate":"2030-01-02","isCompleted":false,"createdAt":"2026-10-03T07:55:14.401Z","version":1,"isOverdue":false},{"id":"3f0ea79f-dcaf-4475-a202-7bc8f761e227","title":"Buy milk","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:55:14.364Z","version":1,"isOverdue":false}]
+
