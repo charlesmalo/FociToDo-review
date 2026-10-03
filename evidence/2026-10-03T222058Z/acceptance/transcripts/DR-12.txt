@@ -1,0 +1,20 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"bare\ date\"\,\"dueAt\":\"2026-10-05\"\}
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 268
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"dueAt","message":"Due must be a date and time with a timezone offset, e.g. 2026-10-03T18:00:00Z"}],"instance":"/api/todos"}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"no\ offset\"\,\"dueAt\":\"2026-10-05T10:00:00\"\}
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 268
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"dueAt","message":"Due must be a date and time with a timezone offset, e.g. 2026-10-03T18:00:00Z"}],"instance":"/api/todos"}
+

@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"clear\ desc\"\,\"description\":\"to\ be\ cleared\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:23 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 216
+Connection: keep-alive
+Location: /api/todos/739b9688-5080-4015-a6d5-1857d1a3924b
+ETag: "1"
+
+{"id":"739b9688-5080-4015-a6d5-1857d1a3924b","title":"clear desc","description":"to be cleared","dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T22:21:23.033Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> PATCH /api/todos/739b9688-5080-4015-a6d5-1857d1a3924b -H Content-Type:\ application/json --data-binary \{\"description\":null\} -H If-Match:\ \"1\"
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:23 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+ETag: "2"
+
+{"id":"739b9688-5080-4015-a6d5-1857d1a3924b","title":"clear desc","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T22:21:23.033Z","version":2,"isOverdue":false,"isDueSoon":false}
+

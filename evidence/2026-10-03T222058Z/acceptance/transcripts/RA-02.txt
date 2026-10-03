@@ -1,0 +1,37 @@
+one instant, two spellings: 2026-10-04T10:21:22+14:00 and 2026-10-03T08:21:22-12:00
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"overdue\ east\"\,\"dueAt\":\"2026-10-04T10:21:22+14:00\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 228
+Connection: keep-alive
+Location: /api/todos/73d5ad16-4479-477a-9c9d-5622b981795b
+ETag: "1"
+
+{"id":"73d5ad16-4479-477a-9c9d-5622b981795b","title":"overdue east","description":null,"dueAt":"2026-10-03T20:21:22.000Z","isCompleted":false,"createdAt":"2026-10-03T22:21:22.960Z","version":1,"isOverdue":true,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"overdue\ west\"\,\"dueAt\":\"2026-10-03T08:21:22-12:00\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 228
+Connection: keep-alive
+Location: /api/todos/dd659f25-c977-4cd2-b030-f6b2aaf95c72
+ETag: "1"
+
+{"id":"dd659f25-c977-4cd2-b030-f6b2aaf95c72","title":"overdue west","description":null,"dueAt":"2026-10-03T20:21:22.000Z","isCompleted":false,"createdAt":"2026-10-03T22:21:22.980Z","version":1,"isOverdue":true,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"future\ 2\ days\"\,\"dueAt\":\"2026-10-05T22:21:22Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 230
+Connection: keep-alive
+Location: /api/todos/c7f15081-2d42-4dac-9166-b9103d64c5af
+ETag: "1"
+
+{"id":"c7f15081-2d42-4dac-9166-b9103d64c5af","title":"future 2 days","description":null,"dueAt":"2026-10-05T22:21:22.000Z","isCompleted":false,"createdAt":"2026-10-03T22:21:22.995Z","version":1,"isOverdue":false,"isDueSoon":false}
+

@@ -1,0 +1,10 @@
+>>> POST /api/todos -H Content-Type:\ application/json\;\ charset=latin1 --data-binary \{\"title\":\"x\"\}
+HTTP/1.1 415 Unsupported Media Type
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 133
+Connection: keep-alive
+
+{"type":"/problems/bad-request","title":"Bad request","status":415,"detail":"unsupported charset \"LATIN1\"","instance":"/api/todos"}
+

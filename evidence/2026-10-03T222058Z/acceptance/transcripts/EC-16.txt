@@ -1,0 +1,30 @@
+>>> POST /api/todos/00000000-0000-4000-8000-000000000000/complete
+HTTP/1.1 404 Not Found
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 200
+Connection: keep-alive
+
+{"type":"/problems/not-found","title":"Not found","status":404,"detail":"Todo 00000000-0000-4000-8000-000000000000 was not found","instance":"/api/todos/00000000-0000-4000-8000-000000000000/complete"}
+
+>>> POST /api/todos/00000000-0000-4000-8000-000000000000/incomplete
+HTTP/1.1 404 Not Found
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+
+{"type":"/problems/not-found","title":"Not found","status":404,"detail":"Todo 00000000-0000-4000-8000-000000000000 was not found","instance":"/api/todos/00000000-0000-4000-8000-000000000000/incomplete"}
+
+>>> DELETE /api/todos/00000000-0000-4000-8000-000000000000 -H If-Match:\ \"1\"
+HTTP/1.1 404 Not Found
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 191
+Connection: keep-alive
+
+{"type":"/problems/not-found","title":"Not found","status":404,"detail":"Todo 00000000-0000-4000-8000-000000000000 was not found","instance":"/api/todos/00000000-0000-4000-8000-000000000000"}
+

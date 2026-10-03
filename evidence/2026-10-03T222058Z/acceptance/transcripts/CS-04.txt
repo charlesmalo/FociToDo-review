@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-CS04-edab1bef20bd-a\"\} -H Idempotency-Key:\ acc-cbbb09c02f5857cf
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 218
+Connection: keep-alive
+Location: /api/todos/269def6d-8287-4fa4-ac8b-10b795bd2f4f
+ETag: "1"
+
+{"id":"269def6d-8287-4fa4-ac8b-10b795bd2f4f","title":"acc-CS04-edab1bef20bd-a","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T22:21:22.844Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-CS04-edab1bef20bd-b\"\} -H Idempotency-Key:\ acc-cbbb09c02f5857cf
+HTTP/1.1 422 Unprocessable Entity
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 22:21:22 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+
+{"type":"/problems/idempotency-key-reuse","title":"Idempotency key reused","status":422,"detail":"Idempotency-Key acc-cbbb09c02f5857cf was already used with a different request","instance":"/api/todos"}
+
