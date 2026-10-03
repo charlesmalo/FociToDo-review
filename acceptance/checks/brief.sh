@@ -9,28 +9,28 @@ check_BR_01() {
   expect_jq '.id | test("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")'
   expect_json .title 'Buy milk'
   expect_json .description null
-  expect_json .dueDate null
+  expect_json .dueAt null
   expect_json .isCompleted false
   expect_json .version 1
   expect_jq '.createdAt | type == "string"'
 }
 
 check_BR_02() {
-  create_todo '{"title":"Buy milk","description":"2% organic","dueDate":"2030-01-02"}'
+  create_todo '{"title":"Buy milk","description":"2% organic","dueAt":"2030-01-02T12:00:00Z"}'
   expect_status 201
   expect_json .description '2% organic'
-  expect_json .dueDate '2030-01-02'
+  expect_json .dueAt '2030-01-02T12:00:00.000Z'
 }
 
 check_BR_03() {
   local p
   p="$(prefix BR03)"
-  create_todo "{\"title\":\"${p}a\",\"dueDate\":\"2030-01-02\"}"
+  create_todo "{\"title\":\"${p}a\",\"dueAt\":\"2030-01-02T12:00:00Z\"}"
   [ -n "${ID}" ] || return 0
   req GET /api/todos
   expect_status 200
   expect_jq 'type == "array"'
-  expect_jq ".[] | select(.id == \"${ID}\") | .title == \"${p}a\" and .dueDate == \"2030-01-02\" and .isCompleted == false and has(\"isOverdue\")"
+  expect_jq ".[] | select(.id == \"${ID}\") | .title == \"${p}a\" and .dueAt == \"2030-01-02T12:00:00.000Z\" and .isCompleted == false and has(\"isOverdue\")"
 }
 
 check_BR_04() {
@@ -44,7 +44,7 @@ check_BR_04() {
 }
 
 check_BR_05() {
-  create_todo '{"title":"Old","description":"keep","dueDate":"2030-01-02"}'
+  create_todo '{"title":"Old","description":"keep","dueAt":"2030-01-02T12:00:00Z"}'
   [ -n "${ID}" ] || return 0
   patch_json "/api/todos/${ID}" '{"title":"New"}' -H 'If-Match: "1"'
   expect_status 200
@@ -52,7 +52,7 @@ check_BR_05() {
   expect_json .title New
   expect_json .version 2
   expect_json .description keep
-  expect_json .dueDate 2030-01-02
+  expect_json .dueAt '2030-01-02T12:00:00.000Z'
 }
 
 check_BR_06() {
@@ -65,11 +65,11 @@ check_BR_06() {
 }
 
 check_BR_07() {
-  create_todo '{"title":"Due","dueDate":"2030-01-01"}'
+  create_todo '{"title":"Due","dueAt":"2030-01-01T12:00:00Z"}'
   [ -n "${ID}" ] || return 0
-  patch_json "/api/todos/${ID}" '{"dueDate":"2030-02-02"}' -H 'If-Match: "1"'
+  patch_json "/api/todos/${ID}" '{"dueAt":"2030-02-02T12:00:00Z"}' -H 'If-Match: "1"'
   expect_status 200
-  expect_json .dueDate '2030-02-02'
+  expect_json .dueAt '2030-02-02T12:00:00.000Z'
   expect_json .version 2
 }
 
@@ -109,8 +109,8 @@ _br_filter_fixture() {
     req POST "/api/todos/${ID}/complete"
     [ "${STATUS}" = 200 ] || fail_check "setup: complete returned ${STATUS}"
   fi
-  create_todo "{\"title\":\"${p}future\",\"dueDate\":\"$(utc_date '+3 days')\"}"
-  create_todo "{\"title\":\"${p}overdue\",\"dueDate\":\"$(utc_date '-3 days')\"}"
+  create_todo "{\"title\":\"${p}future\",\"dueAt\":\"$(utc_at '+3 days')\"}"
+  create_todo "{\"title\":\"${p}overdue\",\"dueAt\":\"$(utc_at '-3 days')\"}"
 }
 
 # _sorted LIST: space-separated words, sorted, for order-independent set comparison.
@@ -167,11 +167,11 @@ check_BR_14() {
 check_BR_15() {
   local p
   p="$(prefix BR15)"
-  create_todo "{\"title\":\"${p}b\",\"dueDate\":\"2030-05-01\"}"
-  create_todo "{\"title\":\"${p}a\",\"dueDate\":\"2030-01-01\"}"
-  create_todo "{\"title\":\"${p}c\",\"dueDate\":\"2030-09-01\"}"
+  create_todo "{\"title\":\"${p}b\",\"dueAt\":\"2030-05-01T12:00:00Z\"}"
+  create_todo "{\"title\":\"${p}a\",\"dueAt\":\"2030-01-01T12:00:00Z\"}"
+  create_todo "{\"title\":\"${p}c\",\"dueAt\":\"2030-09-01T12:00:00Z\"}"
   create_todo "{\"title\":\"${p}none\"}"
-  req GET '/api/todos?sort=dueDate&order=asc'
+  req GET '/api/todos?sort=dueAt&order=asc'
   expect_status 200
   local got
   got="$(mine "${p}")"
@@ -181,11 +181,11 @@ check_BR_15() {
 check_BR_16() {
   local p
   p="$(prefix BR16)"
-  create_todo "{\"title\":\"${p}b\",\"dueDate\":\"2030-05-01\"}"
-  create_todo "{\"title\":\"${p}a\",\"dueDate\":\"2030-01-01\"}"
-  create_todo "{\"title\":\"${p}c\",\"dueDate\":\"2030-09-01\"}"
+  create_todo "{\"title\":\"${p}b\",\"dueAt\":\"2030-05-01T12:00:00Z\"}"
+  create_todo "{\"title\":\"${p}a\",\"dueAt\":\"2030-01-01T12:00:00Z\"}"
+  create_todo "{\"title\":\"${p}c\",\"dueAt\":\"2030-09-01T12:00:00Z\"}"
   create_todo "{\"title\":\"${p}none\"}"
-  req GET '/api/todos?sort=dueDate&order=desc'
+  req GET '/api/todos?sort=dueAt&order=desc'
   expect_status 200
   local got
   got="$(mine "${p}")"

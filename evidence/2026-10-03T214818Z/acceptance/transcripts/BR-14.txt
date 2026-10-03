@@ -1,0 +1,67 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR14-9c7881dfbca3-done\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 221
+Connection: keep-alive
+Location: /api/todos/0a193685-2d9f-494f-9229-6aa948bd642f
+ETag: "1"
+
+{"id":"0a193685-2d9f-494f-9229-6aa948bd642f","title":"acc-BR14-9c7881dfbca3-done","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:39.815Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos/0a193685-2d9f-494f-9229-6aa948bd642f/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 220
+Connection: keep-alive
+ETag: "2"
+
+{"id":"0a193685-2d9f-494f-9229-6aa948bd642f","title":"acc-BR14-9c7881dfbca3-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.815Z","version":2,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR14-9c7881dfbca3-future\"\,\"dueAt\":\"2026-10-06T21:48:39Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 245
+Connection: keep-alive
+Location: /api/todos/de9e31f5-0350-4d0d-a4af-35deb31bce2c
+ETag: "1"
+
+{"id":"de9e31f5-0350-4d0d-a4af-35deb31bce2c","title":"acc-BR14-9c7881dfbca3-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.841Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR14-9c7881dfbca3-overdue\"\,\"dueAt\":\"2026-09-30T21:48:39Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 245
+Connection: keep-alive
+Location: /api/todos/bfd8db66-baed-4cac-b231-bea1a8e90716
+ETag: "1"
+
+{"id":"bfd8db66-baed-4cac-b231-bea1a8e90716","title":"acc-BR14-9c7881dfbca3-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.855Z","version":1,"isOverdue":true,"isDueSoon":false}
+
+>>> GET /api/todos
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 4795
+Connection: keep-alive
+
+[{"id":"bfd8db66-baed-4cac-b231-bea1a8e90716","title":"acc-BR14-9c7881dfbca3-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.855Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"de9e31f5-0350-4d0d-a4af-35deb31bce2c","title":"acc-BR14-9c7881dfbca3-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.841Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"0a193685-2d9f-494f-9229-6aa948bd642f","title":"acc-BR14-9c7881dfbca3-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.815Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"e5eed67b-9683-4596-8b99-e29928f2d03c","title":"acc-BR13-898b29c9be36-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.785Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"9a4ac1d4-f463-4907-987a-afaebced1149","title":"acc-BR13-898b29c9be36-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.772Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"ccf8f838-f2de-4bf2-b516-b97ba88f4340","title":"acc-BR13-898b29c9be36-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.753Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"d29a5429-a603-4dee-a448-8d4bfb97c9eb","title":"acc-BR12-aabf0339bbd5-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.725Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"8017b7c1-8391-49cb-94e7-5df74d766fb2","title":"acc-BR12-aabf0339bbd5-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.711Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"a8c24a0b-edff-40ef-bcc2-5ddb5c5a8e79","title":"acc-BR12-aabf0339bbd5-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.692Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"cefcd3be-8d26-4474-b7d9-2cc0149f0a4b","title":"acc-BR11-edd0c3be70b4-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.669Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"2bafd7ac-a916-4870-b00a-80300a4eac5e","title":"acc-BR11-edd0c3be70b4-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.656Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"372cd725-a52a-4516-852b-9dfde89ffb3e","title":"acc-BR11-edd0c3be70b4-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.637Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"29f1565d-01f3-4971-a614-20544516b9e8","title":"Incomplete me","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:39.580Z","version":3,"isOverdue":false,"isDueSoon":false},{"id":"8accad38-1fd5-4a21-9bb9-6c0be8a40124","title":"Complete me","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.558Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"87055a4a-71ac-4158-83d5-4a02d651cee5","title":"Due","description":null,"dueAt":"2030-02-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.534Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"ce9035fd-1851-48b9-8855-9dcac30441e0","title":"Desc","description":"new","dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:39.510Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"33f2db5f-df5d-4581-be96-113f0ed535fd","title":"New","description":"keep","dueAt":"2030-01-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.479Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"7914d5b3-3aa2-4130-912f-ca1857ed3752","title":"View me","description":null,"dueA
+
+>>> GET /api/todos?status=all
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 4795
+Connection: keep-alive
+
+[{"id":"bfd8db66-baed-4cac-b231-bea1a8e90716","title":"acc-BR14-9c7881dfbca3-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.855Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"de9e31f5-0350-4d0d-a4af-35deb31bce2c","title":"acc-BR14-9c7881dfbca3-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.841Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"0a193685-2d9f-494f-9229-6aa948bd642f","title":"acc-BR14-9c7881dfbca3-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.815Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"e5eed67b-9683-4596-8b99-e29928f2d03c","title":"acc-BR13-898b29c9be36-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.785Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"9a4ac1d4-f463-4907-987a-afaebced1149","title":"acc-BR13-898b29c9be36-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.772Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"ccf8f838-f2de-4bf2-b516-b97ba88f4340","title":"acc-BR13-898b29c9be36-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.753Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"d29a5429-a603-4dee-a448-8d4bfb97c9eb","title":"acc-BR12-aabf0339bbd5-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.725Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"8017b7c1-8391-49cb-94e7-5df74d766fb2","title":"acc-BR12-aabf0339bbd5-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.711Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"a8c24a0b-edff-40ef-bcc2-5ddb5c5a8e79","title":"acc-BR12-aabf0339bbd5-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.692Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"cefcd3be-8d26-4474-b7d9-2cc0149f0a4b","title":"acc-BR11-edd0c3be70b4-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.669Z","version":1,"isOverdue":true,"isDueSoon":false},{"id":"2bafd7ac-a916-4870-b00a-80300a4eac5e","title":"acc-BR11-edd0c3be70b4-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.656Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"372cd725-a52a-4516-852b-9dfde89ffb3e","title":"acc-BR11-edd0c3be70b4-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.637Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"29f1565d-01f3-4971-a614-20544516b9e8","title":"Incomplete me","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:39.580Z","version":3,"isOverdue":false,"isDueSoon":false},{"id":"8accad38-1fd5-4a21-9bb9-6c0be8a40124","title":"Complete me","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.558Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"87055a4a-71ac-4158-83d5-4a02d651cee5","title":"Due","description":null,"dueAt":"2030-02-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.534Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"ce9035fd-1851-48b9-8855-9dcac30441e0","title":"Desc","description":"new","dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:39.510Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"33f2db5f-df5d-4581-be96-113f0ed535fd","title":"New","description":"keep","dueAt":"2030-01-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.479Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"7914d5b3-3aa2-4130-912f-ca1857ed3752","title":"View me","description":null,"dueA
+

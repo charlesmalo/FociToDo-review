@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Black-box HTTP checks against the app under review, sourced by scripts/acceptance.sh.
 # Written only from the allowed sources — the brief, the design spec, docs/api.md, the
-# README and the served /api/openapi.json — never from the app's own tests. See the
+# README, the committed apps/api/openapi.json and the 2026-10-03 spec — never from the app's own tests. See the
 # Independence section at the top of acceptance/expectations.md.
 
 BASE="${BASE:-http://web:8080}"
@@ -96,4 +96,15 @@ mine() {
     | tr '\n' ' ' | sed 's/ $//'
 }
 
-utc_date() { date -u -d "$1" +%Y-%m-%d; }
+# utc_at WHEN: an instant relative to now (GNU date syntax, e.g. '+2 hours') as RFC 3339 UTC.
+utc_at() { date -u -d "$1" +%Y-%m-%dT%H:%M:%SZ; }
+
+# at_offset WHEN OFFSET: the same instant as utc_at, written with a numeric offset such as +14:00 or -12:00.
+at_offset() {
+  local epoch sign secs
+  epoch="$(date -u -d "$1" +%s)"
+  sign="${2:0:1}"
+  secs=$(( 10#${2:1:2} * 3600 + 10#${2:4:2} * 60 ))
+  [ "${sign}" = '-' ] && secs=$(( -secs ))
+  printf '%s%s\n' "$(date -u -d "@$(( epoch + secs ))" +%Y-%m-%dT%H:%M:%S)" "$2"
+}

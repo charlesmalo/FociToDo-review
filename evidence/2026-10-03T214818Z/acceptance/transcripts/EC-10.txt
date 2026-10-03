@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"precedence\ 400\ 428\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 213
+Connection: keep-alive
+Location: /api/todos/2a042cd1-723b-45e2-843c-58b1db450663
+ETag: "1"
+
+{"id":"2a042cd1-723b-45e2-843c-58b1db450663","title":"precedence 400 428","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.385Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> PATCH /api/todos/2a042cd1-723b-45e2-843c-58b1db450663 -H Content-Type:\ application/json --data-binary \{\"title\":123\}
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 250
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"title","message":"Title must be a string"}],"instance":"/api/todos/2a042cd1-723b-45e2-843c-58b1db450663"}
+

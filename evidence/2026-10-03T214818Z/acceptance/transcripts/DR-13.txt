@@ -1,0 +1,24 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"past\ offset\"\,\"dueAt\":\"2001-01-01T10:00:00+02:00\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:44 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 227
+Connection: keep-alive
+Location: /api/todos/d698482c-6c66-43ef-813d-41fcdbce1d23
+ETag: "1"
+
+{"id":"d698482c-6c66-43ef-813d-41fcdbce1d23","title":"past offset","description":null,"dueAt":"2001-01-01T08:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:44.848Z","version":1,"isOverdue":true,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"past\ z\"\,\"dueAt\":\"2001-01-01T10:00:00.5Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:44 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 222
+Connection: keep-alive
+Location: /api/todos/bc0bec4a-fb43-461b-9c89-d970f6986418
+ETag: "1"
+
+{"id":"bc0bec4a-fb43-461b-9c89-d970f6986418","title":"past z","description":null,"dueAt":"2001-01-01T10:00:00.500Z","isCompleted":false,"createdAt":"2026-10-03T21:48:44.864Z","version":1,"isOverdue":true,"isDueSoon":false}
+

@@ -1,0 +1,57 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR11-edd0c3be70b4-done\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 221
+Connection: keep-alive
+Location: /api/todos/372cd725-a52a-4516-852b-9dfde89ffb3e
+ETag: "1"
+
+{"id":"372cd725-a52a-4516-852b-9dfde89ffb3e","title":"acc-BR11-edd0c3be70b4-done","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:39.637Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos/372cd725-a52a-4516-852b-9dfde89ffb3e/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 220
+Connection: keep-alive
+ETag: "2"
+
+{"id":"372cd725-a52a-4516-852b-9dfde89ffb3e","title":"acc-BR11-edd0c3be70b4-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.637Z","version":2,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR11-edd0c3be70b4-future\"\,\"dueAt\":\"2026-10-06T21:48:39Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 245
+Connection: keep-alive
+Location: /api/todos/2bafd7ac-a916-4870-b00a-80300a4eac5e
+ETag: "1"
+
+{"id":"2bafd7ac-a916-4870-b00a-80300a4eac5e","title":"acc-BR11-edd0c3be70b4-future","description":null,"dueAt":"2026-10-06T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.656Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR11-edd0c3be70b4-overdue\"\,\"dueAt\":\"2026-09-30T21:48:39Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 245
+Connection: keep-alive
+Location: /api/todos/cefcd3be-8d26-4474-b7d9-2cc0149f0a4b
+ETag: "1"
+
+{"id":"cefcd3be-8d26-4474-b7d9-2cc0149f0a4b","title":"acc-BR11-edd0c3be70b4-overdue","description":null,"dueAt":"2026-09-30T21:48:39.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.669Z","version":1,"isOverdue":true,"isDueSoon":false}
+
+>>> GET /api/todos?status=completed
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 428
+Connection: keep-alive
+
+[{"id":"372cd725-a52a-4516-852b-9dfde89ffb3e","title":"acc-BR11-edd0c3be70b4-done","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.637Z","version":2,"isOverdue":false,"isDueSoon":false},{"id":"8accad38-1fd5-4a21-9bb9-6c0be8a40124","title":"Complete me","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.558Z","version":2,"isOverdue":false,"isDueSoon":false}]
+

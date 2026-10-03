@@ -36,8 +36,8 @@ check_RB_06() {
 }
 
 check_RB_07() {
-  post_json /api/todos '{"title":"x","dueDate":20300101}'
-  expect_field_error dueDate
+  post_json /api/todos '{"title":"x","dueAt":20300101}'
+  expect_field_error dueAt
 }
 
 check_RB_08() {

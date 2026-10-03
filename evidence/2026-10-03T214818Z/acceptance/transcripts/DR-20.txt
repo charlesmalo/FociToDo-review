@@ -1,0 +1,35 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"same\ instant\"\,\"dueAt\":\"2030-06-01T12:00:00Z\"\} -H Idempotency-Key:\ acc-9537e41cbcf9a9f9
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 229
+Connection: keep-alive
+Location: /api/todos/02982851-5423-49cd-88bf-601117e12345
+ETag: "1"
+
+{"id":"02982851-5423-49cd-88bf-601117e12345","title":"same instant","description":null,"dueAt":"2030-06-01T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:45.096Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"same\ instant\"\,\"dueAt\":\"2030-06-01T14:00:00+02:00\"\} -H Idempotency-Key:\ acc-9537e41cbcf9a9f9
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 229
+Connection: keep-alive
+Location: /api/todos/02982851-5423-49cd-88bf-601117e12345
+Idempotent-Replayed: true
+ETag: "1"
+
+{"id":"02982851-5423-49cd-88bf-601117e12345","title":"same instant","description":null,"dueAt":"2030-06-01T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:45.096Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"same\ instant\"\,\"dueAt\":\"2030-06-01T12:00:01Z\"\} -H Idempotency-Key:\ acc-9537e41cbcf9a9f9
+HTTP/1.1 422 Unprocessable Entity
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+
+{"type":"/problems/idempotency-key-reuse","title":"Idempotency key reused","status":422,"detail":"Idempotency-Key acc-9537e41cbcf9a9f9 was already used with a different request","instance":"/api/todos"}
+

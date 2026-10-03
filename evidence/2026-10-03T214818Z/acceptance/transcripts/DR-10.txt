@@ -1,0 +1,12 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"empty\ desc\"\,\"description\":\"\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:44 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+Location: /api/todos/ce5641d2-ac10-467c-a3bc-76effe8a501d
+ETag: "1"
+
+{"id":"ce5641d2-ac10-467c-a3bc-76effe8a501d","title":"empty desc","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:44.774Z","version":1,"isOverdue":false,"isDueSoon":false}
+

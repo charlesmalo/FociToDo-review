@@ -1,0 +1,34 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"complete\ twice\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 209
+Connection: keep-alive
+Location: /api/todos/df64fe1b-6188-4697-87d2-878e3aa9a914
+ETag: "1"
+
+{"id":"df64fe1b-6188-4697-87d2-878e3aa9a914","title":"complete twice","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.582Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos/df64fe1b-6188-4697-87d2-878e3aa9a914/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 208
+Connection: keep-alive
+ETag: "2"
+
+{"id":"df64fe1b-6188-4697-87d2-878e3aa9a914","title":"complete twice","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:45.582Z","version":2,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos/df64fe1b-6188-4697-87d2-878e3aa9a914/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 208
+Connection: keep-alive
+ETag: "2"
+
+{"id":"df64fe1b-6188-4697-87d2-878e3aa9a914","title":"complete twice","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:45.582Z","version":2,"isOverdue":false,"isDueSoon":false}
+

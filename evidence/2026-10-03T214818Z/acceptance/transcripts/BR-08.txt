@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"Complete\ me\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 206
+Connection: keep-alive
+Location: /api/todos/8accad38-1fd5-4a21-9bb9-6c0be8a40124
+ETag: "1"
+
+{"id":"8accad38-1fd5-4a21-9bb9-6c0be8a40124","title":"Complete me","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:39.558Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos/8accad38-1fd5-4a21-9bb9-6c0be8a40124/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+ETag: "2"
+
+{"id":"8accad38-1fd5-4a21-9bb9-6c0be8a40124","title":"Complete me","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:39.558Z","version":2,"isOverdue":false,"isDueSoon":false}
+

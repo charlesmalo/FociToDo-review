@@ -1,31 +1,31 @@
 # Expectation catalogue
 
-Every expectation the independent acceptance run checks, with where it comes from. Each row is proven by `check_<ID>` in `checks/*.sh`, black-box over HTTP through nginx at `http://web:8080`, using the requests the web front end sends. Sources: the take-home **brief**; the design **spec** (`docs/superpowers/specs/2026-09-30-foci-todo-design.md` in the app); the app's **api** guide (`docs/api.md`); **README** assumptions; **robustness** (hostile input the app must reject cleanly — a 4xx with problem details, never a 5xx).
+Every expectation the independent acceptance run checks, with where it comes from. Each row is proven by `check_<ID>` in `checks/*.sh`, black-box over HTTP through nginx at `http://web:8080`, using the requests the web front end sends. Sources: the take-home **brief**; the design **spec** (`docs/superpowers/specs/2026-09-30-foci-todo-design.md` in the app) and its amendment, **spec 2026-10-03** (`docs/superpowers/specs/2026-10-03-api-docs-and-deadlines-design.md`: API docs not served, deadlines as UTC instants); the app's **api** guide (`docs/api.md`); the committed **openapi** document (`apps/api/openapi.json`); **README** assumptions; **robustness** (hostile input the app must reject cleanly — a 4xx with problem details, never a 5xx).
 
 ## Independence
 
-This catalogue, its checks (`acceptance/checks/*.sh`) and the storyboard journeys (`storyboard/journeys/*.spec.ts`) are written only from these allowed sources: the take-home brief, the design spec (`docs/superpowers/specs/2026-09-30-foci-todo-design.md`), the app's API guide (`docs/api.md`), the app's README, and the served `/api/openapi.json`. They are never written from, or adapted from, the app's own test code (`apps/*/tests`, `packages/*/tests`, `e2e/`) — every check here interacts with a freshly started stack only as a black box, over HTTP or through a browser pointed at `http://web:8080`. Reading the app's UI source to find an element's accessible name (its label, role or text) is allowed (R49) and is how the storyboard's selectors were written; reading the app's test files is not. The plan's reference user journey was drafted by the app's own author, so some sample data in the storyboard (for example "Buy oat milk") coincides with the app's own `e2e` fixtures — this is a coincidence of authorship, not a dependency on the app's tests.
+This catalogue, its checks (`acceptance/checks/*.sh`) and the storyboard journeys (`storyboard/journeys/*.spec.ts`) are written only from these allowed sources: the take-home brief, the design spec (`docs/superpowers/specs/2026-09-30-foci-todo-design.md`) and its amendment (`docs/superpowers/specs/2026-10-03-api-docs-and-deadlines-design.md`), the app's API guide (`docs/api.md`), the app's README, and the committed `apps/api/openapi.json` in the app repository (read-only). They are never written from, or adapted from, the app's own test code (`apps/*/tests`, `packages/*/tests`, `e2e/`) — every check here interacts with a freshly started stack only as a black box, over HTTP or through a browser pointed at `http://web:8080`. Reading the app's UI source to find an element's accessible name (its label, role or text) is allowed (R49) and is how the storyboard's selectors were written; reading the app's test files is not. The plan's reference user journey was drafted by the app's own author, so some sample data in the storyboard (for example "Buy oat milk") coincides with the app's own `e2e` fixtures — this is a coincidence of authorship, not a dependency on the app's tests.
 
 ## Brief actions
 
 | ID | Source | Expectation |
 |---|---|---|
-| BR-01 | brief: Add | `POST /api/todos {"title"}` → 201, `Location: /api/todos/<id>`, `ETag: "1"`, body has id, title, description null, dueDate null, isCompleted false, createdAt, version 1 |
-| BR-02 | brief: Add | Create with description and dueDate echoes both back |
-| BR-03 | brief: List | `GET /api/todos` → 200 JSON array whose items carry title, dueDate, isCompleted (and isOverdue) |
+| BR-01 | brief: Add | `POST /api/todos {"title"}` → 201, `Location: /api/todos/<id>`, `ETag: "1"`, body has id, title, description null, dueAt null, isCompleted false, createdAt, version 1 |
+| BR-02 | brief: Add, spec 2026-10-03 §3.1 | Create with description and `dueAt` (`2030-01-02T12:00:00Z`) echoes both back, `dueAt` as `2030-01-02T12:00:00.000Z` |
+| BR-03 | brief: List | `GET /api/todos` → 200 JSON array whose items carry title, dueAt, isCompleted (and isOverdue) |
 | BR-04 | brief: View | `GET /api/todos/<id>` → 200 with `ETag` and the same todo |
 | BR-05 | brief: Update | `PATCH` title with `If-Match` → 200, new title, version 2, `ETag: "2"`, other fields unchanged |
 | BR-06 | brief: Update | `PATCH` description → changed |
-| BR-07 | brief: Update | `PATCH` dueDate → changed |
+| BR-07 | brief: Update, spec 2026-10-03 §3.1 | `PATCH` `dueAt` → changed |
 | BR-08 | brief: Complete | `POST /api/todos/<id>/complete` → 200, isCompleted true |
 | BR-09 | brief: Incomplete | `POST /api/todos/<id>/incomplete` → 200, isCompleted false |
 | BR-10 | brief: Delete | `DELETE` with `If-Match` → 204, then `GET` → 404 |
 | BR-11 | brief: filter (optional) | `?status=completed` returns only completed todos |
 | BR-12 | brief: filter (optional) | `?status=incomplete` returns only incomplete todos |
-| BR-13 | brief: filter (optional) | `?status=overdue` returns only incomplete todos due before today (UTC) |
+| BR-13 | brief: filter (optional), spec 2026-10-03 §3.2 | `?status=overdue` returns only incomplete todos whose deadline is in the past |
 | BR-14 | brief: filter (optional) | default and `?status=all` return completed and incomplete todos |
-| BR-15 | brief: sort (optional) | `?sort=dueDate&order=asc` orders by due date ascending |
-| BR-16 | brief: sort (optional) | `?sort=dueDate&order=desc` orders by due date descending |
+| BR-15 | brief: sort (optional), spec 2026-10-03 §3.3 | `?sort=dueAt&order=asc` orders by deadline ascending, todos without a deadline last |
+| BR-16 | brief: sort (optional), spec 2026-10-03 §3.3 | `?sort=dueAt&order=desc` orders by deadline descending, todos without a deadline still last |
 | BR-17 | brief: sort (optional) | default order is newest first (`createdAt` desc) |
 | BR-18 | brief: sort (optional) | `?sort=createdAt&order=asc` is oldest first |
 | BR-19 | brief: sort (optional) | `?sort=title` orders by title, asc and desc |
@@ -46,15 +46,16 @@ This catalogue, its checks (`acceptance/checks/*.sh`) and the storyboard journey
 | DR-08 | spec: DR-3 | a 2000-character description is accepted |
 | DR-09 | spec: DR-3 | a 2001-character description → 400 naming `description` |
 | DR-10 | spec: DR-3 | an empty description is stored as `null` |
-| DR-11 | spec: DR-4 | `dueDate` `2026-02-30` (not a real date) → 400 naming `dueDate` |
-| DR-12 | spec: DR-4 | `dueDate` `2026-1-5` (not `YYYY-MM-DD`) → 400 naming `dueDate` |
-| DR-13 | spec: DR-4 | a past `dueDate` (`2001-01-01`) is accepted |
-| DR-14 | api: Conventions | the earliest date `0001-01-01` is accepted |
-| DR-15 | api: Conventions | year `0000` → 400 naming `dueDate` |
+| DR-11 | spec 2026-10-03 §3.1 | `dueAt` `2026-02-30T10:00:00Z` (not a real date) → 400 naming `dueAt` |
+| DR-12 | spec 2026-10-03 §3.1 | `dueAt` as a bare date (`2026-10-05`) or a date-time without an offset (`2026-10-05T10:00:00`) → 400 naming `dueAt` |
+| DR-13 | spec 2026-10-03 §3.1 | a past `dueAt` is accepted in both spellings and normalised to UTC with milliseconds: `2001-01-01T10:00:00+02:00` → `2001-01-01T08:00:00.000Z`; `2001-01-01T10:00:00.5Z` → `2001-01-01T10:00:00.500Z` |
+| DR-14 | spec 2026-10-03 §3.1 | the earliest instant `0001-01-01T00:00:00Z` is accepted and returned as `0001-01-01T00:00:00.000Z` |
+| DR-15 | spec 2026-10-03 §3.1 | year `0000` and year `10000` → 400 naming `dueAt` |
 | DR-16 | spec: DR-5 | `isCompleted` defaults to `false` and cannot be set on create (unknown field → 400) |
 | DR-17 | spec: DR-7 | `version` is read-only: sending it in PATCH → 400 |
-| DR-18 | spec: DR-8 | `isOverdue`: due yesterday (UTC) and incomplete → true; due today → false; due yesterday but completed → false |
+| DR-18 | spec 2026-10-03 §3.2 | `isOverdue` is relative to the deadline instant: 10 seconds in the past and incomplete → true; 5 minutes ahead → false; past but completed → false |
 | DR-19 | api: Conventions | every todo response's `ETag` equals `"<version>"` (create, get, patch, complete, incomplete) |
+| DR-20 | spec 2026-10-03 §3.1 | the idempotency request hash uses the normalised instant: the same `dueAt` written with `Z` and with `+02:00` under one `Idempotency-Key` replays the original 201 (`Idempotent-Replayed: true`, same id); a different instant under that key → 422 `/problems/idempotency-key-reuse` |
 
 ## Error contract
 
@@ -95,19 +96,19 @@ This catalogue, its checks (`acceptance/checks/*.sh`) and the storyboard journey
 | ID | Source | Expectation |
 |---|---|---|
 | RA-01 | README assumption 1 | no authentication: requests without credentials succeed and no `WWW-Authenticate` challenge is sent |
-| RA-02 | README assumption 2 | overdue is judged against today in UTC: due 2 days ago → overdue; due in 2 days → not |
-| RA-03 | README assumption 3 | past due dates are allowed when creating and when updating |
+| RA-02 | README assumption 2, spec 2026-10-03 §3.2 | overdue is a property of the instant, whatever the client's timezone: the same instant sent as `+14:00` and as `-12:00` (2 hours ago) gives identical `dueAt`, `isOverdue` (true) and `isDueSoon` (false); a deadline 2 days ahead is not overdue |
+| RA-03 | README assumption 3 | past deadlines (`dueAt`) are allowed when creating and when updating |
 | RA-04 | README assumption 4 | `PATCH {"description": null}` clears the description |
-| RA-05 | README assumption 4 | `PATCH {"dueDate": null}` clears the due date |
+| RA-05 | README assumption 4 | `PATCH {"dueAt": null}` clears the deadline |
 | RA-06 | README assumption 4 | `PATCH {"title": null}` → 400 (the title cannot be cleared) |
 | RA-07 | README assumption 4 | a PATCH changes only the fields it sends |
 | RA-08 | README assumption 5 | complete and incomplete need no `If-Match` |
 | RA-09 | README assumption 6 | a deleted todo is gone for good: absent from the list, `GET` → 404, a second `DELETE` with `If-Match` → 404 |
 | RA-10 | README assumption 7 | no pagination: 60 created todos all appear in one list response; `?page=2` → 400 |
 | RA-11 | README assumption 8 | idempotency keys apply to creates only: two PATCHes with the same key, each with the current `If-Match`, both apply |
-| RA-12 | README assumption 9 | `dueDate` is returned exactly as sent (no timezone shift); `createdAt` is UTC |
+| RA-12 | README assumption 9, spec 2026-10-03 §3.1 | `dueAt` sent with an offset (`2030-07-15T09:30:00-04:00`) is returned normalised to UTC (`2030-07-15T13:30:00.000Z`); `createdAt` is UTC |
 | RA-13 | README assumption 10 | titles sort case-insensitively (`apple`, `Banana`, `cherry`) |
-| RA-14 | README assumption 10 | todos without a due date sort last in both orders |
+| RA-14 | README assumption 10, spec 2026-10-03 §3.3 | todos without a deadline sort last in both orders of `sort=dueAt` |
 
 ## Robustness
 
@@ -119,7 +120,7 @@ This catalogue, its checks (`acceptance/checks/*.sh`) and the storyboard journey
 | RB-04 | robustness | a JSON array body → 400 |
 | RB-05 | robustness | an unknown field → 400 whose `errors[]` names it |
 | RB-06 | robustness | `title` as a number → 400 naming `title` |
-| RB-07 | robustness | `dueDate` as a number → 400 naming `dueDate` |
+| RB-07 | robustness | `dueAt` as a number → 400 naming `dueAt` |
 | RB-08 | robustness | a 10,000-character title → 400 naming `title` (not 5xx) |
 | RB-09 | robustness | non-ASCII titles (accents, CJK, emoji, right-to-left) round-trip unchanged |
 | RB-10 | api: Conventions | a NUL character (`\u0000`) in title or description → 400 |
@@ -137,5 +138,14 @@ This catalogue, its checks (`acceptance/checks/*.sh`) and the storyboard journey
 | ID | Source | Expectation |
 |---|---|---|
 | AD-01 | openapi: Health | `GET /api/health` → 200 `{"status":"ok","db":"up",…}` |
-| AD-02 | spec: OpenAPI | `GET /api/openapi.json` → 200 OpenAPI 3.1 document with paths for `/api/todos`, `/api/todos/{id}`, `/api/todos/{id}/complete`, `/api/todos/{id}/incomplete`, `/api/health` |
-| AD-03 | README: Quick start | `GET /api/docs` → 200 HTML (the API explorer) (following redirects) |
+| AD-02 | spec 2026-10-03 §2.1 | `GET /api/openapi.json` → 404 `/problems/not-found` problem (the API serves no OpenAPI document) |
+| AD-03 | spec 2026-10-03 §2.1 | `GET /api/docs/` → 404 `/problems/not-found` problem (the API serves no explorer) |
+
+## Deadline status
+
+| ID | Source | Expectation |
+|---|---|---|
+| DS-01 | spec 2026-10-03 §3.2 | `isDueSoon` is true for an incomplete todo due 2 hours ahead (and `isOverdue` false); false 25 hours ahead; false when completed; false without a deadline |
+| DS-02 | spec 2026-10-03 §3.3 | `?status=due-soon` returns only the due-soon todos of its own title prefix (not the 25 h one, the overdue one, the completed one or the deadline-free one) |
+| DS-03 | spec 2026-10-03 §3.2 | at most one of `isOverdue` / `isDueSoon` is true: every due-soon-filtered todo has `isOverdue` false, every overdue-filtered todo has `isDueSoon` false |
+| DS-04 | spec 2026-10-03 §3.3 | the renamed key: `?sort=dueDate` → 400 naming `sort`; a body with `dueDate` → 400 naming `dueDate` |

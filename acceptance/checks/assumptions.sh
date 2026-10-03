@@ -8,19 +8,30 @@ check_RA_01() {
 }
 
 check_RA_02() {
-  create_todo "{\"title\":\"overdue 2 days\",\"dueDate\":\"$(utc_date '-2 days')\"}"
+  local at east west
+  at='-2 hours'
+  east="$(at_offset "${at}" +14:00)"
+  west="$(at_offset "${at}" -12:00)"
+  printf 'one instant, two spellings: %s and %s\n' "${east}" "${west}" >>"${TRANSCRIPT}"
+  create_todo "{\"title\":\"overdue east\",\"dueAt\":\"${east}\"}"
   expect_json .isOverdue true
-  create_todo "{\"title\":\"future 2 days\",\"dueDate\":\"$(utc_date '+2 days')\"}"
+  expect_json .isDueSoon false
+  local east_view
+  east_view="$(jq -c '{dueAt, isOverdue, isDueSoon}' "${B}")"
+  create_todo "{\"title\":\"overdue west\",\"dueAt\":\"${west}\"}"
+  [ "$(jq -c '{dueAt, isOverdue, isDueSoon}' "${B}")" = "${east_view}" ] \
+    || fail_check "same instant, different offsets gave different views: ${east_view} vs $(jq -c '{dueAt, isOverdue, isDueSoon}' "${B}")"
+  create_todo "{\"title\":\"future 2 days\",\"dueAt\":\"$(utc_at '+2 days')\"}"
   expect_json .isOverdue false
 }
 
 check_RA_03() {
-  create_todo '{"title":"past on create","dueDate":"2001-01-01"}'
+  create_todo '{"title":"past on create","dueAt":"2001-01-01T12:00:00Z"}'
   expect_status 201
   [ -n "${ID}" ] || return 0
-  patch_json "/api/todos/${ID}" '{"dueDate":"1999-12-31"}' -H 'If-Match: "1"'
+  patch_json "/api/todos/${ID}" '{"dueAt":"1999-12-31T12:00:00Z"}' -H 'If-Match: "1"'
   expect_status 200
-  expect_json .dueDate 1999-12-31
+  expect_json .dueAt '1999-12-31T12:00:00.000Z'
 }
 
 check_RA_04() {
@@ -32,11 +43,11 @@ check_RA_04() {
 }
 
 check_RA_05() {
-  create_todo '{"title":"clear due","dueDate":"2030-01-01"}'
+  create_todo '{"title":"clear due","dueAt":"2030-01-01T12:00:00Z"}'
   [ -n "${ID}" ] || return 0
-  patch_json "/api/todos/${ID}" '{"dueDate":null}' -H 'If-Match: "1"'
+  patch_json "/api/todos/${ID}" '{"dueAt":null}' -H 'If-Match: "1"'
   expect_status 200
-  expect_json .dueDate null
+  expect_json .dueAt null
 }
 
 check_RA_06() {
@@ -47,13 +58,13 @@ check_RA_06() {
 }
 
 check_RA_07() {
-  create_todo '{"title":"only sent fields","description":"keep desc","dueDate":"2030-03-03"}'
+  create_todo '{"title":"only sent fields","description":"keep desc","dueAt":"2030-03-03T12:00:00Z"}'
   [ -n "${ID}" ] || return 0
   patch_json "/api/todos/${ID}" '{"title":"renamed"}' -H 'If-Match: "1"'
   expect_status 200
   expect_json .title renamed
   expect_json .description 'keep desc'
-  expect_json .dueDate 2030-03-03
+  expect_json .dueAt '2030-03-03T12:00:00.000Z'
 }
 
 check_RA_08() {
@@ -112,8 +123,8 @@ check_RA_11() {
 }
 
 check_RA_12() {
-  create_todo '{"title":"due date exact","dueDate":"2030-07-15"}'
-  expect_json .dueDate 2030-07-15
+  create_todo '{"title":"due instant normalised","dueAt":"2030-07-15T09:30:00-04:00"}'
+  expect_json .dueAt 2030-07-15T13:30:00.000Z
   expect_jq '.createdAt | endswith("Z")'
 }
 
@@ -133,14 +144,14 @@ check_RA_13() {
 check_RA_14() {
   local p
   p="$(prefix RA14)"
-  create_todo "{\"title\":\"${p}with-date\",\"dueDate\":\"2030-01-01\"}"
+  create_todo "{\"title\":\"${p}with-date\",\"dueAt\":\"2030-01-01T12:00:00Z\"}"
   create_todo "{\"title\":\"${p}no-date\"}"
-  req GET '/api/todos?sort=dueDate&order=asc'
+  req GET '/api/todos?sort=dueAt&order=asc'
   expect_status 200
   local got
   got="$(mine "${p}")"
   [ "${got}" = "${p}with-date ${p}no-date" ] || fail_check "asc order '${got}', expected with-date before no-date"
-  req GET '/api/todos?sort=dueDate&order=desc'
+  req GET '/api/todos?sort=dueAt&order=desc'
   expect_status 200
   got="$(mine "${p}")"
   [ "${got}" = "${p}with-date ${p}no-date" ] || fail_check "desc order '${got}', expected with-date before no-date (no-date last)"

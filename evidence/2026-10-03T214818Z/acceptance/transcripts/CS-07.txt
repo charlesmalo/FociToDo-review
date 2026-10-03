@@ -1,0 +1,12 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"first\ create\ with\ key\"\} -H Idempotency-Key:\ acc-500d9957ab77f0b6
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 216
+Connection: keep-alive
+Location: /api/todos/f2eef34e-2357-4b1b-abc9-397598bcffc5
+ETag: "1"
+
+{"id":"f2eef34e-2357-4b1b-abc9-397598bcffc5","title":"first create with key","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.765Z","version":1,"isOverdue":false,"isDueSoon":false}
+

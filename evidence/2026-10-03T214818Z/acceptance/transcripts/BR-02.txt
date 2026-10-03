@@ -1,0 +1,12 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"Buy\ milk\"\,\"description\":\"2%\ organic\"\,\"dueAt\":\"2030-01-02T12:00:00Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 233
+Connection: keep-alive
+Location: /api/todos/74464d7a-1340-4e58-b780-877069bbdb41
+ETag: "1"
+
+{"id":"74464d7a-1340-4e58-b780-877069bbdb41","title":"Buy milk","description":"2% organic","dueAt":"2030-01-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:48:39.403Z","version":1,"isOverdue":false,"isDueSoon":false}
+

@@ -1,0 +1,10 @@
+>>> GET /api/health
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:47 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 73
+Connection: keep-alive
+
+{"status":"ok","db":"up","schemaVersion":"1759190400002_due-at-instants"}
+

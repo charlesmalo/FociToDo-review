@@ -1,0 +1,33 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"stale\ delete\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 207
+Connection: keep-alive
+Location: /api/todos/d315596c-a956-4e1a-b85a-9c1946dcc1f7
+ETag: "1"
+
+{"id":"d315596c-a956-4e1a-b85a-9c1946dcc1f7","title":"stale delete","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.306Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> PATCH /api/todos/d315596c-a956-4e1a-b85a-9c1946dcc1f7 -H Content-Type:\ application/json --data-binary \{\"title\":\"bump\"\} -H If-Match:\ \"1\"
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 199
+Connection: keep-alive
+ETag: "2"
+
+{"id":"d315596c-a956-4e1a-b85a-9c1946dcc1f7","title":"bump","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.306Z","version":2,"isOverdue":false,"isDueSoon":false}
+
+>>> DELETE /api/todos/d315596c-a956-4e1a-b85a-9c1946dcc1f7 -H If-Match:\ \"1\"
+HTTP/1.1 412 Precondition Failed
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 259
+Connection: keep-alive
+
+{"type":"/problems/version-conflict","title":"Version conflict","status":412,"detail":"Todo d315596c-a956-4e1a-b85a-9c1946dcc1f7 was modified by another request; fetch the latest version and retry","instance":"/api/todos/d315596c-a956-4e1a-b85a-9c1946dcc1f7"}
+

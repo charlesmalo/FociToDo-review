@@ -1,0 +1,56 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"etag\ check\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+Location: /api/todos/77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a
+ETag: "1"
+
+{"id":"77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a","title":"etag check","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.039Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> GET /api/todos/77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+ETag: "1"
+
+{"id":"77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a","title":"etag check","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.039Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> PATCH /api/todos/77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a -H Content-Type:\ application/json --data-binary \{\"title\":\"etag\ check\ 2\"\} -H If-Match:\ \"1\"
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 207
+Connection: keep-alive
+ETag: "2"
+
+{"id":"77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a","title":"etag check 2","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.039Z","version":2,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos/77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 206
+Connection: keep-alive
+ETag: "3"
+
+{"id":"77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a","title":"etag check 2","description":null,"dueAt":null,"isCompleted":true,"createdAt":"2026-10-03T21:48:45.039Z","version":3,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos/77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a/incomplete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:48:45 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 207
+Connection: keep-alive
+ETag: "4"
+
+{"id":"77b9dd2f-e25f-4716-81ce-0d3b27f0fa1a","title":"etag check 2","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:48:45.039Z","version":4,"isOverdue":false,"isDueSoon":false}
+
