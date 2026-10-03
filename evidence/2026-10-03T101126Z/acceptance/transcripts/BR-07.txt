@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"Due\"\,\"dueDate\":\"2030-01-01\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:44 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 190
+Connection: keep-alive
+Location: /api/todos/129f6344-fa71-4d1a-a999-25b361cfed32
+ETag: "1"
+
+{"id":"129f6344-fa71-4d1a-a999-25b361cfed32","title":"Due","description":null,"dueDate":"2030-01-01","isCompleted":false,"createdAt":"2026-10-03T10:11:44.578Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/129f6344-fa71-4d1a-a999-25b361cfed32 -H Content-Type:\ application/json --data-binary \{\"dueDate\":\"2030-02-02\"\} -H If-Match:\ \"1\"
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:44 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 190
+Connection: keep-alive
+ETag: "2"
+
+{"id":"129f6344-fa71-4d1a-a999-25b361cfed32","title":"Due","description":null,"dueDate":"2030-02-02","isCompleted":false,"createdAt":"2026-10-03T10:11:44.578Z","version":2,"isOverdue":false}
+

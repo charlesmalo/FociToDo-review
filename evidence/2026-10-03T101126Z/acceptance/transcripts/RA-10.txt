@@ -1,0 +1,740 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-1\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/d1e724fb-53f9-4a5f-a028-8a89c2f4905c
+ETag: "1"
+
+{"id":"d1e724fb-53f9-4a5f-a028-8a89c2f4905c","title":"acc-RA10-7bdae1b9ba3c-1","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.975Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-2\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/e9d07a43-9637-40a6-a966-29be963f5202
+ETag: "1"
+
+{"id":"e9d07a43-9637-40a6-a966-29be963f5202","title":"acc-RA10-7bdae1b9ba3c-2","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.986Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-3\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/e0b101ab-d79c-4b2e-9390-93b810a9c93e
+ETag: "1"
+
+{"id":"e0b101ab-d79c-4b2e-9390-93b810a9c93e","title":"acc-RA10-7bdae1b9ba3c-3","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.997Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-4\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/aa6aef0d-b50d-4daf-8ab1-94da9a0ad229
+ETag: "1"
+
+{"id":"aa6aef0d-b50d-4daf-8ab1-94da9a0ad229","title":"acc-RA10-7bdae1b9ba3c-4","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.008Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-5\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/818fbaef-fdad-4744-b648-a271c232193c
+ETag: "1"
+
+{"id":"818fbaef-fdad-4744-b648-a271c232193c","title":"acc-RA10-7bdae1b9ba3c-5","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.019Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-6\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/0c438736-6467-42cc-969e-5af50414da8d
+ETag: "1"
+
+{"id":"0c438736-6467-42cc-969e-5af50414da8d","title":"acc-RA10-7bdae1b9ba3c-6","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.032Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-7\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/66dd5052-a8de-4b6e-8a92-61a81ffef9d1
+ETag: "1"
+
+{"id":"66dd5052-a8de-4b6e-8a92-61a81ffef9d1","title":"acc-RA10-7bdae1b9ba3c-7","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.044Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-8\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/68b8a2d1-7920-4b3c-b8b1-e2c916adafe7
+ETag: "1"
+
+{"id":"68b8a2d1-7920-4b3c-b8b1-e2c916adafe7","title":"acc-RA10-7bdae1b9ba3c-8","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.058Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-9\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+Connection: keep-alive
+Location: /api/todos/6c151f9b-6a03-4bfc-9b4f-783e1a5c6fe6
+ETag: "1"
+
+{"id":"6c151f9b-6a03-4bfc-9b4f-783e1a5c6fe6","title":"acc-RA10-7bdae1b9ba3c-9","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.071Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-10\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/6605af4e-c178-42a4-982e-9b523435d1ba
+ETag: "1"
+
+{"id":"6605af4e-c178-42a4-982e-9b523435d1ba","title":"acc-RA10-7bdae1b9ba3c-10","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.082Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-11\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/637e2fa2-52b7-4580-a8bc-db637bba5e76
+ETag: "1"
+
+{"id":"637e2fa2-52b7-4580-a8bc-db637bba5e76","title":"acc-RA10-7bdae1b9ba3c-11","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.093Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-12\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/22c12295-9ef3-4d13-b3e2-31aec95ff575
+ETag: "1"
+
+{"id":"22c12295-9ef3-4d13-b3e2-31aec95ff575","title":"acc-RA10-7bdae1b9ba3c-12","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.104Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-13\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/c6f7aa2e-982f-42e3-b813-2831fffd3e01
+ETag: "1"
+
+{"id":"c6f7aa2e-982f-42e3-b813-2831fffd3e01","title":"acc-RA10-7bdae1b9ba3c-13","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.115Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-14\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/94fc94a5-9b02-4efe-97b1-952a1ebc9e9c
+ETag: "1"
+
+{"id":"94fc94a5-9b02-4efe-97b1-952a1ebc9e9c","title":"acc-RA10-7bdae1b9ba3c-14","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.126Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-15\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/4d22cddf-82db-42be-ba0e-9e64a4db5ca5
+ETag: "1"
+
+{"id":"4d22cddf-82db-42be-ba0e-9e64a4db5ca5","title":"acc-RA10-7bdae1b9ba3c-15","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.139Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-16\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/94f8c23c-0928-43c1-a865-e9a2c88252e8
+ETag: "1"
+
+{"id":"94f8c23c-0928-43c1-a865-e9a2c88252e8","title":"acc-RA10-7bdae1b9ba3c-16","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.150Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-17\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/8c266c04-32db-4f80-a3c5-fac467b3dfa7
+ETag: "1"
+
+{"id":"8c266c04-32db-4f80-a3c5-fac467b3dfa7","title":"acc-RA10-7bdae1b9ba3c-17","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.162Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-18\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/6ed46d4d-4f78-4c3b-bd3b-0acef3d5cd43
+ETag: "1"
+
+{"id":"6ed46d4d-4f78-4c3b-bd3b-0acef3d5cd43","title":"acc-RA10-7bdae1b9ba3c-18","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.173Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-19\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/d006982b-88d6-47cb-87c2-e788572307c9
+ETag: "1"
+
+{"id":"d006982b-88d6-47cb-87c2-e788572307c9","title":"acc-RA10-7bdae1b9ba3c-19","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.184Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-20\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/8d1dc34c-008e-49fc-9156-923a1f82e1b6
+ETag: "1"
+
+{"id":"8d1dc34c-008e-49fc-9156-923a1f82e1b6","title":"acc-RA10-7bdae1b9ba3c-20","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.195Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-21\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/e98b0eed-e4fb-4c57-92cd-d057f5cd9d45
+ETag: "1"
+
+{"id":"e98b0eed-e4fb-4c57-92cd-d057f5cd9d45","title":"acc-RA10-7bdae1b9ba3c-21","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.206Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-22\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/5b59da92-1b71-436b-b389-19de6bc0d8da
+ETag: "1"
+
+{"id":"5b59da92-1b71-436b-b389-19de6bc0d8da","title":"acc-RA10-7bdae1b9ba3c-22","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.217Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-23\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/e4927687-e2fd-4fab-99f5-eba0349f20dd
+ETag: "1"
+
+{"id":"e4927687-e2fd-4fab-99f5-eba0349f20dd","title":"acc-RA10-7bdae1b9ba3c-23","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.228Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-24\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/01f26913-7fff-44fd-b433-dd5cc662a17e
+ETag: "1"
+
+{"id":"01f26913-7fff-44fd-b433-dd5cc662a17e","title":"acc-RA10-7bdae1b9ba3c-24","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.239Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-25\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/c7c8e297-e49b-4b5d-80c1-3af85d0f1b91
+ETag: "1"
+
+{"id":"c7c8e297-e49b-4b5d-80c1-3af85d0f1b91","title":"acc-RA10-7bdae1b9ba3c-25","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.251Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-26\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/6cf9a1ab-abc7-4792-85da-a42c69880bd0
+ETag: "1"
+
+{"id":"6cf9a1ab-abc7-4792-85da-a42c69880bd0","title":"acc-RA10-7bdae1b9ba3c-26","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.264Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-27\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/df1f2eb1-bb4a-422d-9e3f-0685d3c5235c
+ETag: "1"
+
+{"id":"df1f2eb1-bb4a-422d-9e3f-0685d3c5235c","title":"acc-RA10-7bdae1b9ba3c-27","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.275Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-28\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/3d481468-23b0-4ffa-87c9-2a57a71eb9a3
+ETag: "1"
+
+{"id":"3d481468-23b0-4ffa-87c9-2a57a71eb9a3","title":"acc-RA10-7bdae1b9ba3c-28","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.287Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-29\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/44a28400-3c76-4651-b244-46e4d81ab865
+ETag: "1"
+
+{"id":"44a28400-3c76-4651-b244-46e4d81ab865","title":"acc-RA10-7bdae1b9ba3c-29","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.298Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-30\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/8b79f850-d1cb-46ce-b966-dd925bc16ac0
+ETag: "1"
+
+{"id":"8b79f850-d1cb-46ce-b966-dd925bc16ac0","title":"acc-RA10-7bdae1b9ba3c-30","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.309Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-31\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/4c47c96d-c52b-484f-aca6-0d3f0d00f956
+ETag: "1"
+
+{"id":"4c47c96d-c52b-484f-aca6-0d3f0d00f956","title":"acc-RA10-7bdae1b9ba3c-31","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.321Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-32\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/7cb4cd24-4d49-4fce-98d3-f62efda02236
+ETag: "1"
+
+{"id":"7cb4cd24-4d49-4fce-98d3-f62efda02236","title":"acc-RA10-7bdae1b9ba3c-32","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.332Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-33\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/3e54fb52-83df-44bc-bed2-bc6d2ff7d88d
+ETag: "1"
+
+{"id":"3e54fb52-83df-44bc-bed2-bc6d2ff7d88d","title":"acc-RA10-7bdae1b9ba3c-33","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.344Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-34\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/da75bd30-c900-4bae-adaa-186c8a37dc04
+ETag: "1"
+
+{"id":"da75bd30-c900-4bae-adaa-186c8a37dc04","title":"acc-RA10-7bdae1b9ba3c-34","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.355Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-35\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/e0b40b93-406c-42c5-a311-41ff97cc6d74
+ETag: "1"
+
+{"id":"e0b40b93-406c-42c5-a311-41ff97cc6d74","title":"acc-RA10-7bdae1b9ba3c-35","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.366Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-36\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/db3d4c88-c9b5-46cf-8cc3-a4e19ad5f622
+ETag: "1"
+
+{"id":"db3d4c88-c9b5-46cf-8cc3-a4e19ad5f622","title":"acc-RA10-7bdae1b9ba3c-36","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.377Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-37\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/63bc4573-c1b7-423c-aa3e-5b689475878f
+ETag: "1"
+
+{"id":"63bc4573-c1b7-423c-aa3e-5b689475878f","title":"acc-RA10-7bdae1b9ba3c-37","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.389Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-38\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/1959b804-dc04-43dd-81f6-d5bae77b2b61
+ETag: "1"
+
+{"id":"1959b804-dc04-43dd-81f6-d5bae77b2b61","title":"acc-RA10-7bdae1b9ba3c-38","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.400Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-39\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/52b66790-9342-4fcb-af92-9beed5db1fd4
+ETag: "1"
+
+{"id":"52b66790-9342-4fcb-af92-9beed5db1fd4","title":"acc-RA10-7bdae1b9ba3c-39","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.412Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-40\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/a4dc1737-fbad-425f-84ed-af73fa8e872d
+ETag: "1"
+
+{"id":"a4dc1737-fbad-425f-84ed-af73fa8e872d","title":"acc-RA10-7bdae1b9ba3c-40","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.423Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-41\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/26f3db16-50da-4514-bddf-685335ff7cdd
+ETag: "1"
+
+{"id":"26f3db16-50da-4514-bddf-685335ff7cdd","title":"acc-RA10-7bdae1b9ba3c-41","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.435Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-42\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/5f5e943b-27b1-4acd-8a95-c85d3fb752ed
+ETag: "1"
+
+{"id":"5f5e943b-27b1-4acd-8a95-c85d3fb752ed","title":"acc-RA10-7bdae1b9ba3c-42","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.447Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-43\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/6f6ab932-405d-4fc5-97a6-e81e5b5eb860
+ETag: "1"
+
+{"id":"6f6ab932-405d-4fc5-97a6-e81e5b5eb860","title":"acc-RA10-7bdae1b9ba3c-43","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.458Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-44\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/ee323811-0ad0-4b2a-9378-f96c12274a23
+ETag: "1"
+
+{"id":"ee323811-0ad0-4b2a-9378-f96c12274a23","title":"acc-RA10-7bdae1b9ba3c-44","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.471Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-45\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/82428e75-bc68-4ccc-966c-2c64a7d90070
+ETag: "1"
+
+{"id":"82428e75-bc68-4ccc-966c-2c64a7d90070","title":"acc-RA10-7bdae1b9ba3c-45","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.483Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-46\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/71918291-8498-4032-b2a5-7bd512b4021c
+ETag: "1"
+
+{"id":"71918291-8498-4032-b2a5-7bd512b4021c","title":"acc-RA10-7bdae1b9ba3c-46","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.494Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-47\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/91b5e0eb-874b-4ccb-a6cb-4c6f9991d1c7
+ETag: "1"
+
+{"id":"91b5e0eb-874b-4ccb-a6cb-4c6f9991d1c7","title":"acc-RA10-7bdae1b9ba3c-47","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.507Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-48\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/0d46faec-61a0-4437-9699-5da36937c455
+ETag: "1"
+
+{"id":"0d46faec-61a0-4437-9699-5da36937c455","title":"acc-RA10-7bdae1b9ba3c-48","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.520Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-49\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/d9af61c1-b902-40fa-b4ac-ebec63f343e0
+ETag: "1"
+
+{"id":"d9af61c1-b902-40fa-b4ac-ebec63f343e0","title":"acc-RA10-7bdae1b9ba3c-49","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.532Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-50\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/e3fc3f1e-ce0a-40be-9b20-68fec4d35ccf
+ETag: "1"
+
+{"id":"e3fc3f1e-ce0a-40be-9b20-68fec4d35ccf","title":"acc-RA10-7bdae1b9ba3c-50","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.546Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-51\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/6e700929-86f6-4401-96cb-d15d36679a9c
+ETag: "1"
+
+{"id":"6e700929-86f6-4401-96cb-d15d36679a9c","title":"acc-RA10-7bdae1b9ba3c-51","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.559Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-52\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/6da90c8d-7443-4f7c-b454-e4732946c5ad
+ETag: "1"
+
+{"id":"6da90c8d-7443-4f7c-b454-e4732946c5ad","title":"acc-RA10-7bdae1b9ba3c-52","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.572Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-53\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/cd3f32c5-9e0c-4250-b28f-34a6bdcdb71a
+ETag: "1"
+
+{"id":"cd3f32c5-9e0c-4250-b28f-34a6bdcdb71a","title":"acc-RA10-7bdae1b9ba3c-53","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.583Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-54\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/e1510cad-bee1-4dbc-99cb-0d0b74c7b6db
+ETag: "1"
+
+{"id":"e1510cad-bee1-4dbc-99cb-0d0b74c7b6db","title":"acc-RA10-7bdae1b9ba3c-54","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.596Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-55\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/4b3fee36-59ed-4da8-968c-81939e93e879
+ETag: "1"
+
+{"id":"4b3fee36-59ed-4da8-968c-81939e93e879","title":"acc-RA10-7bdae1b9ba3c-55","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.610Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-56\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/892688bf-fa9b-499b-814a-db8d33d3d190
+ETag: "1"
+
+{"id":"892688bf-fa9b-499b-814a-db8d33d3d190","title":"acc-RA10-7bdae1b9ba3c-56","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.626Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-57\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/f07cd73f-6c37-477a-8cd7-f74cba7227b5
+ETag: "1"
+
+{"id":"f07cd73f-6c37-477a-8cd7-f74cba7227b5","title":"acc-RA10-7bdae1b9ba3c-57","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.640Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-58\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/417471eb-2a89-4691-a17b-fa87ca793d48
+ETag: "1"
+
+{"id":"417471eb-2a89-4691-a17b-fa87ca793d48","title":"acc-RA10-7bdae1b9ba3c-58","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.653Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-59\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/d12c94a1-6c4b-46a3-8a14-791b63ef645e
+ETag: "1"
+
+{"id":"d12c94a1-6c4b-46a3-8a14-791b63ef645e","title":"acc-RA10-7bdae1b9ba3c-59","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.667Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-RA10-7bdae1b9ba3c-60\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 203
+Connection: keep-alive
+Location: /api/todos/8e0cc544-ca0b-4788-aee9-b4fb48fe51f5
+ETag: "1"
+
+{"id":"8e0cc544-ca0b-4788-aee9-b4fb48fe51f5","title":"acc-RA10-7bdae1b9ba3c-60","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.680Z","version":1,"isOverdue":false}
+
+>>> GET /api/todos
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 29093
+Connection: keep-alive
+
+[{"id":"8e0cc544-ca0b-4788-aee9-b4fb48fe51f5","title":"acc-RA10-7bdae1b9ba3c-60","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.680Z","version":1,"isOverdue":false},{"id":"d12c94a1-6c4b-46a3-8a14-791b63ef645e","title":"acc-RA10-7bdae1b9ba3c-59","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.667Z","version":1,"isOverdue":false},{"id":"417471eb-2a89-4691-a17b-fa87ca793d48","title":"acc-RA10-7bdae1b9ba3c-58","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.653Z","version":1,"isOverdue":false},{"id":"f07cd73f-6c37-477a-8cd7-f74cba7227b5","title":"acc-RA10-7bdae1b9ba3c-57","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.640Z","version":1,"isOverdue":false},{"id":"892688bf-fa9b-499b-814a-db8d33d3d190","title":"acc-RA10-7bdae1b9ba3c-56","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.626Z","version":1,"isOverdue":false},{"id":"4b3fee36-59ed-4da8-968c-81939e93e879","title":"acc-RA10-7bdae1b9ba3c-55","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.610Z","version":1,"isOverdue":false},{"id":"e1510cad-bee1-4dbc-99cb-0d0b74c7b6db","title":"acc-RA10-7bdae1b9ba3c-54","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.596Z","version":1,"isOverdue":false},{"id":"cd3f32c5-9e0c-4250-b28f-34a6bdcdb71a","title":"acc-RA10-7bdae1b9ba3c-53","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.583Z","version":1,"isOverdue":false},{"id":"6da90c8d-7443-4f7c-b454-e4732946c5ad","title":"acc-RA10-7bdae1b9ba3c-52","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.572Z","version":1,"isOverdue":false},{"id":"6e700929-86f6-4401-96cb-d15d36679a9c","title":"acc-RA10-7bdae1b9ba3c-51","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.559Z","version":1,"isOverdue":false},{"id":"e3fc3f1e-ce0a-40be-9b20-68fec4d35ccf","title":"acc-RA10-7bdae1b9ba3c-50","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.546Z","version":1,"isOverdue":false},{"id":"d9af61c1-b902-40fa-b4ac-ebec63f343e0","title":"acc-RA10-7bdae1b9ba3c-49","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.532Z","version":1,"isOverdue":false},{"id":"0d46faec-61a0-4437-9699-5da36937c455","title":"acc-RA10-7bdae1b9ba3c-48","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.520Z","version":1,"isOverdue":false},{"id":"91b5e0eb-874b-4ccb-a6cb-4c6f9991d1c7","title":"acc-RA10-7bdae1b9ba3c-47","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.507Z","version":1,"isOverdue":false},{"id":"71918291-8498-4032-b2a5-7bd512b4021c","title":"acc-RA10-7bdae1b9ba3c-46","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.494Z","version":1,"isOverdue":false},{"id":"82428e75-bc68-4ccc-966c-2c64a7d90070","title":"acc-RA10-7bdae1b9ba3c-45","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.483Z","version":1,"isOverdue":false},{"id":"ee323811-0ad0-4b2a-9378-f96c12274a23","title":"acc-RA10-7bdae1b9ba3c-44","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.471Z","version":1,"isOverdue":false},{"id":"6f6ab932-405d-4fc5-97a6-e81e5b5eb860","title":"acc-RA10-7bdae1b9ba3c-43","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.458Z","version":1,"isOverdue":false},{"id":"5f5e943b-27b1-4acd-8a95-c85d3fb752ed","title":"acc-RA10-7bdae1b9ba3c-42","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:51.447Z","version":1,"isOverdue":false},{"id":"26f3db16-50da-4514-bddf-685335ff7cdd","title":"acc-RA10-7bdae1b9ba3c-41","description":null,"dueDate":null,"isComple
+
+>>> GET /api/todos?page=2
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 210
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"page","message":"Unknown field"}],"instance":"/api/todos?page=2"}
+

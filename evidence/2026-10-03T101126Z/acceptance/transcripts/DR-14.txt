@@ -1,0 +1,12 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"earliest\ date\"\,\"dueDate\":\"0001-01-01\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:49 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 199
+Connection: keep-alive
+Location: /api/todos/747fb2fc-0874-4ba5-a06c-e1647640607a
+ETag: "1"
+
+{"id":"747fb2fc-0874-4ba5-a06c-e1647640607a","title":"earliest date","description":null,"dueDate":"0001-01-01","isCompleted":false,"createdAt":"2026-10-03T10:11:49.909Z","version":1,"isOverdue":true}
+

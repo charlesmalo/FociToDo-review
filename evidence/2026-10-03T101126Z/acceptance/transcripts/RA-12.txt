@@ -1,0 +1,12 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"due\ date\ exact\"\,\"dueDate\":\"2030-07-15\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:51 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 201
+Connection: keep-alive
+Location: /api/todos/af74cea2-63db-46e5-b2bd-1bd3e61272e7
+ETag: "1"
+
+{"id":"af74cea2-63db-46e5-b2bd-1bd3e61272e7","title":"due date exact","description":null,"dueDate":"2030-07-15","isCompleted":false,"createdAt":"2026-10-03T10:11:51.752Z","version":1,"isOverdue":false}
+

@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"weak\ if-match\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 192
+Connection: keep-alive
+Location: /api/todos/1289229d-0229-4522-8c87-399f9f221c67
+ETag: "1"
+
+{"id":"1289229d-0229-4522-8c87-399f9f221c67","title":"weak if-match","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.315Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/1289229d-0229-4522-8c87-399f9f221c67 -H Content-Type:\ application/json --data-binary \{\"title\":\"x\"\} -H If-Match:\ W/\"1\"
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 282
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"If-Match","message":"If-Match must be a single strong ETag such as \"3\""}],"instance":"/api/todos/1289229d-0229-4522-8c87-399f9f221c67"}
+

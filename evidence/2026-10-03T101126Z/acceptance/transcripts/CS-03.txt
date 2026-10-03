@@ -1,0 +1,35 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-CS03-83875a92bc7a-once\"\} -H Idempotency-Key:\ acc-f712afc63124ce73
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+Location: /api/todos/4ef43c76-0f6c-47d1-a465-f69192707245
+ETag: "1"
+
+{"id":"4ef43c76-0f6c-47d1-a465-f69192707245","title":"acc-CS03-83875a92bc7a-once","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.599Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-CS03-83875a92bc7a-once\"\} -H Idempotency-Key:\ acc-f712afc63124ce73
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+Location: /api/todos/4ef43c76-0f6c-47d1-a465-f69192707245
+Idempotent-Replayed: true
+ETag: "1"
+
+{"id":"4ef43c76-0f6c-47d1-a465-f69192707245","title":"acc-CS03-83875a92bc7a-once","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.599Z","version":1,"isOverdue":false}
+
+>>> GET /api/todos
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 14685
+Connection: keep-alive
+
+[{"id":"4ef43c76-0f6c-47d1-a465-f69192707245","title":"acc-CS03-83875a92bc7a-once","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.599Z","version":1,"isOverdue":false},{"id":"d9bd1357-61d9-415e-88b4-ab3ebe37e6ac","title":"incomplete twice","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.563Z","version":1,"isOverdue":false},{"id":"c92618ce-c856-4f65-9923-6b601f2a4b1d","title":"complete twice","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T10:11:50.531Z","version":2,"isOverdue":false},{"id":"b1994dfd-dc5d-47dc-a9c7-cb49d4b595fe","title":"charset patch","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.412Z","version":1,"isOverdue":false},{"id":"4f118796-b7c9-49fd-896c-b84631ab24f2","title":"precedence 400 428","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.337Z","version":1,"isOverdue":false},{"id":"1289229d-0229-4522-8c87-399f9f221c67","title":"weak if-match","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.315Z","version":1,"isOverdue":false},{"id":"80bc2d5c-9cfc-4121-b168-690b01db249a","title":"wildcard if-match","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.294Z","version":1,"isOverdue":false},{"id":"2a78c793-3ecb-4b7e-a9b4-9e991725541a","title":"bump","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.259Z","version":2,"isOverdue":false},{"id":"83392724-7a0a-440c-9df3-f11799b59e2a","title":"no if-match delete","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.232Z","version":1,"isOverdue":false},{"id":"7a3dc1d2-a4f8-402f-aee5-4d7d5b8ff6e0","title":"no if-match patch","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.204Z","version":1,"isOverdue":false},{"id":"566d3c42-1313-4a7a-9094-2cb8cffb78ca","title":"bump","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.160Z","version":2,"isOverdue":false},{"id":"992c6f61-f4a9-4f36-adb1-65c9abf95884","title":"etag check 2","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.049Z","version":4,"isOverdue":false},{"id":"50d976a8-3946-4c6d-b5ab-7b5807a1aa0d","title":"due today","description":null,"dueDate":"2026-10-03","isCompleted":false,"createdAt":"2026-10-03T10:11:50.021Z","version":1,"isOverdue":false},{"id":"de9001ab-d655-459f-bfa9-f2222a5fb0e8","title":"due yesterday","description":null,"dueDate":"2026-10-02","isCompleted":true,"createdAt":"2026-10-03T10:11:50.007Z","version":2,"isOverdue":false},{"id":"3a80966a-28b5-4e9d-974b-a2fb6a0228c4","title":"version readonly","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:49.974Z","version":1,"isOverdue":false},{"id":"09e9d46d-a44c-4bfb-8774-51f3ec10eb1b","title":"default completed","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:49.942Z","version":1,"isOverdue":false},{"id":"747fb2fc-0874-4ba5-a06c-e1647640607a","title":"earliest date","description":null,"dueDate":"0001-01-01","isCompleted":false,"createdAt":"2026-10-03T10:11:49.909Z","version":1,"isOverdue":true},{"id":"0f7deac7-6453-438a-bb83-86d3a579b51b","title":"past date","description":null,"dueDate":"2001-01-01","isCompleted":false,"createdAt":"2026-10-03T10:11:49.895Z","version":1,"isOverdue":true},{"id":"ed5cd6ca-025e-4607-83a0-6f36b3448d77","title":"empty desc","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:49.843Z","version":1,"isOverdue":false},{"id":"c2084ba7-39f4-4518-91eb-c3c1cb885dca","title":"desc 2000","description":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+

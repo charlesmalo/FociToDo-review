@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"cannot\ clear\ title\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 197
+Connection: keep-alive
+Location: /api/todos/9165766a-466d-4c20-8ba1-3887cc2f1c6a
+ETag: "1"
+
+{"id":"9165766a-466d-4c20-8ba1-3887cc2f1c6a","title":"cannot clear title","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T10:11:50.833Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/9165766a-466d-4c20-8ba1-3887cc2f1c6a -H Content-Type:\ application/json --data-binary \{\"title\":null\} -H If-Match:\ \"1\"
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 10:11:50 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 250
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"title","message":"Title must be a string"}],"instance":"/api/todos/9165766a-466d-4c20-8ba1-3887cc2f1c6a"}
+
