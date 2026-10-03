@@ -20,7 +20,7 @@ Scope of PR #20 (one commit, `a524a3d`; `apps/web/src/todos/components/TodoFilte
 - GREEN (post-fix): each label's text is exactly its caption.
 - Full gate: 459 tests, coverage 100%; e2e 8/8; a screenshot shows the filters render identically (no visual regression).
 
-**Independent re-confirmation by this review's own storyboard run on the merged commit `5c43da9`** (this sign-off cycle): 22 frames across 11 journeys, all 13 wireframes paired, including the `filter-and-sort` journey's frames against the fixed controls — [`evidence/2026-10-03T090448Z/storyboard/storyboard.md`](../evidence/2026-10-03T090448Z/storyboard/storyboard.md).
+**Independent re-confirmation by this review's own storyboard run on the merged commit `5c43da9`**: 22 frames across 11 journeys, all 13 wireframes paired, including the `filter-and-sort` journey's frames against the fixed controls — [`evidence/2026-10-03T090448Z/storyboard/storyboard.md`](../evidence/2026-10-03T090448Z/storyboard/storyboard.md). The `filter-and-sort` journey now also asserts each control's accessible name exactly (`getByRole('combobox', { name: 'Show'/'Sort by'/'Order', exact: true })`) in real Chromium before its first frame — a standing regression guard for this defect; re-run again at `153d719`: 24 frames across 11 journeys, all 13 wireframes paired — [`evidence/2026-10-03T101204Z/storyboard/storyboard.md`](../evidence/2026-10-03T101204Z/storyboard/storyboard.md).
 
 **No new findings beyond F-92.** The fix addresses the actual accname root cause (label structure), not merely the locator symptom; the new regression test is correctly aimed at the DOM structure the browser's algorithm reads, with an honest note about why jsdom's own accessible-name computation can't be the regression guard here.
 

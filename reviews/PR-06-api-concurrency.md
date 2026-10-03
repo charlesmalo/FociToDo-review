@@ -60,8 +60,8 @@ checklist. Cross-checked against `apps/api/src/repository/postgres/PgTodoReposit
 - Assertions check final state and status-code sets, not call counts or timings, consistent with "assert
   invariants rather than timings."
 
-**Already raised as Minor in the per-task review (not re-litigated; recorded as Low/Accept below per the
-controller's pre-triage):**
+**Already raised as Minor in the per-task review (not re-litigated; recorded as Low/Accept below from
+pre-merge triage):**
 - Delete-vs-patch test's name ("... state matches the winner") overstates what's checked: only `countTodos()`
   (0 or 1) is asserted for the patch-wins branch, not that the surviving row's title actually equals `'Edited'`.
 - The conflicting-bodies idempotent-create test doesn't independently assert exactly one non-replayed 201 (no

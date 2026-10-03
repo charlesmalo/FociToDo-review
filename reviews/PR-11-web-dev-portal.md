@@ -43,7 +43,7 @@ implementer's word)**
 - `e2e/todos.spec.ts`'s new "the developer portal renders the docs with diagrams" test matches the implementer's
   report verbatim, including the documented nav-scoping deviation (below).
 
-**Already raised at the per-task level (not re-litigated, recorded below per the controller's pre-triage):**
+**Already raised at the per-task level (not re-litigated, recorded below from pre-merge triage):**
 - MermaidBlock keeps stale `svg`/`failed` state when reused across tab switches — confirmed in code:
   `DevPortal.tsx` renders `<DocView page={page} library={library} />` with no `key` prop, so React reuses the
   same `MermaidBlock` instances across a hash change that keeps the same component position; the `useEffect`

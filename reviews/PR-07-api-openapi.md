@@ -66,7 +66,7 @@ matches the generated output"), and §14 A1 (native `z.toJSONSchema` over `zod-t
   (structurally identical path-by-path, component-by-component) and confirmed programmatically identical
   by the independently-re-run `'matches the committed openapi.json'` test.
 
-**Already raised at the per-task level (not re-litigated; recorded below per the controller's pre-triage):**
+**Already raised at the per-task level (not re-litigated; recorded below from pre-merge triage):**
 - (a) `PATCH /todos/:id` can return 415 via the global JSON body parser (unsupported charset) but neither
   spec §5.5 nor `openapi.json` documents 415 for PATCH — only for POST (which this PR newly added 415 to).
   Same underlying gap as POST had before this PR; PATCH's is unaddressed.

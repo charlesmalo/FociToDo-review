@@ -22,12 +22,12 @@ Diff reviewed line-by-line (`review-bdbb54b..c2445fb.diff`) against spec §5.2 (
 
 **Architecture**: `TodoService.ts`/`HealthService.ts` import only `@foci/shared`, `../domain/*`, `../repository/ports.js`, and (for `TodoService`) the sibling `requestHash.js` — no import from `repository/postgres` or `repository/in-memory`, consistent with the `import-x/no-restricted-paths` zone (`eslint.config.js`: service "may depend on repository ports only"). `app.ts` still doesn't exist, so the composition-root rule has nothing to violate yet.
 
-**Already resolved / clarified during per-task review (not re-litigated, recorded as Accept below per the controller's list):**
+**Already resolved / clarified during per-task review (not re-litigated, recorded as Accept below):**
 - The expiry test (`'treats a key older than 24 hours as new'`) doesn't assert the expired record is actually replaced in storage or pin the exact TTL boundary (one tick past 24h, not the boundary itself) (F-13).
 - No test for a malformed stored replay body (`TodoViewSchema.parse(existing.body)` throwing) or for a rollback path when the todo insert fails after a successful claim (F-14).
 - On a live-key claim failure, the code returns normally from the `unitOfWork.run` callback (committing an empty unit of work) where §5.4 says "roll back"; since nothing was written on that path, the observable behaviour is identical to an explicit rollback (F-15).
 
-**No Critical or Important findings.** This PR is a close-to-verbatim implementation of pre-approved task briefs (both task reports state "no deviations from the brief"). Independent re-verification of the diff against spec §5.2/§5.4/§6 and the global constraints, plus an independent coverage/lint/typecheck run, found no behavioural mismatch. Three pre-identified Low-severity items are carried into the triage table below as new findings (F-13…F-15); none affect correctness, and all are accepted as-is per the controller's pre-triage.
+**No Critical or Important findings.** This PR is a close-to-verbatim implementation of pre-approved task briefs (both task reports state "no deviations from the brief"). Independent re-verification of the diff against spec §5.2/§5.4/§6 and the global constraints, plus an independent coverage/lint/typecheck run, found no behavioural mismatch. Three pre-identified Low-severity items are carried into the triage table below as new findings (F-13…F-15); none affect correctness, and all are accepted as-is from pre-merge triage.
 
 ## Triage
 
@@ -68,4 +68,4 @@ Copy of `checklists/milestone-review.md` with results for PR #4:
 - [x] Inputs validated with shared schemas; no secrets or stack traces in responses — `TodoService`/`HealthService` consume already-validated `CreateTodo`/`UpdateTodo`/`ListTodosQuery` types from `@foci/shared`; no new input surface (no HTTP yet); reviewed all new files for stray credentials or debug output, none found.
 - [ ] Images non-root; no dev dependencies in runtime images — **N/A for this PR**: no Dockerfile changes; `api`/`web` runtime images land in later PRs.
 
-**Verdict: clean.** No Critical or Important findings. Three Low-severity items (F-13…F-15) are accepted as-is per the controller's pre-triage; none affect correctness, concurrency guarantees, or the 100% coverage gate. Independently re-ran the api-unit test project, eslint, and tsc against the new files to confirm the task reports' claims.
+**Verdict: clean.** No Critical or Important findings. Three Low-severity items (F-13…F-15) are accepted as-is from pre-merge triage; none affect correctness, concurrency guarantees, or the 100% coverage gate. Independently re-ran the api-unit test project, eslint, and tsc against the new files to confirm the task reports' claims.

@@ -89,7 +89,7 @@ web, TS `~6.0.3`, 100% coverage, test-path mirroring).
   No new `hasInstallScript: true` package introduced by this PR (spot-checked the lockfile diff for
   `"hasInstallScript": true` blocks — none under the newly-added web packages).
 
-**Already raised at the per-task level (not re-litigated; recorded below per the controller's pre-triage):**
+**Already raised at the per-task level (not re-litigated; recorded below from pre-merge triage):**
 - (a) After a successful delete, the opener row is gone from the DOM, so `openerRef.current?.focus()` is a
   no-op and focus falls through to `<body>` instead of somewhere useful.
 - (b) `TodoDetailsPanel.test.tsx`'s `setup()` renders with `id="todo-1"` while `makeView()`'s fixtures
@@ -141,7 +141,7 @@ are all Low.
 Copy of `checklists/milestone-review.md` with results for PR #8:
 
 ### Correctness
-- [x] Behaviour matches the spec sections the PR claims (§7.2 data-flow table, §7.3 rules) — every row verified by test and, for the live stack, by direct `curl`/container inspection; see F-30/F-31 for the two controller-ruled spec-text divergences.
+- [x] Behaviour matches the spec sections the PR claims (§7.2 data-flow table, §7.3 rules) — every row verified by test and, for the live stack, by direct `curl`/container inspection; see F-30/F-31 for the two deliberate spec-text divergences.
 - [~] Error precedence 400 → 428 → 404 → 412 preserved — N/A at the HTTP-handling level (this PR adds no server logic); the client's own precedence for its two special-cased statuses (412 before generic error handling) is correct and tested, 404 handling is ruled by R12 (F-30).
 - [x] No silent catch-alls; unexpected errors become logged 500s — N/A server-side; client-side, every mutation's catch branch either re-throws (handled by `TodoForm`) or falls through to `describeError`, never silently swallowed.
 
@@ -172,7 +172,7 @@ TanStack Query data layer, the full component tree, and a hardened nginx-unprivi
 every row of spec §7.2's data-flow table independently verified both by test (72 new tests, 100% coverage) and
 live against the real default Docker Compose stack (`db`→`migrate`→`api`→`web`, all healthy, reachable at
 `http://localhost:8080`, SPA fallback and `/api` proxy both confirmed, non-root/no-Node confirmed by direct
-container inspection). Two items are controller-ruled spec-text divergences (F-30/F-31, both strictly safer
+container inspection). Two items are deliberate spec-text divergences (F-30/F-31, both strictly safer
 than the literal spec text); one item is a genuine fix already landed in this PR (F-38, Radix's focus-return
 gap for triggerless dialogs); the remaining six are Low/Accept polish items carried from the per-task reviews
 plus one new Low finding (F-39, a cosmetic/enhancement difference from the spec's literal checkbox name).

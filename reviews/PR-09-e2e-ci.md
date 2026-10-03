@@ -82,7 +82,7 @@ prerequisite for `!reset`).
   test-only tool per spec §8.1, so NFR-8's non-root/no-dev-deps constraint (scoped to production runtime
   images) does not apply to it — consistent with the matrix's existing treatment of the `e2e` image.
 
-**Already raised at the per-task level (not re-litigated, recorded below per the controller's pre-triage):**
+**Already raised at the per-task level (not re-litigated, recorded below from pre-merge triage):**
 - (a) The `e2e` Docker stage installs `@playwright/test` with `npm install` rather than `npm ci` from a
   lockfile (plan-mandated per spec A5 — "no host `node_modules`" — since the `e2e` target has no workspace
   lockfile of its own); mitigated by the exact `--save-exact` pin plus `check-playwright-pin.mjs` catching any

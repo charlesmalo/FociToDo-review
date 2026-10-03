@@ -25,7 +25,7 @@ Diff reviewed line-by-line (`review-a698697..ef4bc8c.diff`, 904 insertions acros
 
 **Architecture**: No file under `apps/api/src/repository/postgres/**` imports from `apps/api/src/repository/in-memory/**` (confirmed by direct inspection of all six new source files) — the only cross-references are `../ports.js`, `../../domain/todo.js`, and `@foci/shared`, identical to the import shape the in-memory adapter already uses. No `app.ts` exists yet, so there is nothing to violate the composition-root rule. The three new dependencies (`pg`, `node-pg-migrate`, `@types/pg`) are justified by the PR's stated purpose (a Postgres adapter needs a Postgres driver and a migration runner) and documented in the task report.
 
-**Already resolved / clarified during per-task review (not re-litigated, recorded as Accept below per the controller's list):**
+**Already resolved / clarified during per-task review (not re-litigated, recorded as Accept below):**
 - `PgUnitOfWork.test.ts` lacks a failing-`BEGIN` case and a single-release assertion (F-6).
 - `PgDatabaseProbe.test.ts`'s "no migration has run" test name overstates what an empty mock `rows` array actually proves (F-7).
 - `PgDatabaseProbe.int.test.ts` hard-codes the latest migration's filename, coupling it to migration history (F-8).
@@ -79,4 +79,4 @@ Copy of `checklists/milestone-review.md` with results for PR #3:
 - [x] Inputs validated with shared schemas; no secrets or stack traces in responses — no new input surface in this PR (no HTTP yet); reviewed all new files for stray credentials or debug output, none found; `testDatabaseUrl()` actively refuses to run destructive tests against a non-`_test` database.
 - [ ] Images non-root; no dev dependencies in runtime images — **N/A for this PR**: no Dockerfile changes; `api`/`web` runtime images land in later PRs.
 
-**Verdict: clean.** No Critical or Important findings. Seven Low-severity polish items (F-6…F-12) are accepted as-is per the controller's pre-triage; none affect correctness, concurrency guarantees, or the 100% coverage gate.
+**Verdict: clean.** No Critical or Important findings. Seven Low-severity polish items (F-6…F-12) are accepted as-is from pre-merge triage; none affect correctness, concurrency guarantees, or the 100% coverage gate.

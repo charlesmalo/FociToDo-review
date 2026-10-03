@@ -40,7 +40,7 @@ word)**
   handful of the `docs/api.md` sequence diagrams run slightly longer (up to 21 lines) to show both the happy and
   error branches per spec §10's own instruction ("happy and error branches") — reasonable, not a finding.
 
-**Already raised at the per-task level (not re-litigated, recorded below per the controller's pre-triage):**
+**Already raised at the per-task level (not re-litigated, recorded below from pre-merge triage):**
 - (R15) `docs/api.md`'s problem-types table lists `/problems/bad-request` (4xx) with "Other client errors from
   the JSON parser (e.g. 415 charset)" and the endpoint table lists 415 as a possible PATCH error; confirmed
   `apps/api/openapi.json` currently documents 415 only on `POST /api/todos`, not on `PATCH /api/todos/{id}` —

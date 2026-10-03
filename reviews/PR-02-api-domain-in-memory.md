@@ -15,7 +15,7 @@ Diff reviewed line-by-line (`review-c2eb6ae..5ae431e.diff`, 999 insertions acros
 - `apps/api/src/domain/clock.ts` / `ids.ts`: `Clock`/`IdGenerator` ports match spec; `utcDate` correctly uses `toISOString().slice(0,10)` (UTC, not local offset — verified by the "near midnight" test).
 - `apps/api/src/repository/ports.ts`: `TodoRepository`, `IdempotencyStore`, `UnitOfWork`, `Storage` match spec §5.3 verbatim (plus `DatabaseProbe`/`DatabaseStatus`, forward declarations for the `/api/health` route in a later PR — harmless, unused so far).
 - `apps/api/src/repository/in-memory/ordering.ts`: `compareCodePoints` iterates by code point (not UTF-16 units), matching Postgres `COLLATE "C"`; `matchesStatus` and `compareTodos` match spec exactly, including `NULLS LAST` in both directions and the fixed `created_at DESC, id ASC` tie-break applied independent of the requested sort direction.
-- `InMemoryTodoRepository`: `create`/`findById`/`list`/`update`/`setCompleted`/`delete` match the port contracts; `update` always bumps the version on a successful conditional write (per the controller's recorded ruling that "version only on real changes" applies to `setCompleted`, not `update`); `setCompleted` bumps the version only when the flag actually changes, matching spec §5.3.
+- `InMemoryTodoRepository`: `create`/`findById`/`list`/`update`/`setCompleted`/`delete` match the port contracts; `update` always bumps the version on a successful conditional write ("version only on real changes" applies to `setCompleted`, not `update`); `setCompleted` bumps the version only when the flag actually changes, matching spec §5.3.
 - `InMemoryIdempotencyStore`: `find`/`claim` correctly treat records with `createdAt < notBefore` as expired and allow them to be reclaimed, matching spec §5.4's `ON CONFLICT … WHERE created_at < notBefore` semantics.
 - `AsyncMutex` / `InMemoryUnitOfWork`: promise-tail mutex correctly serialises `run()` calls and releases the lock on both success and failure; `UnitOfWork.run` snapshots the two `Map`s before invoking `work` and restores them only on throw, matching spec §5.3's "serialises callbacks with an async mutex" and the commit/rollback behaviour proven by the contract suite (including the 5-way concurrent same-key claim test — exactly one claim succeeds).
 - `repository.contract.ts`: a thorough, adapter-agnostic suite (round-trip, duplicate id, partial/null-clearing updates, stale-version refusal, unknown-id handling, status filter × sort × tie-break combinations, idempotency expiry/replacement, unit-of-work commit/rollback/race) that will double as the Postgres adapter's acceptance test in PR 3.
@@ -50,7 +50,7 @@ Copy of `checklists/milestone-review.md` with results for PR #2:
 
 ### Concurrency
 - [x] Every write is a single statement or inside the unit of work — in-memory repository methods contain no internal `await`, so each runs to completion without interleaving; multi-step work (idempotency claim + todo insert) is wrapped in `UnitOfWork.run`, serialised by `AsyncMutex`.
-- [x] Version bumps only on real changes; conditional writes use the version — `update`/`delete` are conditional on `expectedVersion`; `setCompleted` bumps the version only when the flag changes (per the controller's recorded ruling that "version only on real changes" applies to `complete`/`incomplete`, not `update`, which bumps on every successful conditional write per §5.3).
+- [x] Version bumps only on real changes; conditional writes use the version — `update`/`delete` are conditional on `expectedVersion`; `setCompleted` bumps the version only when the flag changes ("version only on real changes" applies to `complete`/`incomplete`, not `update`, which bumps on every successful conditional write per §5.3).
 - [x] New code paths covered by an invariant test if they touch shared state — the contract suite's "lets exactly one of several concurrent units claim the same key" test (5 parallel `unitOfWork.run` calls, `Promise.all`) asserts the invariant rather than timing.
 
 ### Tests
@@ -64,7 +64,7 @@ Copy of `checklists/milestone-review.md` with results for PR #2:
 
 ### Docs
 - [ ] README / guides / OpenAPI still accurate (no drift) — **N/A for this PR**: README and docs/ land in PR 10; nothing exists yet to drift.
-- [ ] New decisions recorded as ADRs — **N/A for this PR**: the one interpretive decision made (PATCH bumps the version on every successful conditional update; "version only on real changes" applies to `complete`/`incomplete`) is a clarification of already-approved spec §5.3 behaviour, recorded in the controller's ruling log rather than a new ADR.
+- [ ] New decisions recorded as ADRs — **N/A for this PR**: the one interpretive decision made (PATCH bumps the version on every successful conditional update; "version only on real changes" applies to `complete`/`incomplete`) is a clarification of already-approved spec §5.3 behaviour, not a new ADR.
 
 ### Security & operability
 - [x] Inputs validated with shared schemas; no secrets or stack traces in responses — no new input surface in this PR (no HTTP yet); repository/domain code introduces no secrets; reviewed all new files for stray credentials or debug output, none found.
