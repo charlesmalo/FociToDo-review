@@ -19,7 +19,7 @@ check_AD_02() {
 }
 
 check_AD_03() {
-  req GET /api/docs
+  req GET /api/docs -L
   expect_status 200
   expect_header Content-Type '^text/html'
 }

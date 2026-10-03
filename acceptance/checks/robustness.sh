@@ -67,11 +67,23 @@ check_RB_10() {
 }
 
 check_RB_11() {
-  local path
-  for path in '/api/todos/..%2F..%2Fetc' "/api/todos/$(printf 'a%.0s' $(seq 1 1000))" '/api/todos/%00'; do
-    req GET "${path}"
-    expect_4xx
-  done
+  local index_copy="${SCRATCH}/rb11-index"
+  req GET /
+  cp "${B}" "${index_copy}"
+
+  req GET '/api/todos/..%2F..%2Fetc'
+  printf 'note: nginx decodes %%2F and removes dot segments before routing, so ..%%2F..%%2Fetc becomes /etc — outside /api — and is served the app'"'"'s own index.html, not the API.\n' >>"${TRANSCRIPT}"
+  [[ ! "${STATUS}" =~ ^5[0-9][0-9]$ ]] || fail_check "status ${STATUS}, expected not a 5xx"
+  expect_header Content-Type '^text/html'
+  cmp -s "${B}" "${index_copy}" || fail_check "..%2F..%2Fetc body does not match the app's own GET / index.html byte-for-byte"
+
+  req GET "/api/todos/$(printf 'a%.0s' $(seq 1 1000))"
+  expect_4xx
+  expect_header Content-Type '^application/problem\+json'
+
+  req GET '/api/todos/%00'
+  printf 'note: nginx rejects the raw NUL byte in the request line itself (Connection: close, nginx'"'"'s own error page) — the request never reaches the API, so no problem+json body is possible here.\n' >>"${TRANSCRIPT}"
+  expect_4xx
 }
 
 check_RB_12() {

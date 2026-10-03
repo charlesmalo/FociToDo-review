@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"no\ if-match\ patch\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:38 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 196
+Connection: keep-alive
+Location: /api/todos/830cf5b3-a465-45e8-ae5f-a1c0a0a5d46e
+ETag: "1"
+
+{"id":"830cf5b3-a465-45e8-ae5f-a1c0a0a5d46e","title":"no if-match patch","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:19:38.795Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/830cf5b3-a465-45e8-ae5f-a1c0a0a5d46e -H Content-Type:\ application/json --data-binary \{\"title\":\"x\"\}
+HTTP/1.1 428 Precondition Required
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:38 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+
+{"type":"/problems/precondition-required","title":"Precondition required","status":428,"detail":"Send If-Match with the ETag you last received","instance":"/api/todos/830cf5b3-a465-45e8-ae5f-a1c0a0a5d46e"}
+

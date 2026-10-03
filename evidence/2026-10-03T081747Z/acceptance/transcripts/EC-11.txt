@@ -1,0 +1,10 @@
+>>> PATCH /api/todos/00000000-0000-4000-8000-000000000000 -H Content-Type:\ application/json --data-binary \{\"title\":\"x\"\}
+HTTP/1.1 428 Precondition Required
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:38 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+
+{"type":"/problems/precondition-required","title":"Precondition required","status":428,"detail":"Send If-Match with the ETag you last received","instance":"/api/todos/00000000-0000-4000-8000-000000000000"}
+

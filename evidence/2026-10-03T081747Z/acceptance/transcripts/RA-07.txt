@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"only\ sent\ fields\"\,\"description\":\"keep\ desc\"\,\"dueDate\":\"2030-03-03\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 210
+Connection: keep-alive
+Location: /api/todos/c515fd07-a560-4c5a-8e8d-5261e71f7dff
+ETag: "1"
+
+{"id":"c515fd07-a560-4c5a-8e8d-5261e71f7dff","title":"only sent fields","description":"keep desc","dueDate":"2030-03-03","isCompleted":false,"createdAt":"2026-10-03T08:19:39.500Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/c515fd07-a560-4c5a-8e8d-5261e71f7dff -H Content-Type:\ application/json --data-binary \{\"title\":\"renamed\"\} -H If-Match:\ \"1\"
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 201
+Connection: keep-alive
+ETag: "2"
+
+{"id":"c515fd07-a560-4c5a-8e8d-5261e71f7dff","title":"renamed","description":"keep desc","dueDate":"2030-03-03","isCompleted":false,"createdAt":"2026-10-03T08:19:39.500Z","version":2,"isOverdue":false}
+

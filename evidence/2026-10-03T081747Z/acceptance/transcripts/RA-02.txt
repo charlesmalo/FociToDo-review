@@ -1,0 +1,24 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"overdue\ 2\ days\"\,\"dueDate\":\"2026-10-01\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 200
+Connection: keep-alive
+Location: /api/todos/2630251f-ead1-4f18-a0aa-8bc7c65b497f
+ETag: "1"
+
+{"id":"2630251f-ead1-4f18-a0aa-8bc7c65b497f","title":"overdue 2 days","description":null,"dueDate":"2026-10-01","isCompleted":false,"createdAt":"2026-10-03T08:19:39.375Z","version":1,"isOverdue":true}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"future\ 2\ days\"\,\"dueDate\":\"2026-10-05\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:39 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 200
+Connection: keep-alive
+Location: /api/todos/88e102ce-8904-43ac-957f-0f3abb8ed063
+ETag: "1"
+
+{"id":"88e102ce-8904-43ac-957f-0f3abb8ed063","title":"future 2 days","description":null,"dueDate":"2026-10-05","isCompleted":false,"createdAt":"2026-10-03T08:19:39.390Z","version":1,"isOverdue":false}
+

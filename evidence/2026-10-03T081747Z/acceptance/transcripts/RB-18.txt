@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"\<script\>alert\(1\)\</script\>\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:40 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 204
+Connection: keep-alive
+Location: /api/todos/b4252d2b-7d42-4ad6-82c7-697c4807213a
+ETag: "1"
+
+{"id":"b4252d2b-7d42-4ad6-82c7-697c4807213a","title":"<script>alert(1)</script>","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:19:40.853Z","version":1,"isOverdue":false}
+
+>>> GET /api/todos/b4252d2b-7d42-4ad6-82c7-697c4807213a
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:19:40 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 204
+Connection: keep-alive
+ETag: "1"
+
+{"id":"b4252d2b-7d42-4ad6-82c7-697c4807213a","title":"<script>alert(1)</script>","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:19:40.853Z","version":1,"isOverdue":false}
+
