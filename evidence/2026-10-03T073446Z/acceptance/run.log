@@ -56,10 +56,3 @@ PASS BR-17
 PASS BR-18
 PASS BR-19
 acceptance.sh: harness error: api not healthy 90 s after restart
-
-# Exit code of this invocation (`docker compose run --rm --build acceptance`) was 2
-# (harness_fail), per the orchestrator's `trap teardown EXIT`; the trailing
-# "[exited with code 0]" above is an artifact of the capturing shell's own `tee`
-# pipeline, not the command's real exit status. See task-1-report.md for the
-# root-cause analysis (nginx caches a stale upstream IP for `api` across the
-# db+api restart and never recovers on its own).
