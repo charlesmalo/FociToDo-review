@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test';
 import { frame } from '../frame';
-import { createTodo, utcDate } from '../seed';
+import { DAY, createTodo, isoIn } from '../seed';
 
 // Brief: Persistence, as observed from the front end — the same list survives a reload.
 test('reloading the page shows the same tasks', async ({ page, request }) => {
   await createTodo(request, {
     title: 'Reload demo: persists across reload',
-    dueDate: utcDate(15),
+    dueAt: isoIn(15 * DAY),
   });
 
   await page.goto('/');

@@ -1,16 +1,17 @@
 import { expect, test } from '@playwright/test';
 import { frame } from '../frame';
-import { createTodo, utcDate } from '../seed';
+import { DAY, createTodo, isoIn } from '../seed';
 
 // Brief: Update title/description/due date.
 test("editing a task's title shows the prefilled form, then the saved title in its details", async ({
   page,
   request,
 }) => {
+  const dueAt = isoIn(10 * DAY);
   await createTodo(request, {
     title: 'Edit demo: original title',
     description: 'Receipts in the blue folder',
-    dueDate: utcDate(10),
+    dueAt,
   });
 
   await page.goto('/');
@@ -22,6 +23,9 @@ test("editing a task's title shows the prefilled form, then the saved title in i
   await expect(editDialog).toBeVisible();
   await expect(editDialog.getByLabel('Title')).toHaveValue('Edit demo: original title');
   await expect(editDialog.getByLabel('Description')).toHaveValue('Receipts in the blue folder');
+  // The page runs in UTC, so the form shows the instant's UTC date and time.
+  await expect(editDialog.getByLabel('Due date')).toHaveValue(dueAt.slice(0, 10));
+  await expect(editDialog.getByLabel('Due time')).toHaveValue(dueAt.slice(11, 16));
   await frame(
     page,
     'edit',

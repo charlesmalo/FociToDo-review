@@ -7,6 +7,8 @@ export default defineConfig({
   reporter: [['list']],
   use: {
     baseURL: process.env.BASE_URL ?? 'http://web:8080',
+    locale: 'en-US',
+    timezoneId: 'UTC',
     viewport: { width: 1100, height: 760 },
   },
 });

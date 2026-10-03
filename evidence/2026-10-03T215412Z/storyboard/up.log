@@ -1,0 +1,178 @@
+ Image review-storyboard-web Building 
+ Image review-storyboard-api Building 
+ Image review-storyboard-migrate Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.64kB done
+#1 DONE 0.0s
+
+#2 [web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 4.39kB done
+#2 DONE 0.0s
+
+#3 [migrate] resolve image config for docker-image://docker.io/docker/dockerfile:1
+#3 DONE 0.2s
+
+#4 [migrate] docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#4 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e done
+#4 CACHED
+
+#5 [web internal] load metadata for docker.io/library/node:24.21-alpine
+#5 ...
+
+#6 [web internal] load metadata for docker.io/nginxinc/nginx-unprivileged:1.31-alpine
+#6 DONE 0.2s
+
+#5 [api internal] load metadata for docker.io/library/node:24.21-alpine
+#5 DONE 0.2s
+
+#7 [migrate internal] load .dockerignore
+#7 transferring context: 135B done
+#7 DONE 0.0s
+
+#8 [migrate base 1/2] FROM docker.io/library/node:24.21-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1
+#8 resolve docker.io/library/node:24.21-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1 0.0s done
+#8 DONE 0.0s
+
+#9 [web web 1/4] FROM docker.io/nginxinc/nginx-unprivileged:1.31-alpine@sha256:26b0bf6fbf07297983cb341998d79c831508787de26627dd2a112321b9c3a4af
+#9 resolve docker.io/nginxinc/nginx-unprivileged:1.31-alpine@sha256:26b0bf6fbf07297983cb341998d79c831508787de26627dd2a112321b9c3a4af 0.0s done
+#9 DONE 0.0s
+
+#10 [web internal] load build context
+#10 transferring context: 3.91MB 0.1s done
+#10 DONE 0.1s
+
+#11 [web build-web 1/1] RUN npm run build -w @foci/web
+#11 CACHED
+
+#12 [web web 3/4] COPY apps/web/nginx.conf /etc/nginx/conf.d/default.conf
+#12 CACHED
+
+#13 [web web 2/4] RUN apk upgrade --no-cache pcre2   && apk list -I pcre2 | grep -Eq '^pcre2-10\.(49|[5-9][0-9])-'
+#13 CACHED
+
+#14 [api source 1/1] COPY . .
+#14 CACHED
+
+#15 [api build-api 1/1] RUN npm run build -w @foci/shared -w @foci/api
+#15 CACHED
+
+#16 [api api 8/9] COPY --chown=node:node apps/api/migrations apps/api/migrations
+#16 CACHED
+
+#17 [api api 7/9] COPY --from=build-api --chown=node:node /repo/apps/api/dist apps/api/dist
+#17 CACHED
+
+#18 [api manifests 5/5] COPY apps/web/package.json apps/web/
+#18 CACHED
+
+#19 [api api 4/9] COPY --chown=node:node packages/shared/package.json packages/shared/
+#19 CACHED
+
+#20 [api api 5/9] COPY --from=build-api --chown=node:node /repo/packages/shared/dist packages/shared/dist
+#20 CACHED
+
+#21 [api manifests 4/5] COPY apps/api/package.json apps/api/
+#21 CACHED
+
+#22 [api api 3/9] COPY --from=api-prod-deps --chown=node:node /repo/node_modules ./node_modules
+#22 CACHED
+
+#23 [api base 2/2] WORKDIR /repo
+#23 CACHED
+
+#24 [api api 6/9] COPY --chown=node:node apps/api/package.json apps/api/
+#24 CACHED
+
+#25 [api manifests 1/5] COPY package.json package-lock.json ./
+#25 CACHED
+
+#26 [api manifests 3/5] COPY packages/diagrams/package.json packages/diagrams/
+#26 CACHED
+
+#27 [api api-prod-deps 1/1] RUN --mount=type=cache,target=/root/.npm     npm ci --omit=dev --no-audit --no-fund -w @foci/api -w @foci/shared
+#27 CACHED
+
+#28 [api deps 1/1] RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
+#28 CACHED
+
+#29 [api manifests 2/5] COPY packages/shared/package.json packages/shared/
+#29 CACHED
+
+#30 [web web 4/4] COPY --from=build-web /repo/apps/web/dist /usr/share/nginx/html
+#30 CACHED
+
+#31 [migrate api 9/9] RUN rm -rf     /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack     /usr/local/bin/yarn /usr/local/bin/yarnpkg     /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack     /opt/yarn-v*   && ! command -v npm && ! command -v npx && ! command -v corepack   && ! command -v yarn && ! command -v yarnpkg
+#31 CACHED
+
+#32 [migrate] exporting to image
+#32 exporting layers done
+#32 exporting manifest sha256:c8cc705cc36568d137d377c5e8842fa5a053a2880491edfdbe16e50cf8081d30 done
+#32 exporting config sha256:d8e4de413923c2d05f58bea189746ce2acca068e4657a5158d76e67868d77bb2
+#32 exporting config sha256:d8e4de413923c2d05f58bea189746ce2acca068e4657a5158d76e67868d77bb2 done
+#32 exporting attestation manifest sha256:a401d1aa1b55dcf3758a8c887532d34836c7ca68cc594aee3267e56b271a1e77 0.0s done
+#32 exporting manifest list sha256:4be73c516498f6657c07c9d6da76afa98f7cf209b3ddd6c017dfa210cdebcf3d done
+#32 naming to docker.io/library/review-storyboard-migrate:latest done
+#32 unpacking to docker.io/library/review-storyboard-migrate:latest done
+#32 DONE 0.1s
+
+#33 [api] exporting to image
+#33 exporting layers done
+#33 exporting manifest sha256:31acf2a917c34b5818ced5cb3a1614bf61da4c75467a3ccc2467009d59dbadc5 done
+#33 exporting config sha256:7a4d7505f30c6135b1ab2e76a7c95c479ba86a92a3dc2242fef246d12ea62f67 done
+#33 exporting attestation manifest sha256:9bc6e3fed2549dbc12ac836777af4be4b68b57d78de7115a620fd6eaefcd31b3 0.0s done
+#33 exporting manifest list sha256:00f3d142803c66c880696137e13da9e14d1428ad71c405c66ae9cff9f2ec2988 done
+#33 naming to docker.io/library/review-storyboard-api:latest done
+#33 unpacking to docker.io/library/review-storyboard-api:latest done
+#33 DONE 0.1s
+
+#34 [web] exporting to image
+#34 exporting layers done
+#34 exporting manifest sha256:7b44b04d189cbeeeb672eca800601d73a2c054ac6edf8610c4a6514a792f09c2 done
+#34 exporting config sha256:146c7d83cc675081b9fbe4e916aa96195d118297969b6f175bf04bbe123af3d3 done
+#34 exporting attestation manifest sha256:adfac769cb1a2d119ee193115065fc81048848f2174a5464d0ec532024d115b1 0.0s done
+#34 exporting manifest list sha256:014ce657f4d2cb8860715960e837f68a821a31d2765146817a2dce688f8a9d14 done
+#34 naming to docker.io/library/review-storyboard-web:latest done
+#34 unpacking to docker.io/library/review-storyboard-web:latest done
+#34 DONE 0.1s
+
+#35 [migrate] resolving provenance for metadata file
+#35 DONE 0.0s
+
+#36 [api] resolving provenance for metadata file
+#36 DONE 0.0s
+
+#37 [web] resolving provenance for metadata file
+#37 DONE 0.0s
+ Image review-storyboard-migrate Built 
+ Image review-storyboard-api Built 
+ Image review-storyboard-web Built 
+ Network review-storyboard_default Creating 
+ Network review-storyboard_default Creating 
+ Volume review-storyboard_pgdata Creating 
+ Volume review-storyboard_pgdata Creating 
+ Volume review-storyboard_pgdata Created 
+ Volume review-storyboard_pgdata Created 
+ Network review-storyboard_default Created 
+ Network review-storyboard_default Created 
+ Container review-storyboard-db-1 Creating 
+ Container review-storyboard-db-1 Created 
+ Container review-storyboard-migrate-1 Creating 
+ Container review-storyboard-migrate-1 Created 
+ Container review-storyboard-api-1 Creating 
+ Container review-storyboard-api-1 Created 
+ Container review-storyboard-web-1 Creating 
+ Container review-storyboard-web-1 Created 
+ Container review-storyboard-db-1 Starting 
+ Container review-storyboard-db-1 Started 
+ Container review-storyboard-db-1 Waiting 
+ Container review-storyboard-db-1 Healthy 
+ Container review-storyboard-migrate-1 Starting 
+ Container review-storyboard-migrate-1 Started 
+ Container review-storyboard-migrate-1 Waiting 
+ Container review-storyboard-migrate-1 Exited 
+ Container review-storyboard-api-1 Starting 
+ Container review-storyboard-api-1 Started 
+ Container review-storyboard-api-1 Waiting 
+ Container review-storyboard-api-1 Healthy 
+ Container review-storyboard-web-1 Starting 
+ Container review-storyboard-web-1 Started 

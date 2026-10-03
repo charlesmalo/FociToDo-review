@@ -19,15 +19,25 @@ test('empty list, then add a task', async ({ page }) => {
   await frame(page, 'add', 2, '"+ New task" opens the New task dialog.', 'ui/dialog-new-task');
 
   await dialog.getByLabel('Title').fill('Buy oat milk');
+  await expect(dialog.getByLabel('Due time')).toHaveValue('');
   await dialog.getByLabel('Due date').fill('2030-01-15');
-  await dialog.getByRole('button', { name: 'Add task' }).click();
-  await expect(page.getByRole('button', { name: 'Buy oat milk' })).toBeVisible();
-  await expect(page.getByText('Due 2030-01-15')).toBeVisible();
+  await expect(dialog.getByLabel('Due time')).toHaveValue('17:00');
   await frame(
     page,
     'add',
     3,
-    'After "Add task" the new task is in the list with its due date.',
+    'Entering a Due date prefills the Due time with 17:00.',
+    'ui/dialog-new-task',
+  );
+
+  await dialog.getByRole('button', { name: 'Add task' }).click();
+  await expect(page.getByRole('button', { name: 'Buy oat milk' })).toBeVisible();
+  await expect(page.getByText('Due Jan 15, 2030, 5:00 PM')).toBeVisible();
+  await frame(
+    page,
+    'add',
+    4,
+    'After "Add task" the new task is in the list with its due date and time (17:00 UTC here).',
     'ui/task-list-with-tasks',
   );
 });

@@ -1,0 +1,29 @@
+{"journey":"add","step":1,"caption":"First visit: the list is empty and invites adding a task.","wireframe":"ui/task-list-empty","file":"add-01.png"}
+{"journey":"add","step":2,"caption":"\"+ New task\" opens the New task dialog.","wireframe":"ui/dialog-new-task","file":"add-02.png"}
+{"journey":"add","step":3,"caption":"Entering a Due date prefills the Due time with 17:00.","wireframe":"ui/dialog-new-task","file":"add-03.png"}
+{"journey":"add","step":4,"caption":"After \"Add task\" the new task is in the list with its due date and time (17:00 UTC here).","wireframe":"ui/task-list-with-tasks","file":"add-04.png"}
+{"journey":"list-and-view","step":1,"caption":"The list shows an overdue task, a due-soon task, a future task and a completed task, each deadline with its date and time.","wireframe":"ui/task-list-with-tasks","file":"list-and-view-01.png"}
+{"journey":"list-and-view","step":2,"caption":"Opening the overdue task shows its details, marked Overdue.","wireframe":"ui/dialog-task-details","file":"list-and-view-02.png"}
+{"journey":"edit","step":1,"caption":"Edit opens the form prefilled with the task's current values.","wireframe":"ui/dialog-edit-task","file":"edit-01.png"}
+{"journey":"edit","step":2,"caption":"After Save, the task details show the new title.","wireframe":"ui/dialog-task-details","file":"edit-02.png"}
+{"journey":"complete","step":1,"caption":"Ticking the checkbox marks the task completed.","wireframe":"ui/task-list-with-tasks","file":"complete-01.png"}
+{"journey":"complete","step":2,"caption":"Unticking it again marks the task incomplete.","wireframe":"ui/task-list-with-tasks","file":"complete-02.png"}
+{"journey":"filter-and-sort","step":1,"caption":"The Show, Sort by and Order controls, each named by its label alone.","wireframe":"ui/filters-and-sorting","file":"filter-and-sort-01.png"}
+{"journey":"filter-and-sort","step":2,"caption":"Show: Completed lists only the completed task.","wireframe":"ui/task-list-with-tasks","file":"filter-and-sort-02.png"}
+{"journey":"filter-and-sort","step":3,"caption":"Show: Incomplete lists every task not yet completed.","wireframe":"ui/task-list-with-tasks","file":"filter-and-sort-03.png"}
+{"journey":"filter-and-sort","step":4,"caption":"Show: Overdue lists only the overdue tasks, each carrying the Overdue badge.","wireframe":"ui/task-list-with-tasks","file":"filter-and-sort-04.png"}
+{"journey":"filter-and-sort","step":5,"caption":"Show: Due soon lists only incomplete tasks due within 24 hours, each carrying the Due soon badge.","wireframe":"ui/task-list-with-tasks","file":"filter-and-sort-05.png"}
+{"journey":"filter-and-sort","step":6,"caption":"Completing every overdue task leaves none matching Show: Overdue.","wireframe":"ui/task-list-no-match","file":"filter-and-sort-06.png"}
+{"journey":"filter-and-sort","step":7,"caption":"Sort by Title, Ascending orders titles case-insensitively.","wireframe":"ui/task-list-with-tasks","file":"filter-and-sort-07.png"}
+{"journey":"filter-and-sort","step":8,"caption":"Sort by Due, Ascending orders tasks by deadline, earliest first.","wireframe":"ui/task-list-with-tasks","file":"filter-and-sort-08.png"}
+{"journey":"validation","step":1,"caption":"Submitting with an empty title shows \"Title is required\".","wireframe":"ui/dialog-new-task-with-errors","file":"validation-01.png"}
+{"journey":"conflict","step":1,"caption":"Save after a conflicting change shows the changed-elsewhere notice with the edit kept.","wireframe":"ui/dialog-changed-elsewhere","file":"conflict-01.png"}
+{"journey":"deleted-elsewhere","step":1,"caption":"Opening a task deleted elsewhere shows \"This task no longer exists.\"","wireframe":"ui/dialog-task-no-longer-exists","file":"deleted-elsewhere-01.png"}
+{"journey":"delete","step":1,"caption":"Delete asks \"Delete this task?\" before removing it.","wireframe":"ui/dialog-delete-confirmation","file":"delete-01.png"}
+{"journey":"delete","step":2,"caption":"After \"Yes, delete\" the task is gone from the list.","wireframe":"ui/task-list-with-tasks","file":"delete-02.png"}
+{"journey":"reload","step":1,"caption":"Reloading the page shows the same tasks as before.","wireframe":"ui/task-list-with-tasks","file":"reload-01.png"}
+{"journey":"loading-and-error","step":1,"caption":"While the list request is in flight: \"Loading tasks…\".","wireframe":"ui/task-list-loading","file":"loading-and-error-01.png"}
+{"journey":"loading-and-error","step":2,"caption":"After the retries fail: the error banner with Retry.","wireframe":"ui/task-list-load-error","file":"loading-and-error-02.png"}
+{"journey":"loading-and-error","step":3,"caption":"Retry succeeds and the list loads.","wireframe":"ui/task-list-with-tasks","file":"loading-and-error-03.png"}
+{"journey":"two-timezones","step":1,"caption":"Viewed from New York (America/New_York): the same Overdue and Due soon badges, with the deadlines in local time.","wireframe":"ui/task-list-with-tasks","file":"two-timezones-01.png"}
+{"journey":"two-timezones","step":2,"caption":"Viewed from Tokyo (Asia/Tokyo): the same Overdue and Due soon badges, with the deadlines in local time.","wireframe":"ui/task-list-with-tasks","file":"two-timezones-02.png"}

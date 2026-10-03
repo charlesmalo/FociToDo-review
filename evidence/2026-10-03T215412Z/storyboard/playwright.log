@@ -1,0 +1,18 @@
+
+Running 12 tests using 1 worker
+
+  ✓   1 journeys/01-empty-and-add.spec.ts:5:1 › empty list, then add a task (429ms)
+  ✓   2 journeys/02-list-and-view.spec.ts:6:1 › list shows an overdue, a due-soon, a future and a completed task; view the overdue task's details (285ms)
+  ✓   3 journeys/03-edit.spec.ts:6:1 › editing a task's title shows the prefilled form, then the saved title in its details (351ms)
+  ✓   4 journeys/04-complete-and-incomplete.spec.ts:6:1 › ticking a task's checkbox completes it, unticking marks it incomplete again (322ms)
+  ✓   5 journeys/05-filter-and-sort.spec.ts:6:1 › filters and sorting: every Show value, "no match", and sorting by title and by due (801ms)
+  ✓   6 journeys/06-validation.spec.ts:5:1 › adding a task with an empty title shows a validation error (212ms)
+  ✓   7 journeys/07-conflict.spec.ts:6:1 › editing a task that changes elsewhere shows the changed-elsewhere notice with the edit kept (313ms)
+  ✓   8 journeys/08-deleted-elsewhere.spec.ts:6:1 › a task deleted elsewhere shows "This task no longer exists." when opened (196ms)
+  ✓   9 journeys/09-delete.spec.ts:6:1 › deleting a task asks for confirmation, then removes it from the list (345ms)
+  ✓  10 journeys/10-reload.spec.ts:6:1 › reloading the page shows the same tasks (239ms)
+  ✓  11 journeys/11-loading-and-error.spec.ts:5:1 › a delayed list request shows loading, a failing one shows the error banner, and Retry recovers (7.9s)
+  ✓  12 journeys/12-two-timezones.spec.ts:7:1 › the same deadlines show the same badges and each viewer’s local time (307ms)
+
+  12 passed (12.5s)
+storyboard: 29 frames, 12 journeys, 13 wireframes paired
