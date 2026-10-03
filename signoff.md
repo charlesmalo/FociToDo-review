@@ -1,4 +1,84 @@
-# Release sign-off — FociToDo @ 153d719
+# Release sign-off — FociToDo @ 3dbb2eb
+
+**Date:** 2026-10-03 · commit `3dbb2ebc374e2e783f1164e35b1104224cdd6033` (PR #23's merge, the commit after PR #22 "refactor: API docs as a local artifact, not an endpoint" and PR #23 "feat(deadlines): deadlines as UTC instants with a due-soon flag")
+
+**Recommendation:** Ready with noted risks
+
+Noted risks:
+- F-64/F-65 — the unmodified upstream `postgres:17.11-alpine` image ships `gosu` with Go-stdlib CVEs (1 CRITICAL, 21 HIGH), the same CVE set as at `153d719` ([`trivy-postgres-17.11-alpine.txt`](evidence/2026-10-03T220217Z/scans/trivy-postgres-17.11-alpine.txt)). No patched tag is published yet, and `gosu` runs once at container start to drop root. Remediation: bump the pin when a patched tag ships.
+
+Two app changes since the `153d719` sign-off, both merged to `main`:
+- **PR #22 — the API no longer serves its own documentation.** `/api/docs` and `/api/openapi.json` are gone; the API reference is the generated, self-contained `docs/api/index.html` in the repository (ADR 0016). Observable from outside: both paths answer `404` (acceptance AD-02, AD-03).
+- **PR #23 — deadlines are UTC instants.** The date-only `dueDate` became `dueAt`, an RFC 3339 instant normalised to UTC; `isOverdue` is derived from the instant, a new `isDueSoon` flag marks incomplete todos due within 24 hours, and the list takes `status=due-soon` and `sort=dueAt` (ADR 0017). The web form takes a local date and time and shows deadlines in the viewer's timezone.
+
+Neither change is a finding. The review of each found defects in how it was built, all fixed in the same PR except two Low items accepted (F-101..F-113; see Findings). No app defect was found by this review's own harnesses this cycle: `verify`, `stress`, `scans`, acceptance and the storyboard all passed on the first run against `3dbb2eb` (one acceptance expectation, RA-02, was tightened to derive its two offsets from a single instant, a harness change).
+
+## Scope delivered vs requested
+
+| Requirement | Delivered |
+|---|---|
+| Functional: add / list / view / update / complete / incomplete / delete a to-do, filter (now also `due-soon`), sort (`createdAt` / `dueAt` / `title`) (FR-1–FR-9) | All 9 Done — [traceability/matrix.md](traceability/matrix.md); independently re-proven black-box by this review's acceptance catalogue (BR-01..BR-21, DS-01..DS-04) and storyboard (12 journeys) |
+| Functional: in-app developer docs (FR-10) | **Removed** by design — ADR 0015, PR #16 (unchanged) |
+| Data rules: id, title, description, dueAt, isCompleted, createdAt, version, isOverdue, isDueSoon (DR-1–DR-8) | All 8 Done — [traceability/matrix.md](traceability/matrix.md) (DR-4 and DR-8 re-pointed to the `dueAt` / `isDueSoon` code and tests at `3dbb2eb`); independently re-proven black-box by DR-01..DR-20 and DS-01..DS-04 |
+| Non-functional: Docker-only setup, TypeScript/Node 24, Postgres persistence, ports + two adapters, concurrency guarantees, strict validation + problem details, 100% coverage, lint-enforced layers, multi-stage/non-root/prod-only images, docs + Mermaid, OpenAPI from Zod (NFR-0–NFR-10) | All 11 Done — [traceability/matrix.md](traceability/matrix.md); NFR-10 now reads "served: no; local artifact `docs/api/index.html`", with AD-02 and AD-03 as the independent 404 evidence |
+| Documentation and wireframes (DOC-1, DOC-2) and delivery (D-1–D-9) | All Done — [traceability/matrix.md](traceability/matrix.md); the storyboard pairs 13/13 wireframes with frames |
+
+40 traceability rows read `Done`, except FR-10 which reads `Removed` by deliberate design decision; none `In progress` or `Planned`.
+
+## Quality snapshot
+
+Every number below is read from the final evidence runs on `3dbb2eb` (see Evidence); each run's `summary.md`/`results.md` records the checked-out SHA.
+
+- **Independent acceptance**: 104/104 PASS, 0 FAIL — [`evidence/2026-10-03T215055Z/acceptance/`](evidence/2026-10-03T215055Z/acceptance/). By section: Brief actions (BR) 21, Data rules (DR) 20, Error contract (EC) 17, Concurrency surface (CS) 7, README assumptions (RA) 14, Robustness (RB) 18, API documentation and health (AD) 3, Deadline status (DS) 4 — 104 total. New since `153d719`: DS-01..DS-04 and DR-20; changed: BR-01/02/03/05/07/13/15/16, DR-11..DR-15, DR-18, RA-02/03/05/07/12/14, RB-07, and AD-02/AD-03 (now `404`).
+- **Storyboard**: 29 captioned frames across 12 journeys (add, list-and-view, edit, complete, filter-and-sort, validation, conflict, deleted-elsewhere, delete, reload, loading-and-error, two-timezones); all 13 `docs/ui.md` wireframes paired with at least one frame — [`evidence/2026-10-03T215412Z/storyboard/storyboard.md`](evidence/2026-10-03T215412Z/storyboard/storyboard.md).
+- Test gate: PASS — 62 test files, 546 tests; coverage 100/100/100/100 (statements 893/893, branches 452/452, functions 292/292, lines 789/789) — [`evidence/2026-10-03T215759Z/test-gate.log`](evidence/2026-10-03T215759Z/test-gate.log), [`coverage-summary.json`](evidence/2026-10-03T215759Z/reports/coverage/coverage-summary.json)
+- End-to-end: 10 passed — [`evidence/2026-10-03T215759Z/e2e.log`](evidence/2026-10-03T215759Z/e2e.log)
+- Concurrency stress: 5/5 scenarios PASS, 13/13 invariants hold (race-patch, parallel-complete, delete-storm, idempotent-replay, mixed-load); 0 failed requests out of 516,769 (211,469 + 410 + 620 + 800 + 303,470; `http_req_failed` 0.00% in every scenario's k6 log); p95 list latency (`GET /todos` under mixed load) 10.35 ms against a 250 ms threshold — [`evidence/2026-10-03T215927Z/stress/`](evidence/2026-10-03T215927Z/stress/). The `mixed-load` script was updated for the renamed contract (`sort=dueAt`, a `dueAt` instant) so the load mix keeps exercising the real API.
+- Images: 0 HIGH/CRITICAL vulnerabilities on both `api` and `web` (Trivy, `--ignore-unfixed`); 0 `npm audit --omit=dev --audit-level=high` findings; the unmodified upstream `postgres:17.11-alpine` image still has 22 HIGH/CRITICAL (the same `gosu` CVE set) — accepted, F-64/F-65. Hadolint reports 5 findings, the same five as at `153d719` with line numbers shifted by +2 (F-57..F-59, F-99, F-100) — [`evidence/2026-10-03T220217Z/scans/`](evidence/2026-10-03T220217Z/scans/). No scanner finding is new since `153d719`.
+- Clean-clone rebuild → healthy: 26 s (arm64; base images and npm cache warm) — local, Colima — [`evidence/2026-10-03T215759Z/summary.md`](evidence/2026-10-03T215759Z/summary.md). Not a cold-machine time; the README quick start was not run on a clean machine (the one unchecked box in the [release-readiness checklist](checklists/release-readiness-3dbb2eb.md)), unchanged from earlier sign-offs. CI on `main` at `3dbb2eb` is green on fresh `ubuntu-latest` runners, all 4 jobs (test, images, diagrams, e2e) — run [37156200771](https://github.com/charlesmalo/FociToDo/actions/runs/37156200771)
+
+Release readiness: [`checklists/release-readiness-3dbb2eb.md`](checklists/release-readiness-3dbb2eb.md) — 7 of 8 boxes checked, each with its evidence; the clean-machine box is left unchecked and explained, unchanged from earlier sign-offs.
+
+## Findings
+
+By severity (113 findings, F-1..F-113): Critical 2 · High 6 · Important 20 · Medium 4 · Minor 26 · Low 55.
+
+By decision: Fix 53 · Accept 59 · Reject 1 (F-17 "not reproducible" — the only Reject).
+
+**Open items: none.** All 23 app PRs (#1–#23) are merged to `main`; app CI is green on `main` at `3dbb2eb` (run 37156200771, 4/4 jobs). 13 new findings since the `153d719` sign-off's F-100 (F-101..F-113), from the review notes of the two PRs:
+- PR #22 ([`reviews/PR-22-api-docs-local.md`](reviews/PR-22-api-docs-local.md)): F-101 (Important, docs) the generated API reference showed every schema as "any" from `file://` — fixed by a tested `$ref` inliner; F-102 (Medium, tests) a fragile HTML-slicing renderer test — fixed; F-103 (Minor, docs) the generated file not marked generated — fixed; F-104 (Minor, docs) three defects in the deadlines plan as first written — corrected before execution; F-105 (Low, tests) a loose test-only jsdom declaration — Accept.
+- PR #23 ([`reviews/PR-23-deadline-instants.md`](reviews/PR-23-deadline-instants.md)): F-106 (Minor) a duplicated validation issue for one bad `dueAt`; F-107 (Important) V8 rolling an impossible local date into the next month in the form; F-108 (Important) a migration comment read as the up/down separator; F-109 (Important) a title edit silently changing the stored instant; F-110 (Important) the local-to-UTC conversion tested only in UTC; F-111 (Important) a time-dependent, flaky e2e deadline; F-112 (Minor) stale badges on an idle page — all Fix; F-113 (Low) one ambiguous wall-clock hour a year in the e2e — Accept.
+
+Every `Accept`/`Reject` row records where it was decided and its reason is in the row or in that PR's triage table under [`reviews/`](reviews/). All findings carried forward from earlier sign-offs (F-1..F-100) are unchanged.
+
+## Accepted risks and trade-offs
+
+- The pinned upstream `postgres:17.11-alpine` image's `gosu` CVEs (F-64/F-65), as above. Accepted: the image is the unmodified official one, no patched `postgres:17` Alpine tag exists yet, and `gosu` only runs once at container start to drop root; `db` publishes no port. Remediation: bump the pin when a patched tag ships.
+- Two test-only details accepted at review: a loosely typed jsdom declaration in the diagrams package (F-105) and one ambiguous New York wall-clock hour a year in the timezone e2e (F-113, at most one CI retry a year).
+- All risks and trade-offs carried forward from the `153d719` and `41a279a` sign-offs (the Hadolint style findings, the two odd-id robustness probes, the duplicated `0000-13-01` message, which concerned the former `dueDate` field, delete-on-404 dialog behaviour, the scoped create-idempotency key, no clean-machine timing run, and the architectural trade-off ADRs) are unchanged — see the earlier sign-offs below.
+
+## Evidence
+
+Final runs on `3dbb2eb` (`docker compose run --rm -e APP_REF=3dbb2ebc374e2e783f1164e35b1104224cdd6033 acceptance|storyboard|verify|stress|scans`):
+
+- Independent acceptance (black-box curl checks): [`evidence/2026-10-03T215055Z/acceptance/`](evidence/2026-10-03T215055Z/acceptance/) — 104/104 PASS
+- Storyboard (captioned screenshots beside wireframes): [`evidence/2026-10-03T215412Z/storyboard/storyboard.md`](evidence/2026-10-03T215412Z/storyboard/storyboard.md) — 29 frames, 12 journeys, 13/13 wireframes paired
+- Verify (clean clone → `--no-cache` rebuild → test gate → e2e): [`evidence/2026-10-03T215759Z/`](evidence/2026-10-03T215759Z/)
+- Stress (k6 scenarios + invariant checks): [`evidence/2026-10-03T215927Z/stress/`](evidence/2026-10-03T215927Z/stress/)
+- Scans (Trivy on `api`, `web` and `postgres:17.11-alpine`; Hadolint; npm audit): [`evidence/2026-10-03T220217Z/scans/`](evidence/2026-10-03T220217Z/scans/)
+- Release readiness: [`checklists/release-readiness-3dbb2eb.md`](checklists/release-readiness-3dbb2eb.md)
+- App CI run on `3dbb2eb` (test, images, diagrams, e2e — all four jobs green): https://github.com/charlesmalo/FociToDo/actions/runs/37156200771
+- Review notes: [`reviews/PR-22-api-docs-local.md`](reviews/PR-22-api-docs-local.md), [`reviews/PR-23-deadline-instants.md`](reviews/PR-23-deadline-instants.md)
+- Full traceability: [`traceability/matrix.md`](traceability/matrix.md)
+- Full findings log: [`findings/log.md`](findings/log.md)
+
+An earlier, also-passing acceptance run at `3dbb2eb` ([`evidence/2026-10-03T214818Z/`](evidence/2026-10-03T214818Z/)) preceded the RA-02 change and is kept as history, as are the `153d719` runs and all earlier evidence directories.
+
+---
+
+# Earlier sign-off — FociToDo @ 153d719
+
+Kept as history. At the time this was written, `153d719` was the release candidate (PR #21's merge); `main` subsequently gained PR #22 (API docs as a local artifact) and PR #23 (deadlines as UTC instants) — see the `3dbb2eb` sign-off above, which supersedes the recommendation below.
 
 **Date:** 2026-10-03 · commit `153d7193d8170d1f8658ab4a047fcc34a7b6c711` (PR #21's merge, the commit after PR #18 "UI wireframes for every screen state", PR #19 "fix: re-resolve the api so the proxy survives an api restart", PR #20 "fix: name each filter control by its label alone" and PR #21 "fix: patch pcre2 in the web image (CVE-2026-103111)")
 
