@@ -72,6 +72,8 @@ check_DR_10() {
 check_DR_11() {
   post_json /api/todos '{"title":"bad date","dueAt":"2026-02-30T10:00:00Z"}'
   expect_field_error dueAt
+  jq -e '[.errors[] | select(.field == "dueAt")] | length == 1' "$B" > /dev/null 2>&1 \
+    || fail_check "errors[] has not exactly one entry for dueAt"
 }
 
 check_DR_12() {

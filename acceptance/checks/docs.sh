@@ -16,4 +16,6 @@ check_AD_02() {
 check_AD_03() {
   req GET /api/docs/
   expect_problem 404 /problems/not-found
+  req GET /api/docs
+  expect_problem 404 /problems/not-found
 }
