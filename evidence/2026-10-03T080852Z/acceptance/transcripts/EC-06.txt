@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"no\ if-match\ delete\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 197
+Connection: keep-alive
+Location: /api/todos/0ae3fc03-2bd5-43d7-9197-298bec6a2bac
+ETag: "1"
+
+{"id":"0ae3fc03-2bd5-43d7-9197-298bec6a2bac","title":"no if-match delete","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:10:42.960Z","version":1,"isOverdue":false}
+
+>>> DELETE /api/todos/0ae3fc03-2bd5-43d7-9197-298bec6a2bac
+HTTP/1.1 428 Precondition Required
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 205
+Connection: keep-alive
+
+{"type":"/problems/precondition-required","title":"Precondition required","status":428,"detail":"Send If-Match with the ETag you last received","instance":"/api/todos/0ae3fc03-2bd5-43d7-9197-298bec6a2bac"}
+

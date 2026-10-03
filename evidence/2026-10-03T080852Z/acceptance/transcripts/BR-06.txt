@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"Desc\"\,\"description\":\"old\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:09:09 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 184
+Connection: keep-alive
+Location: /api/todos/2e8293f4-cc73-44e4-be0a-dd6d1c72d5bb
+ETag: "1"
+
+{"id":"2e8293f4-cc73-44e4-be0a-dd6d1c72d5bb","title":"Desc","description":"old","dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:09:09.765Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/2e8293f4-cc73-44e4-be0a-dd6d1c72d5bb -H Content-Type:\ application/json --data-binary \{\"description\":\"new\"\} -H If-Match:\ \"1\"
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:09:09 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 184
+Connection: keep-alive
+ETag: "2"
+
+{"id":"2e8293f4-cc73-44e4-be0a-dd6d1c72d5bb","title":"Desc","description":"new","dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:09:09.765Z","version":2,"isOverdue":false}
+

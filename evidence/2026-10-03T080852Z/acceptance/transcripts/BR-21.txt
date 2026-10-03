@@ -1,0 +1,54 @@
+>>> GET /
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: text/html
+Content-Length: 393
+Last-Modified: Fri, 02 Oct 2026 10:25:51 GMT
+Connection: keep-alive
+ETag: "6abf86af-189"
+Cache-Control: no-cache
+Accept-Ranges: bytes
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FociToDo</title>
+    <script type="module" crossorigin src="/assets/index-CYWNGfdj.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Ds-ty4gC.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
+
+>>> GET /some/deep/link
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: text/html
+Content-Length: 393
+Last-Modified: Fri, 02 Oct 2026 10:25:51 GMT
+Connection: keep-alive
+ETag: "6abf86af-189"
+Cache-Control: no-cache
+Accept-Ranges: bytes
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FociToDo</title>
+    <script type="module" crossorigin src="/assets/index-CYWNGfdj.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Ds-ty4gC.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
+

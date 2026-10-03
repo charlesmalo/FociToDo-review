@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"View\ me\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:09:09 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 186
+Connection: keep-alive
+Location: /api/todos/5103748b-7270-4e47-becf-f763f1d1e1bb
+ETag: "1"
+
+{"id":"5103748b-7270-4e47-becf-f763f1d1e1bb","title":"View me","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:09:09.699Z","version":1,"isOverdue":false}
+
+>>> GET /api/todos/5103748b-7270-4e47-becf-f763f1d1e1bb
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:09:09 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 186
+Connection: keep-alive
+ETag: "1"
+
+{"id":"5103748b-7270-4e47-becf-f763f1d1e1bb","title":"View me","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:09:09.699Z","version":1,"isOverdue":false}
+

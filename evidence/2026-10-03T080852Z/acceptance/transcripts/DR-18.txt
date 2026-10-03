@@ -1,0 +1,36 @@
+dates used: yesterday=2026-10-02 today=2026-10-03 (UTC)
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"due\ yesterday\"\,\"dueDate\":\"2026-10-02\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 199
+Connection: keep-alive
+Location: /api/todos/530d14a2-14cb-4e54-8a02-86a7182bf372
+ETag: "1"
+
+{"id":"530d14a2-14cb-4e54-8a02-86a7182bf372","title":"due yesterday","description":null,"dueDate":"2026-10-02","isCompleted":false,"createdAt":"2026-10-03T08:10:42.705Z","version":1,"isOverdue":true}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"due\ today\"\,\"dueDate\":\"2026-10-03\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 196
+Connection: keep-alive
+Location: /api/todos/49eadee3-ff8d-4778-8109-4f3447dd4bb9
+ETag: "1"
+
+{"id":"49eadee3-ff8d-4778-8109-4f3447dd4bb9","title":"due today","description":null,"dueDate":"2026-10-03","isCompleted":false,"createdAt":"2026-10-03T08:10:42.723Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos/530d14a2-14cb-4e54-8a02-86a7182bf372/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 199
+Connection: keep-alive
+ETag: "2"
+
+{"id":"530d14a2-14cb-4e54-8a02-86a7182bf372","title":"due yesterday","description":null,"dueDate":"2026-10-02","isCompleted":true,"createdAt":"2026-10-03T08:10:42.705Z","version":2,"isOverdue":false}
+

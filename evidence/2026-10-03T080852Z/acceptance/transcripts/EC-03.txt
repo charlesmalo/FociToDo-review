@@ -1,0 +1,10 @@
+>>> GET /api/todos/abc
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 212
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"id","message":"Must be a valid UUID"}],"instance":"/api/todos/abc"}
+

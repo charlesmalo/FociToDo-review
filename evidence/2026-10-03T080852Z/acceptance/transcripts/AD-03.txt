@@ -1,0 +1,24 @@
+>>> GET /api/docs
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:45 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Length: 158
+Connection: keep-alive
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+Location: /api/docs/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Redirecting</title>
+</head>
+<body>
+<pre>Redirecting to /api/docs/</pre>
+</body>
+</html>
+
+
+FAIL: status 301, expected 200

@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"default\ completed\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 196
+Connection: keep-alive
+Location: /api/todos/fe511497-ccac-498e-94bf-caf478e5b31b
+ETag: "1"
+
+{"id":"fe511497-ccac-498e-94bf-caf478e5b31b","title":"default completed","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:10:42.625Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"set\ completed\"\,\"isCompleted\":true\}
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:42 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 210
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"isCompleted","message":"Unknown field"}],"instance":"/api/todos"}
+

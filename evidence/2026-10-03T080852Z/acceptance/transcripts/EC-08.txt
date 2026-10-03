@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"wildcard\ if-match\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:43 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 196
+Connection: keep-alive
+Location: /api/todos/755d49a5-b86a-49af-a953-5546bb975520
+ETag: "1"
+
+{"id":"755d49a5-b86a-49af-a953-5546bb975520","title":"wildcard if-match","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T08:10:43.035Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/755d49a5-b86a-49af-a953-5546bb975520 -H Content-Type:\ application/json --data-binary \{\"title\":\"x\"\} -H If-Match:\ \*
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 08:10:43 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 282
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"If-Match","message":"If-Match must be a single strong ETag such as \"3\""}],"instance":"/api/todos/755d49a5-b86a-49af-a953-5546bb975520"}
+
