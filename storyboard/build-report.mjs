@@ -29,9 +29,10 @@ for (const d of wireframes) {
   copyFileSync(source, join(OUT, 'wireframes', `${d.id.slice(3)}.svg`));
 }
 
-// Escapes a caption/heading for use as an HTML alt attribute (double quote) or a Markdown
-// table cell (pipe) — captions are free text from journeys/*.spec.ts, so either can appear.
-const forAlt = (s) => s.replaceAll('"', '&quot;');
+// Escapes a caption/heading for use as an HTML alt attribute (double quote) and, since the
+// <img> itself sits inside a Markdown table cell, for the pipe too — captions are free text
+// from journeys/*.spec.ts, so any of these characters can appear.
+const forAlt = (s) => s.replaceAll('"', '&quot;').replaceAll('|', '&#124;');
 const forCell = (s) => s.replaceAll('|', '\\|');
 
 const journeys = [...new Set(frames.map((f) => f.journey))];

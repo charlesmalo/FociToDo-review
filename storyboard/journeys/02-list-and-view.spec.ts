@@ -23,8 +23,11 @@ test("list shows an overdue, a future and a completed task; view the overdue tas
   }
 
   await page.goto('/');
+  const tasks = page.getByRole('list', { name: 'Tasks' });
+  const overdueRow = tasks.getByRole('listitem').filter({ hasText: 'List demo: overdue task' });
   await expect(page.getByRole('button', { name: 'List demo: overdue task' })).toBeVisible();
   await expect(page.getByText(`Due ${overdueDate}`)).toBeVisible();
+  await expect(overdueRow.getByText('Overdue', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'List demo: future task' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'List demo: completed task' })).toBeVisible();
   await expect(
@@ -43,6 +46,7 @@ test("list shows an overdue, a future and a completed task; view the overdue tas
   await expect(dialog).toBeVisible();
   await expect(dialog.getByText('List demo: overdue task')).toBeVisible();
   await expect(dialog.getByText('Not completed')).toBeVisible();
+  await expect(dialog.getByText('Overdue', { exact: true })).toBeVisible();
   await frame(
     page,
     'list-and-view',

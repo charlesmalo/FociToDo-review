@@ -2,8 +2,8 @@ import { expect, test } from '@playwright/test';
 import { frame } from '../frame';
 import { createTodo, utcDate } from '../seed';
 
-// Brief: filter (completed / incomplete / overdue, optional) and sort (title, optional).
-test('filters and sorting: the Overdue filter, "no match", and sorting by title', async ({
+// Brief: filter (all / completed / incomplete / overdue) and sort (title, optional).
+test('filters and sorting: every Show value, "no match", and sorting by title', async ({
   page,
   request,
 }) => {
@@ -13,30 +13,65 @@ test('filters and sorting: the Overdue filter, "no match", and sorting by title'
   await createTodo(request, { title: `${prefix}apple`, dueDate: utcDate(20) });
   await createTodo(request, { title: `${prefix}Banana` });
   await createTodo(request, { title: `${prefix}cherry` });
+  const done = await createTodo(request, { title: `${prefix}done` });
+  const completeResponse = await request.post(`/api/todos/${done.id}/complete`);
+  if (!completeResponse.ok()) {
+    throw new Error(`seed: complete failed with ${completeResponse.status()}`);
+  }
 
   await page.goto('/');
-  await expect(page.getByLabel('Show')).toBeVisible();
-  await expect(page.getByLabel('Sort by')).toBeVisible();
-  await expect(page.getByLabel('Order')).toBeVisible();
+  // F-92 regression guard: each control's accessible name is exactly its own label,
+  // never the label plus every option's text (the real-browser-only defect the storyboard's
+  // Playwright/Chromium run found and PR #20 fixed).
+  await expect(page.getByRole('combobox', { name: 'Show', exact: true })).toBeVisible();
+  await expect(page.getByRole('combobox', { name: 'Sort by', exact: true })).toBeVisible();
+  await expect(page.getByRole('combobox', { name: 'Order', exact: true })).toBeVisible();
   await frame(
     page,
     'filter-and-sort',
     1,
-    'The Show, Sort by and Order controls above the list.',
+    'The Show, Sort by and Order controls, each named by its label alone.',
     'ui/filters-and-sorting',
   );
 
   const tasks = page.getByRole('list', { name: 'Tasks' });
 
-  await page.getByLabel('Show').selectOption('Overdue');
-  await expect(page.getByRole('button', { name: `${prefix}overdue-one` })).toBeVisible();
-  await expect(page.getByRole('button', { name: `${prefix}overdue-two` })).toBeVisible();
+  await page.getByLabel('Show').selectOption('Completed');
+  await expect(page.getByRole('button', { name: `${prefix}done` })).toBeVisible();
   await expect(page.getByRole('button', { name: `${prefix}apple` })).toHaveCount(0);
   await frame(
     page,
     'filter-and-sort',
     2,
-    'Show: Overdue lists only the overdue tasks.',
+    'Show: Completed lists only the completed task.',
+    'ui/task-list-with-tasks',
+  );
+
+  await page.getByLabel('Show').selectOption('Incomplete');
+  await expect(page.getByRole('button', { name: `${prefix}overdue-one` })).toBeVisible();
+  await expect(page.getByRole('button', { name: `${prefix}apple` })).toBeVisible();
+  await expect(page.getByRole('button', { name: `${prefix}done` })).toHaveCount(0);
+  await frame(
+    page,
+    'filter-and-sort',
+    3,
+    'Show: Incomplete lists every task not yet completed.',
+    'ui/task-list-with-tasks',
+  );
+
+  await page.getByLabel('Show').selectOption('Overdue');
+  await expect(page.getByRole('button', { name: `${prefix}overdue-one` })).toBeVisible();
+  await expect(page.getByRole('button', { name: `${prefix}overdue-two` })).toBeVisible();
+  await expect(page.getByRole('button', { name: `${prefix}apple` })).toHaveCount(0);
+  // Every row the Overdue filter lists must itself carry the Overdue badge.
+  const overdueRowCount = await tasks.getByRole('listitem').count();
+  expect(overdueRowCount).toBeGreaterThan(0);
+  await expect(tasks.getByText('Overdue', { exact: true })).toHaveCount(overdueRowCount);
+  await frame(
+    page,
+    'filter-and-sort',
+    4,
+    'Show: Overdue lists only the overdue tasks, each carrying the Overdue badge.',
     'ui/task-list-with-tasks',
   );
 
@@ -60,7 +95,7 @@ test('filters and sorting: the Overdue filter, "no match", and sorting by title'
   await frame(
     page,
     'filter-and-sort',
-    3,
+    5,
     'Completing every overdue task leaves none matching Show: Overdue.',
     'ui/task-list-no-match',
   );
@@ -79,13 +114,14 @@ test('filters and sorting: the Overdue filter, "no match", and sorting by title'
     `${prefix}apple`,
     `${prefix}Banana`,
     `${prefix}cherry`,
+    `${prefix}done`,
     `${prefix}overdue-one`,
     `${prefix}overdue-two`,
   ]);
   await frame(
     page,
     'filter-and-sort',
-    4,
+    6,
     'Sort by Title, Ascending orders titles case-insensitively.',
     'ui/task-list-with-tasks',
   );
