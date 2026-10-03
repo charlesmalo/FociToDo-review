@@ -1,0 +1,10 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"year\ zero\"\,\"dueDate\":\"0000-01-01\"\}
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:04:36 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 242
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"dueDate","message":"Due date must be a real date in YYYY-MM-DD format"}],"instance":"/api/todos"}
+

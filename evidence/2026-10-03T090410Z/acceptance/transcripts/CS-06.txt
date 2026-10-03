@@ -1,0 +1,33 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"no\ lost\ update\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:04:36 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 193
+Connection: keep-alive
+Location: /api/todos/7045282d-8a36-4676-a303-de0c7ffe97e3
+ETag: "1"
+
+{"id":"7045282d-8a36-4676-a303-de0c7ffe97e3","title":"no lost update","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T09:04:36.941Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos/7045282d-8a36-4676-a303-de0c7ffe97e3/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:04:36 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 192
+Connection: keep-alive
+ETag: "2"
+
+{"id":"7045282d-8a36-4676-a303-de0c7ffe97e3","title":"no lost update","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T09:04:36.941Z","version":2,"isOverdue":false}
+
+>>> PATCH /api/todos/7045282d-8a36-4676-a303-de0c7ffe97e3 -H Content-Type:\ application/json --data-binary \{\"title\":\"stale\ after\ complete\"\} -H If-Match:\ \"1\"
+HTTP/1.1 412 Precondition Failed
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:04:36 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 259
+Connection: keep-alive
+
+{"type":"/problems/version-conflict","title":"Version conflict","status":412,"detail":"Todo 7045282d-8a36-4676-a303-de0c7ffe97e3 was modified by another request; fetch the latest version and retry","instance":"/api/todos/7045282d-8a36-4676-a303-de0c7ffe97e3"}
+

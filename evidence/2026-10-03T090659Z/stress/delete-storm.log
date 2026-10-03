@@ -1,0 +1,35 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 600     2440.711507/s
+    checks_succeeded...: 100.00% 600 out of 600
+    checks_failed......: 0.00%   0 out of 600
+
+    ✓ DELETE is 204 or 404
+
+    CUSTOM
+    deleted........................: 20     81.35705/s
+
+    HTTP
+    http_req_duration..............: avg=9.74ms  min=816.3µs med=8.54ms max=55.04ms p(90)=11.36ms p(95)=13.19ms
+      { expected_response:true }...: avg=9.74ms  min=816.3µs med=8.54ms max=55.04ms p(90)=11.36ms p(95)=13.19ms
+    http_req_failed................: 0.00%  0 out of 620
+    http_reqs......................: 620    2522.068558/s
+
+    EXECUTION
+    iteration_duration.............: avg=10.11ms min=3.95ms  med=8.7ms  max=55.35ms p(90)=11.42ms p(95)=13.4ms 
+    iterations.....................: 600    2440.711507/s
+
+    NETWORK
+    data_received..................: 229 kB 931 kB/s
+    data_sent......................: 80 kB  324 kB/s
+
+
+

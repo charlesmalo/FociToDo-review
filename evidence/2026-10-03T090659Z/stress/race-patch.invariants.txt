@@ -1,0 +1,3 @@
+PASS all 5 raced todos present (actual 5, expected 5)
+PASS at least one PATCH succeeded (actual true, expected true)
+PASS Σ(version − 1) equals successful PATCHes (no lost or phantom updates) (actual 21480, expected 21480)

@@ -121,7 +121,7 @@ Every expectation the independent acceptance run checks, with where it comes fro
 | RB-10 | api: Conventions | a NUL character (`\u0000`) in title or description → 400 |
 | RB-11 | robustness | odd ids never cause a 5xx: `..%2F..%2Fetc` (normalised by nginx outside /api) serves only the app's own index.html; a 1,000-character id → 4xx problem; `%00` (rejected by nginx's own request-line parser before proxying) → 4xx |
 | RB-12 | spec §5 | an unknown `status` value → 400 |
-| RB-13 | spec §5 | an unknown query key → 400 |
+| RB-13 | api: Conventions | an unknown query key → 400 |
 | RB-14 | robustness | `PUT /api/todos/<id>` (unsupported method) → 4xx problem |
 | RB-15 | openapi: IfMatch | `If-Match: "9999999999"` (beyond the version limit) → 400 |
 | RB-16 | robustness | deeply nested JSON (`{"title":{"a":{"b":…}}}` 50 levels) → 400, never 5xx |
@@ -132,6 +132,6 @@ Every expectation the independent acceptance run checks, with where it comes fro
 
 | ID | Source | Expectation |
 |---|---|---|
-| AD-01 | api: Endpoints | `GET /api/health` → 200 `{"status":"ok","db":"up",…}` |
+| AD-01 | openapi: Health | `GET /api/health` → 200 `{"status":"ok","db":"up",…}` |
 | AD-02 | spec: OpenAPI | `GET /api/openapi.json` → 200 OpenAPI 3.1 document with paths for `/api/todos`, `/api/todos/{id}`, `/api/todos/{id}/complete`, `/api/todos/{id}/incomplete`, `/api/health` |
 | AD-03 | README: Quick start | `GET /api/docs` → 200 HTML (the API explorer) (following redirects) |

@@ -1,0 +1,10 @@
+>>> GET /api/health
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:04:38 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 81
+Connection: keep-alive
+
+{"status":"ok","db":"up","schemaVersion":"1759190400001_create-idempotency-keys"}
+

@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"charset\ patch\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:04:36 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 192
+Connection: keep-alive
+Location: /api/todos/d4b73446-d182-46d9-a3ac-3f062afcddab
+ETag: "1"
+
+{"id":"d4b73446-d182-46d9-a3ac-3f062afcddab","title":"charset patch","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T09:04:36.666Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/d4b73446-d182-46d9-a3ac-3f062afcddab -H Content-Type:\ application/json\;\ charset=latin1 -H If-Match:\ \"1\" --data-binary \{\"title\":\"y\"\}
+HTTP/1.1 415 Unsupported Media Type
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:04:36 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 170
+Connection: keep-alive
+
+{"type":"/problems/bad-request","title":"Bad request","status":415,"detail":"unsupported charset \"LATIN1\"","instance":"/api/todos/d4b73446-d182-46d9-a3ac-3f062afcddab"}
+

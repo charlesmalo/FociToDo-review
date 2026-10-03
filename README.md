@@ -5,25 +5,27 @@ Independent quality assurance for [FociToDo](https://github.com/charlesmalo/Foci
 | Folder | Contents |
 |---|---|
 | `traceability/` | Every requirement → implementing code → verifying tests → status |
-| `reviews/` | One review per app PR (#1–#17): automated review output + solution-lead triage |
+| `reviews/` | One review per app PR (#1–#20): automated review output + solution-lead triage |
 | `findings/log.md` | Every finding with severity, decision and the commit that resolved it |
-| `checklists/` | Milestone-review and release-readiness checklists, plus filled release-readiness copies (latest: `41a279a`) |
-| `evidence/<date>/` | Raw outputs: test and coverage summaries, e2e report, k6 results, scans, timings |
+| `checklists/` | Milestone-review and release-readiness checklists, plus filled release-readiness copies (latest: `5c43da9`) |
+| `evidence/<date>/` | Raw outputs: test and coverage summaries, e2e report, k6 results, scans, acceptance results, storyboard frames, timings |
 | `signoff.md` | One-page release recommendation |
 
 ## Release sign-off
 
-**[signoff.md](signoff.md)** — FociToDo @ `41a279a`, recommendation: Ready with noted risks (upstream `postgres:17.11-alpine` `gosu` CVEs, F-64/F-65).
+**[signoff.md](signoff.md)** — FociToDo @ `5c43da9`, recommendation: Ready with noted risks (upstream `postgres:17.11-alpine` `gosu` CVEs, F-64/F-65; upstream `nginx-unprivileged:1.31-alpine` `pcre2` CVE, F-98).
 
-Latest evidence (release candidate `41a279aeb13ed7aa677fa8248db7b33f9bcf98c7`, the commit after PR #16 "remove the `/dev` developer portal" and PR #17 "diagram images and README diagram map"; each `summary.md` records the SHA it ran against):
-- Verify: [`evidence/2026-10-02T102541Z/`](evidence/2026-10-02T102541Z/)
-- Stress: [`evidence/2026-10-02T102716Z/stress/`](evidence/2026-10-02T102716Z/stress/)
-- Scans: [`evidence/2026-10-02T103040Z/scans/`](evidence/2026-10-02T103040Z/scans/)
-- Release readiness: [`checklists/release-readiness-41a279a.md`](checklists/release-readiness-41a279a.md)
+Latest evidence (release candidate `5c43da9c1490a28e17daf8842e0e01958b737ad1`, the commit after PR #18 "UI wireframes", PR #19 "fix: nginx re-resolves the api" and PR #20 "fix: filter labels"; each `summary.md`/`results.md` records the SHA it ran against):
+- Independent acceptance (black-box curl checks against every expectation): [`evidence/2026-10-03T090410Z/acceptance/`](evidence/2026-10-03T090410Z/acceptance/) — 99/99 PASS
+- Storyboard (every UI journey as captioned screenshots beside its wireframe): [`evidence/2026-10-03T090448Z/storyboard/`](evidence/2026-10-03T090448Z/storyboard/) — 22 frames, 11 journeys, 13/13 wireframes paired
+- Verify: [`evidence/2026-10-03T090528Z/`](evidence/2026-10-03T090528Z/)
+- Stress: [`evidence/2026-10-03T090659Z/stress/`](evidence/2026-10-03T090659Z/stress/)
+- Scans: [`evidence/2026-10-03T091041Z/scans/`](evidence/2026-10-03T091041Z/scans/)
+- Release readiness: [`checklists/release-readiness-5c43da9.md`](checklists/release-readiness-5c43da9.md)
 
-Older `evidence/` directories are kept as history, including the de70329 release-candidate evidence superseded by the above.
+Older `evidence/` directories are kept as history, including the de70329 and 41a279a release-candidate evidence superseded by the above.
 
-`main` is now `41a279a`: PR #16 removed the in-app `/dev` developer portal (ADR 0015 — GitHub already renders the same Markdown and Mermaid), and PR #17 added generated, gate- and CI-verified diagram images with a README map. The e2e suite drops to 8/8 because the portal's own journey was removed with it; diagram validity is now proven by the test gate (`packages/diagrams`) and the CI `diagrams` job instead. See [`signoff.md`](signoff.md) for the full picture and [`reviews/PR-16-remove-dev-portal.md`](reviews/PR-16-remove-dev-portal.md) / [`reviews/PR-17-diagram-images.md`](reviews/PR-17-diagram-images.md) for the per-PR review notes. The de70329 sign-off (and PR #15's post-sign-off note) are kept as history in [`signoff.md`](signoff.md#earlier-sign-off--focitodo--de70329).
+`main` is now `5c43da9`. PR #18 added UI wireframes (`docs/ui.md`, 13 screen states) plus the spec and plans for this cycle's two new harnesses. Those harnesses — **independent acceptance** (black-box HTTP checks of every documented expectation) and **storyboard** (every UI journey as captioned screenshots beside its wireframe) — then found two real app defects in already-merged code, each fixed through its own PR and re-verified: PR #19 fixed a persistence/availability bug (nginx cached a stale upstream IP for `api` after a restart, so the proxy 502'd forever — found by acceptance's `BR-20`), and PR #20 fixed a filter-control accessibility bug (each `<select>`'s accessible name included every one of its options, a real-browser-only defect jsdom's own tests couldn't reproduce — found by the storyboard's Playwright/Chromium run). See [`signoff.md`](signoff.md) for the full picture and [`reviews/PR-18-ui-wireframes.md`](reviews/PR-18-ui-wireframes.md) / [`reviews/PR-19-nginx-reresolve-api.md`](reviews/PR-19-nginx-reresolve-api.md) / [`reviews/PR-20-filter-labels.md`](reviews/PR-20-filter-labels.md) for the per-PR review notes. The de70329 and 41a279a sign-offs are kept as history in [`signoff.md`](signoff.md#earlier-sign-off--focitodo--41a279a).
 
 ## Running the checks
 
