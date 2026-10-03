@@ -1,0 +1,23 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"Survives\ a\ restart\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:40:44 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 197
+Connection: keep-alive
+Location: /api/todos/8d724030-6139-49fb-8f96-c2b5be926019
+ETag: "1"
+
+{"id":"8d724030-6139-49fb-8f96-c2b5be926019","title":"Survives a restart","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T09:40:44.793Z","version":1,"isOverdue":false}
+
+>>> GET /api/todos/8d724030-6139-49fb-8f96-c2b5be926019
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:40:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 197
+Connection: keep-alive
+ETag: "1"
+
+{"id":"8d724030-6139-49fb-8f96-c2b5be926019","title":"Survives a restart","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T09:40:44.793Z","version":1,"isOverdue":false}
+

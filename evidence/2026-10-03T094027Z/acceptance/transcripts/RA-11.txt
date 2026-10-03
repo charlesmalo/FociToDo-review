@@ -1,0 +1,34 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"patch\ key\ ignored\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:40:52 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 196
+Connection: keep-alive
+Location: /api/todos/2838d824-55bc-4158-b4bc-b43a1883b6a4
+ETag: "1"
+
+{"id":"2838d824-55bc-4158-b4bc-b43a1883b6a4","title":"patch key ignored","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T09:40:52.548Z","version":1,"isOverdue":false}
+
+>>> PATCH /api/todos/2838d824-55bc-4158-b4bc-b43a1883b6a4 -H Content-Type:\ application/json --data-binary \{\"title\":\"first\ patch\"\} -H If-Match:\ \"1\" -H Idempotency-Key:\ acc-124457b560240d4a
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:40:52 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 190
+Connection: keep-alive
+ETag: "2"
+
+{"id":"2838d824-55bc-4158-b4bc-b43a1883b6a4","title":"first patch","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T09:40:52.548Z","version":2,"isOverdue":false}
+
+>>> PATCH /api/todos/2838d824-55bc-4158-b4bc-b43a1883b6a4 -H Content-Type:\ application/json --data-binary \{\"title\":\"second\ patch\"\} -H If-Match:\ \"2\" -H Idempotency-Key:\ acc-124457b560240d4a
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 09:40:52 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 191
+Connection: keep-alive
+ETag: "3"
+
+{"id":"2838d824-55bc-4158-b4bc-b43a1883b6a4","title":"second patch","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T09:40:52.548Z","version":3,"isOverdue":false}
+

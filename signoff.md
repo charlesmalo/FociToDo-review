@@ -1,24 +1,25 @@
-# Release sign-off — FociToDo @ 5c43da9
+# Release sign-off — FociToDo @ 153d719
 
-**Date:** 2026-10-03 · commit `5c43da9c1490a28e17daf8842e0e01958b737ad1` (PR #20's merge, the commit after PR #18 "UI wireframes for every screen state", PR #19 "fix: re-resolve the api so the proxy survives an api restart" and PR #20 "fix: name each filter control by its label alone")
+**Date:** 2026-10-03 · commit `153d7193d8170d1f8658ab4a047fcc34a7b6c711` (PR #21's merge, the commit after PR #18 "UI wireframes for every screen state", PR #19 "fix: re-resolve the api so the proxy survives an api restart", PR #20 "fix: name each filter control by its label alone" and PR #21 "fix: patch pcre2 in the web image (CVE-2026-103111)")
 
 **Recommendation:** Ready with noted risks
 
 Noted risks:
 - F-64/F-65 — the unmodified upstream `postgres:17.11-alpine` image ships `gosu` with Go-stdlib CVEs (1 CRITICAL, 21 HIGH), unchanged since the de70329 sign-off. No patched tag is published yet (the floating `postgres:17-alpine` has the same digest), and `gosu` runs once at container start to drop root. Remediation: bump the pin when a patched tag ships.
-- F-98 (new this cycle) — the unmodified upstream `nginxinc/nginx-unprivileged:1.31-alpine` image's Alpine 3.24.2 base now carries one HIGH `pcre2` CVE (CVE-2026-103111, out-of-bounds write via a crafted regular expression), not present at the `41a279a` sign-off's scan of the same floating tag. `apps/web/nginx.conf` defines no regex `location` blocks, so this app's own routing never drives PCRE on untrusted input. Remediation: rebuild once the tag republishes with the patched Alpine package, or pin to a digest that already has it.
 
-This sign-off is the first to run the review repository's new **independent acceptance** and **storyboard** harnesses (built in this cycle) against the app, in addition to the existing `verify`/`stress`/`scans`. Both found one real app defect each — see "Independent acceptance and storyboard found two real defects" below — each fixed through its own app PR, then this entire evidence set was re-run on the fixed `main`.
+The upstream `nginx-unprivileged` `pcre2` HIGH CVE noted at the `5c43da9` sign-off (F-98) is **fixed**, not merely accepted — see "Independent acceptance and storyboard found three real app defects, all fixed" below.
+
+This sign-off folds the `5c43da9` sign-off into this one (the only change since is a one-layer Dockerfile security patch, PR #21) rather than keeping it as a separate history section, per the controller's choice; every evidence link from the `5c43da9` sign-off is preserved below, either re-run fresh at `153d719` or, for `stress` (not re-run this round — see Quality snapshot), cited at its original `5c43da9` path. This sign-off is still the first to run the review repository's new **independent acceptance** and **storyboard** harnesses (built in the `5c43da9` cycle) against the app, in addition to the existing `verify`/`stress`/`scans`.
 
 ## Scope delivered vs requested
 
 | Requirement | Delivered |
 |---|---|
 | Functional: add / list / view / update / complete / incomplete / delete a to-do, filter, sort (FR-1–FR-9) | All 9 Done — [traceability/matrix.md](traceability/matrix.md); independently re-proven black-box by this review's acceptance catalogue (BR-01..BR-21) and storyboard (11 journeys) |
-| Functional: in-app developer docs (FR-10) | **Removed** by design — [ADR 0015](https://github.com/charlesmalo/FociToDo/blob/5c43da9c1490a28e17daf8842e0e01958b737ad1/docs/decisions/0015-docs-and-diagrams-in-the-repository.md), PR #16 |
+| Functional: in-app developer docs (FR-10) | **Removed** by design — [ADR 0015](https://github.com/charlesmalo/FociToDo/blob/153d7193d8170d1f8658ab4a047fcc34a7b6c711/docs/decisions/0015-docs-and-diagrams-in-the-repository.md), PR #16 |
 | Data rules: id, title, description, dueDate, isCompleted, createdAt, version, isOverdue (DR-1–DR-8) | All 8 Done — [traceability/matrix.md](traceability/matrix.md); independently re-proven black-box by DR-01..DR-19 |
 | Non-functional: Docker-only setup, TypeScript/Node 24, Postgres persistence, ports + two adapters, concurrency guarantees, strict validation + problem details, 100% coverage, lint-enforced layers, multi-stage/non-root/prod-only images, docs + Mermaid, OpenAPI from Zod (NFR-0–NFR-10) | All 11 Done — [traceability/matrix.md](traceability/matrix.md) |
-| New: every diagram has a committed, current image and a README map entry (DOC-1) | Done — PR #17; 32 diagrams total as of this cycle (19 + 13 UI wireframes added by PR #18) |
+| New: every diagram has a committed, current image and a README map entry (DOC-1) | Done — PR #17; 32 diagrams total (19 + 13 UI wireframes added by PR #18) |
 | New: every screen state of the single-page UI is documented as a wireframe (DOC-2) | Done — PR #18 (merged `aeaa602`); independently matched against the running app by this review's storyboard — 13/13 wireframes paired with 22 real screenshots across 11 journeys, which also found and led to the fix of a real UI accessibility defect this way (F-92, PR #20) |
 | Delivery: public app repo, README (build/run/tests/design/assumptions/trade-offs), curated PR history, public review repo, CI running the README's own Docker commands (D-1–D-9) | All 9 Done — [traceability/matrix.md](traceability/matrix.md) |
 
@@ -26,70 +27,72 @@ This sign-off is the first to run the review repository's new **independent acce
 
 ## Quality snapshot
 
-Every number below is read from the final evidence runs on `5c43da9` (see Evidence); each run's `summary.md`/`results.md` records the checked-out SHA.
+Every number below is read from the final evidence runs on `153d719` (see Evidence), except stress — see its own bullet. Each run's `summary.md`/`results.md` records the checked-out SHA.
 
-- **Independent acceptance** (new this cycle): 99/99 PASS, 0 FAIL — [`evidence/2026-10-03T090410Z/acceptance/`](evidence/2026-10-03T090410Z/acceptance/). By section: Brief actions (BR) 21, Data rules (DR) 19, Error contract (EC) 17, Concurrency surface (CS) 7, README assumptions (RA) 14, Robustness (RB) 18, API documentation and health (AD) 3 — 99 total. By source: brief 21, spec 22, api guide 24, openapi 3, README assumption 15, robustness 14 — 99 total.
-- **Storyboard** (new this cycle): 22 captioned frames across 11 journeys (add, list-and-view, edit, complete, filter-and-sort, validation, conflict, deleted-elsewhere, delete, reload, loading-and-error); all 13 `docs/ui.md` wireframes paired with at least one frame — [`evidence/2026-10-03T090448Z/storyboard/storyboard.md`](evidence/2026-10-03T090448Z/storyboard/storyboard.md).
+- **Independent acceptance**: 99/99 PASS, 0 FAIL — [`evidence/2026-10-03T094027Z/acceptance/`](evidence/2026-10-03T094027Z/acceptance/). By section: Brief actions (BR) 21, Data rules (DR) 19, Error contract (EC) 17, Concurrency surface (CS) 7, README assumptions (RA) 14, Robustness (RB) 18, API documentation and health (AD) 3 — 99 total. By source: brief 21, spec 22, api guide 24, openapi 3, README assumption 15, robustness 14 — 99 total.
+- **Storyboard**: 22 captioned frames across 11 journeys (add, list-and-view, edit, complete, filter-and-sort, validation, conflict, deleted-elsewhere, delete, reload, loading-and-error); all 13 `docs/ui.md` wireframes paired with at least one frame — [`evidence/2026-10-03T094100Z/storyboard/storyboard.md`](evidence/2026-10-03T094100Z/storyboard/storyboard.md).
 - Test gate: PASS — 59 test files, 459 tests; coverage 100/100/100/100 (statements 827/827, branches 386/386, functions 273/273, lines 736/736)
-- End-to-end: 8/8 journeys (unchanged in scope from the `41a279a` sign-off)
-- Concurrency stress: 5/5 scenarios PASS, 13/13 invariants hold (race-patch, parallel-complete, delete-storm, idempotent-replay, mixed-load); 0 failed requests out of 545,176 (`http_req_failed` 0.00% in every scenario's k6 log); p95 list latency (`GET /todos` under mixed load) 9.80 ms
-- Images: 0 HIGH/CRITICAL vulnerabilities on `api` (Trivy, `--ignore-unfixed`); 1 new HIGH on `web` (F-98, unmodified upstream Alpine base, see Noted risks); 0 `npm audit --omit=dev --audit-level=high` findings. The unmodified upstream `postgres:17.11-alpine` image still has 22 Go stdlib CVEs (1 CRITICAL, 21 HIGH) in its `gosu` binary, unchanged — accepted, see F-64/F-65. 3 Hadolint findings accepted as style-only, unchanged (DL3066 ×1, DL3025 ×2; the Dockerfile was not touched by PR #18–#20)
-- Clean-clone rebuild → healthy: 26 s (arm64; base images and npm cache warm) — local, Colima. Not a cold-machine time; the README quick start was not run on a clean machine (the one unchecked box in the [release-readiness checklist](checklists/release-readiness-5c43da9.md)), unchanged from earlier sign-offs. CI on `main` at `5c43da9` is green on fresh `ubuntu-latest` runners, all 4 jobs (test, images, diagrams, e2e) — run [37111402420](https://github.com/charlesmalo/FociToDo/actions/runs/37111402420)
+- End-to-end: 8/8 journeys (unchanged in scope since the `41a279a` sign-off)
+- Concurrency stress: **not re-run this round** — only change since `5c43da9` is PR #21's one-layer `web`-image package patch (`apk upgrade pcre2` plus a build-time version check), which cannot alter API/Postgres concurrency behaviour (no API, service, repository or nginx-routing code touched). The `5c43da9` stress evidence stands: 5/5 scenarios PASS, 13/13 invariants hold (race-patch, parallel-complete, delete-storm, idempotent-replay, mixed-load); 0 failed requests out of 545,176 (`http_req_failed` 0.00% in every scenario's k6 log); p95 list latency (`GET /todos` under mixed load) 9.80 ms — [`evidence/2026-10-03T090659Z/stress/`](evidence/2026-10-03T090659Z/stress/)
+- Images: 0 HIGH/CRITICAL vulnerabilities on **both** `api` and `web` now (Trivy, `--ignore-unfixed` — F-98's `pcre2` CVE fixed by PR #21); 0 `npm audit --omit=dev --audit-level=high` findings. The unmodified upstream `postgres:17.11-alpine` image still has 22 Go stdlib CVEs (1 CRITICAL, 21 HIGH) in its `gosu` binary, unchanged — accepted, see F-64/F-65. Hadolint now reports 5 findings (was 3): the 3 pre-existing style findings unchanged (DL3066 ×1, DL3025 ×2), plus 2 new ones introduced by PR #21's pcre2-patch layer (DL3066 on its temporary `USER root`, DL4006 on its pipe) — both accepted as style-only, no functional impact (F-99, F-100)
+- Clean-clone rebuild → healthy: 27 s (arm64; base images and npm cache warm) — local, Colima. Not a cold-machine time; the README quick start was not run on a clean machine (the one unchecked box in the [release-readiness checklist](checklists/release-readiness-153d719.md)), unchanged from earlier sign-offs. CI on `main` at `153d719` is green on fresh `ubuntu-latest` runners, all 4 jobs (test, images, diagrams, e2e) — run [37113543211](https://github.com/charlesmalo/FociToDo/actions/runs/37113543211)
 
-Release readiness: [`checklists/release-readiness-5c43da9.md`](checklists/release-readiness-5c43da9.md) — 7 of 8 boxes checked, each with its evidence; the clean-machine box is left unchecked and explained, unchanged from earlier sign-offs.
+Release readiness: [`checklists/release-readiness-153d719.md`](checklists/release-readiness-153d719.md) — 7 of 8 boxes checked, each with its evidence; the clean-machine box is left unchecked and explained, unchanged from earlier sign-offs.
 
-## Independent acceptance and storyboard found two real app defects, both fixed
+## Independent acceptance and storyboard found three real app defects, all fixed
 
-- **BR-20 — persistence across an api+db restart** (found by this review's acceptance harness against `41a279a`): `apps/web/nginx.conf`'s `upstream api_upstream { server api:3000; }` resolved `api` once at nginx startup; after the `api` container restarted on a new Docker-network IP, nginx kept proxying to the stale address and every `/api/*` request 502'd forever, with no self-recovery. **Fixed in PR #19** (merged `3b76cfa`): `resolver 127.0.0.11 valid=10s ipv6=off;` plus `zone api_upstream 64k;` / `server api:3000 resolve;`, keeping PR #13's keepalive pool intact. PR #19's own verification: recovery ≤ 11 s, 2,000/2,000 keepalive requests 200. Re-confirmed by this sign-off's own acceptance run at `5c43da9`: 99/99 PASS including BR-20 — see F-91.
-- **Filter-control accessible names** (found by this review's storyboard, Playwright driving real Chromium — not reproducible in jsdom's accessible-name library): each `<select>` in `TodoFilters.tsx` was nested inside its `<label>`, so the browser computed the control's accessible name from the label's entire text content including every option — the "Sort by" control was announced as `"Sort by Created Due date Title"`. **Fixed in PR #20** (merged `5c43da9`): `<label htmlFor={id}>`/`<select id={id}>` via `useId()`, plus a structural regression test (since jsdom cannot reproduce the browser behaviour that found this). Re-confirmed by this sign-off's own storyboard run at `5c43da9`: the filter-and-sort journey's frames screenshot the fixed controls — see F-92.
+- **BR-20 — persistence across an api+db restart** (found by this review's acceptance harness against `41a279a`): `apps/web/nginx.conf`'s `upstream api_upstream { server api:3000; }` resolved `api` once at nginx startup; after the `api` container restarted on a new Docker-network IP, nginx kept proxying to the stale address and every `/api/*` request 502'd forever, with no self-recovery. **Fixed in PR #19** (merged `3b76cfa`): `resolver 127.0.0.11 valid=10s ipv6=off;` plus `zone api_upstream 64k;` / `server api:3000 resolve;`, keeping PR #13's keepalive pool intact. Re-confirmed by this sign-off's own acceptance run at `153d719`: 99/99 PASS including BR-20 — see F-91.
+- **Filter-control accessible names** (found by this review's storyboard, Playwright driving real Chromium — not reproducible in jsdom's accessible-name library): each `<select>` in `TodoFilters.tsx` was nested inside its `<label>`, so the browser computed the control's accessible name from the label's entire text content including every option — the "Sort by" control was announced as `"Sort by Created Due date Title"`. **Fixed in PR #20** (merged `5c43da9`): `<label htmlFor={id}>`/`<select id={id}>` via `useId()`, plus a structural regression test. Re-confirmed by this sign-off's own storyboard run at `153d719`: the filter-and-sort journey's frames screenshot the fixed controls — see F-92.
+- **`pcre2` HIGH CVE in the `web` base image** (found by this review's scans run against `5c43da9`): the unmodified upstream `nginxinc/nginx-unprivileged:1.31-alpine` image's Alpine base shipped `pcre2 10.48-r0`, with a fix (10.49-r0) already published by Alpine. **Fixed in PR #21** (merged `153d719`): `apk upgrade --no-cache pcre2` plus a positive, RED-proven version-floor check (`apk list -I`, not the vacuous `apk info -v` an earlier draft used) that fails the build unless pcre2 ≥ 10.49 is actually installed. Re-confirmed by this sign-off's own scans run at `153d719`: Trivy `review-scan-web` 0 HIGH/CRITICAL — see F-98.
 
 ## Findings
 
-By severity (98 findings, F-1..F-98): Critical 2 · High 6 · Important 14 · Medium 3 · Minor 22 · Low 51.
+By severity (100 findings, F-1..F-100): Critical 2 · High 6 · Important 14 · Medium 3 · Minor 22 · Low 53.
 
-By decision: Fix 41 · Accept 55 · Reject 2 (F-17 "not reproducible"; F-95 "expectation corrected", see below).
+By decision: Fix 42 · Accept 57 · Reject 1 (F-17 "not reproducible" — the only Reject; see below for why F-95 moved out of Reject).
 
-**Open items: none.** All 20 app PRs (#1–#20) are merged to `main` (confirmed: `git log --merges main` shows 20 `Merge pull request` commits, #1 through #20, the last being `5c43da9`); app CI is green on `main` at `5c43da9` (run 37111402420, 4/4 jobs). 8 new findings this cycle (F-91..F-98, continuing after the `41a279a` sign-off's F-90):
+**Open items: none.** All 21 app PRs (#1–#21) are merged to `main`; app CI is green on `main` at `153d719` (run 37113543211, 4/4 jobs). 10 new findings since the `41a279a` sign-off's F-90 (F-91..F-100):
 - F-91 (High, availability) — BR-20, the nginx stale-upstream persistence defect above. Fix, PR #19 (merged `3b76cfa`).
 - F-92 (Medium, accessibility) — the storyboard filter-label defect above. Fix, PR #20 (merged `5c43da9`).
 - F-93, F-94 (Minor, contract) — RB-11's catalogue wording corrected to describe the actual, safe behaviour of two odd-id probes (nginx's own SPA-fallback normalisation; nginx's own request-line rejection of a raw NUL) instead of a blanket 4xx. Accept, Rulings R46/R48, this repository's commit `f921d31`.
-- F-95 (Minor, contract) — AD-03's catalogue wording corrected from an unconditional 200 to "(following redirects)", matching Swagger UI's standard trailing-slash redirect. Reject (not an app defect; the original expectation was wrong), Ruling R47, this repository's commit `f921d31`.
+- F-95 (Minor, contract) — AD-03's catalogue wording corrected from an unconditional 200 to "(following redirects)", matching Swagger UI's standard trailing-slash redirect. **Accept** (Ruling R51, this fix round — changed from the earlier Reject for consistency with F-93/F-94: app behaviour correct, catalogue expectation corrected; Reject stays reserved for findings that don't reproduce, e.g. F-17), Ruling R47 (the original correction), this repository's commit `f921d31`.
 - F-96 (Important, tests) — `scripts/acceptance.sh` now tears down a stale `review-acceptance` stack before starting. Fix, this repository's commit `8a70e4b`.
 - F-97 (Important, docs) — the design spec's §2 and the plan's Global Constraints section, reconciled to name the identical allowed-sources list. Fix, PR #18 (merged `aeaa602`), Ruling R44.
-- F-98 (High, security) — the new `web`-image upstream `pcre2` CVE, see Noted risks above. Accept.
+- F-98 (High, security) — the `web`-image upstream `pcre2` CVE above. **Fix this fix round** (Ruling R50: fixable, so fixed in the app) — PR #21 (merged `153d719`); was Accept at the `5c43da9` sign-off.
+- F-99, F-100 (Low, security) — two new Hadolint style findings on PR #21's own pcre2-patch layer (`USER root`; a pipe without `pipefail`). Accept, no functional impact, this fix round.
 
-Every `Accept`/`Reject` row records where it was decided and its reason is in the row or in that PR's triage table under [`reviews/`](reviews/), including the new [`reviews/PR-18-ui-wireframes.md`](reviews/PR-18-ui-wireframes.md), [`reviews/PR-19-nginx-reresolve-api.md`](reviews/PR-19-nginx-reresolve-api.md) and [`reviews/PR-20-filter-labels.md`](reviews/PR-20-filter-labels.md). All findings carried forward from the `41a279a` sign-off (F-1..F-90) are unchanged; see the earlier sign-off below for their detail.
+Every `Accept`/`Reject` row records where it was decided and its reason is in the row or in that PR's triage table under [`reviews/`](reviews/), including [`reviews/PR-18-ui-wireframes.md`](reviews/PR-18-ui-wireframes.md), [`reviews/PR-19-nginx-reresolve-api.md`](reviews/PR-19-nginx-reresolve-api.md), [`reviews/PR-20-filter-labels.md`](reviews/PR-20-filter-labels.md) and the new [`reviews/PR-21-web-pcre2.md`](reviews/PR-21-web-pcre2.md). All findings carried forward from the `41a279a` sign-off (F-1..F-90) are unchanged; see the earlier sign-off below for their detail.
 
 ## Accepted risks and trade-offs
 
 - The pinned upstream `postgres:17.11-alpine` image ships `gosu` built with Go 1.24.6, flagged with 1 CRITICAL and 21 HIGH Go stdlib CVEs (F-64/F-65), unchanged since the de70329 sign-off. Accepted: the image is the unmodified official one, no patched `postgres:17` Alpine tag exists yet, and `gosu` only runs once at container start to drop root — it handles no TLS, network, URL or XML input, and `db` publishes no port. Remediation: bump the pin when a patched tag ships.
-- The pinned upstream `nginxinc/nginx-unprivileged:1.31-alpine` image's Alpine base newly carries one HIGH `pcre2` CVE (F-98), first seen at this sign-off. Accepted: unmodified official tag, and this app's own nginx config exercises no regex `location` matching on untrusted input. Remediation: rebuild/re-pin once the tag republishes with the patched package.
 - Two odd-id robustness probes (RB-11) don't return a uniform problem-details 4xx — one is nginx's own safe SPA-fallback normalisation (200, serving `index.html`, outside `/api`), the other is nginx's own request-line rejection of a raw NUL (its stock HTML error page, the request never reaching the app) — both accepted as safe, documented behaviour rather than app defects (F-93/F-94, Rulings R46/R48).
-- `GET /api/docs` 301-redirects to `/api/docs/` before the 200 HTML response (AD-03) — standard Swagger UI static-directory behaviour, not an app defect; the original catalogue expectation (an unconditional 200) was itself wrong and has been corrected (F-95, Ruling R47).
+- `GET /api/docs` 301-redirects to `/api/docs/` before the 200 HTML response (AD-03) — standard Swagger UI static-directory behaviour, not an app defect; the original catalogue expectation (an unconditional 200) was itself wrong and has been corrected (F-95, Accept per Ruling R51).
+- Two Hadolint style findings on PR #21's pcre2-patch layer (F-99, F-100) — a temporary `USER root` and a pipe without `pipefail`, both intentional/harmless as explained above.
 - All risks and trade-offs carried forward from the `41a279a` sign-off (the `/dev` portal removal, the spec's cross-arch diagram contingency, delete-on-404 dialog behaviour, the scoped create-idempotency key, the wasted background delete fetch, the duplicated `0000-13-01` validation message, the `e2e` stage's `npm install`, 3 Hadolint style findings, no clean-machine timing run, and the architectural trade-off ADRs) are unchanged — see the earlier sign-off below.
 
 ## Evidence
 
-Final runs on `5c43da9`, all with the current harness (`docker compose run --rm --build -e APP_REF=5c43da9c1490a28e17daf8842e0e01958b737ad1 acceptance|storyboard|verify|stress|scans`):
+Final runs on `153d719` (`docker compose run --rm --build -e APP_REF=153d7193d8170d1f8658ab4a047fcc34a7b6c711 acceptance|storyboard|verify|scans`; `stress` not re-run, see Quality snapshot):
 
-- Independent acceptance (black-box curl checks, new this cycle): [`evidence/2026-10-03T090410Z/acceptance/`](evidence/2026-10-03T090410Z/acceptance/) — 99/99 PASS
-- Storyboard (captioned screenshots beside wireframes, new this cycle): [`evidence/2026-10-03T090448Z/storyboard/`](evidence/2026-10-03T090448Z/storyboard/) — 22 frames, 11 journeys, 13/13 wireframes paired
-- Verify (clean clone → `--no-cache` rebuild → test gate → e2e): [`evidence/2026-10-03T090528Z/`](evidence/2026-10-03T090528Z/)
-- Stress (k6 scenarios + invariant checks): [`evidence/2026-10-03T090659Z/stress/`](evidence/2026-10-03T090659Z/stress/)
-- Scans (Trivy on `api`, `web` and `postgres:17.11-alpine`; Hadolint; npm audit): [`evidence/2026-10-03T091041Z/scans/`](evidence/2026-10-03T091041Z/scans/)
-- Release readiness: [`checklists/release-readiness-5c43da9.md`](checklists/release-readiness-5c43da9.md)
-- App CI run on `5c43da9` (test, images, diagrams, e2e — all four jobs green): https://github.com/charlesmalo/FociToDo/actions/runs/37111402420
-- Review notes: [`reviews/PR-18-ui-wireframes.md`](reviews/PR-18-ui-wireframes.md), [`reviews/PR-19-nginx-reresolve-api.md`](reviews/PR-19-nginx-reresolve-api.md), [`reviews/PR-20-filter-labels.md`](reviews/PR-20-filter-labels.md)
+- Independent acceptance (black-box curl checks): [`evidence/2026-10-03T094027Z/acceptance/`](evidence/2026-10-03T094027Z/acceptance/) — 99/99 PASS
+- Storyboard (captioned screenshots beside wireframes): [`evidence/2026-10-03T094100Z/storyboard/`](evidence/2026-10-03T094100Z/storyboard/) — 22 frames, 11 journeys, 13/13 wireframes paired
+- Verify (clean clone → `--no-cache` rebuild → test gate → e2e): [`evidence/2026-10-03T093902Z/`](evidence/2026-10-03T093902Z/)
+- Scans (Trivy on `api`, `web` and `postgres:17.11-alpine`; Hadolint; npm audit): [`evidence/2026-10-03T093820Z/scans/`](evidence/2026-10-03T093820Z/scans/)
+- Stress (k6 scenarios + invariant checks, from the `5c43da9` cycle — still valid, see Quality snapshot): [`evidence/2026-10-03T090659Z/stress/`](evidence/2026-10-03T090659Z/stress/)
+- Release readiness: [`checklists/release-readiness-153d719.md`](checklists/release-readiness-153d719.md)
+- App CI run on `153d719` (test, images, diagrams, e2e — all four jobs green): https://github.com/charlesmalo/FociToDo/actions/runs/37113543211
+- Review notes: [`reviews/PR-18-ui-wireframes.md`](reviews/PR-18-ui-wireframes.md), [`reviews/PR-19-nginx-reresolve-api.md`](reviews/PR-19-nginx-reresolve-api.md), [`reviews/PR-20-filter-labels.md`](reviews/PR-20-filter-labels.md), [`reviews/PR-21-web-pcre2.md`](reviews/PR-21-web-pcre2.md)
 - Full traceability: [`traceability/matrix.md`](traceability/matrix.md)
 - Full findings log: [`findings/log.md`](findings/log.md)
 
-Earlier evidence directories stay committed as history; this sign-off cites only the five evidence directories above for the `5c43da9` numbers.
+The `5c43da9` sign-off's own acceptance/storyboard/verify/scans evidence (`evidence/2026-10-03T090410Z/acceptance/`, `evidence/2026-10-03T090448Z/storyboard/`, `evidence/2026-10-03T090528Z/`, `evidence/2026-10-03T091041Z/scans/`) stays committed as history, superseded by the `153d719` runs above for every number except stress (unchanged, cited directly above). Earlier evidence directories (41a279a, de70329 and before) also stay committed as history.
 
 ---
 
 # Earlier sign-off — FociToDo @ 41a279a
 
-Kept as history. At the time this was written, `41a279a` was the release candidate (PR #17's merge); `main` subsequently gained PR #18 (UI wireframes), PR #19 (fix: nginx re-resolves the api) and PR #20 (fix: filter labels) — see the `5c43da9` sign-off above, which supersedes the recommendation below.
+Kept as history. At the time this was written, `41a279a` was the release candidate (PR #17's merge); `main` subsequently gained PR #18 (UI wireframes), PR #19 (fix: nginx re-resolves the api), PR #20 (fix: filter labels) and PR #21 (fix: pcre2 in the web image) — see the `153d719` sign-off above (which folds in the intermediate `5c43da9` sign-off), superseding the recommendation below.
 
 **Recommendation:** Ready with noted risks
 

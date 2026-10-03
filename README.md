@@ -5,27 +5,27 @@ Independent quality assurance for [FociToDo](https://github.com/charlesmalo/Foci
 | Folder | Contents |
 |---|---|
 | `traceability/` | Every requirement → implementing code → verifying tests → status |
-| `reviews/` | One review per app PR (#1–#20): automated review output + solution-lead triage |
+| `reviews/` | One review per app PR (#1–#21): automated review output + solution-lead triage |
 | `findings/log.md` | Every finding with severity, decision and the commit that resolved it |
-| `checklists/` | Milestone-review and release-readiness checklists, plus filled release-readiness copies (latest: `5c43da9`) |
+| `checklists/` | Milestone-review and release-readiness checklists, plus filled release-readiness copies (latest: `153d719`) |
 | `evidence/<date>/` | Raw outputs: test and coverage summaries, e2e report, k6 results, scans, acceptance results, storyboard frames, timings |
 | `signoff.md` | One-page release recommendation |
 
 ## Release sign-off
 
-**[signoff.md](signoff.md)** — FociToDo @ `5c43da9`, recommendation: Ready with noted risks (upstream `postgres:17.11-alpine` `gosu` CVEs, F-64/F-65; upstream `nginx-unprivileged:1.31-alpine` `pcre2` CVE, F-98).
+**[signoff.md](signoff.md)** — FociToDo @ `153d719`, recommendation: Ready with noted risks (upstream `postgres:17.11-alpine` `gosu` CVEs, F-64/F-65 — the only remaining noted risk; the earlier `nginx-unprivileged` `pcre2` CVE, F-98, is now fixed).
 
-Latest evidence (release candidate `5c43da9c1490a28e17daf8842e0e01958b737ad1`, the commit after PR #18 "UI wireframes", PR #19 "fix: nginx re-resolves the api" and PR #20 "fix: filter labels"; each `summary.md`/`results.md` records the SHA it ran against):
-- Independent acceptance (black-box curl checks against every expectation): [`evidence/2026-10-03T090410Z/acceptance/`](evidence/2026-10-03T090410Z/acceptance/) — 99/99 PASS
-- Storyboard (every UI journey as captioned screenshots beside its wireframe): [`evidence/2026-10-03T090448Z/storyboard/`](evidence/2026-10-03T090448Z/storyboard/) — 22 frames, 11 journeys, 13/13 wireframes paired
-- Verify: [`evidence/2026-10-03T090528Z/`](evidence/2026-10-03T090528Z/)
-- Stress: [`evidence/2026-10-03T090659Z/stress/`](evidence/2026-10-03T090659Z/stress/)
-- Scans: [`evidence/2026-10-03T091041Z/scans/`](evidence/2026-10-03T091041Z/scans/)
-- Release readiness: [`checklists/release-readiness-5c43da9.md`](checklists/release-readiness-5c43da9.md)
+Latest evidence (release candidate `153d7193d8170d1f8658ab4a047fcc34a7b6c711`, the commit after PR #18 "UI wireframes", PR #19 "fix: nginx re-resolves the api", PR #20 "fix: filter labels" and PR #21 "fix: pcre2 in the web image"; each `summary.md`/`results.md` records the SHA it ran against):
+- Independent acceptance (black-box curl checks against every expectation): [`evidence/2026-10-03T094027Z/acceptance/`](evidence/2026-10-03T094027Z/acceptance/) — 99/99 PASS
+- Storyboard (every UI journey as captioned screenshots beside its wireframe): [`evidence/2026-10-03T094100Z/storyboard/`](evidence/2026-10-03T094100Z/storyboard/) — 22 frames, 11 journeys, 13/13 wireframes paired
+- Verify: [`evidence/2026-10-03T093902Z/`](evidence/2026-10-03T093902Z/)
+- Scans: [`evidence/2026-10-03T093820Z/scans/`](evidence/2026-10-03T093820Z/scans/) — 0 HIGH/CRITICAL on both `api` and `web`
+- Stress (unchanged since `5c43da9`, not re-run — a web-image-only patch can't affect concurrency behaviour): [`evidence/2026-10-03T090659Z/stress/`](evidence/2026-10-03T090659Z/stress/)
+- Release readiness: [`checklists/release-readiness-153d719.md`](checklists/release-readiness-153d719.md)
 
-Older `evidence/` directories are kept as history, including the de70329 and 41a279a release-candidate evidence superseded by the above.
+Older `evidence/` directories are kept as history, including the 5c43da9, 41a279a and de70329 release-candidate evidence superseded by the above.
 
-`main` is now `5c43da9`. PR #18 added UI wireframes (`docs/ui.md`, 13 screen states) plus the spec and plans for this cycle's two new harnesses. Those harnesses — **independent acceptance** (black-box HTTP checks of every documented expectation) and **storyboard** (every UI journey as captioned screenshots beside its wireframe) — then found two real app defects in already-merged code, each fixed through its own PR and re-verified: PR #19 fixed a persistence/availability bug (nginx cached a stale upstream IP for `api` after a restart, so the proxy 502'd forever — found by acceptance's `BR-20`), and PR #20 fixed a filter-control accessibility bug (each `<select>`'s accessible name included every one of its options, a real-browser-only defect jsdom's own tests couldn't reproduce — found by the storyboard's Playwright/Chromium run). See [`signoff.md`](signoff.md) for the full picture and [`reviews/PR-18-ui-wireframes.md`](reviews/PR-18-ui-wireframes.md) / [`reviews/PR-19-nginx-reresolve-api.md`](reviews/PR-19-nginx-reresolve-api.md) / [`reviews/PR-20-filter-labels.md`](reviews/PR-20-filter-labels.md) for the per-PR review notes. The de70329 and 41a279a sign-offs are kept as history in [`signoff.md`](signoff.md#earlier-sign-off--focitodo--41a279a).
+`main` is now `153d719`. PR #18 added UI wireframes (`docs/ui.md`, 13 screen states) plus the spec and plans for two new harnesses this review repository built that cycle. Those harnesses — **independent acceptance** (black-box HTTP checks of every documented expectation) and **storyboard** (every UI journey as captioned screenshots beside its wireframe) — then found three real app defects, each fixed through its own PR and re-verified: PR #19 fixed a persistence/availability bug (nginx cached a stale upstream IP for `api` after a restart, so the proxy 502'd forever — found by acceptance's `BR-20`); PR #20 fixed a filter-control accessibility bug (each `<select>`'s accessible name included every one of its options, a real-browser-only defect jsdom's own tests couldn't reproduce — found by the storyboard's Playwright/Chromium run); PR #21 fixed a HIGH `pcre2` CVE in the unmodified upstream `web` base image (found by this repository's own `scans`). See [`signoff.md`](signoff.md) for the full picture and [`reviews/PR-18-ui-wireframes.md`](reviews/PR-18-ui-wireframes.md) / [`reviews/PR-19-nginx-reresolve-api.md`](reviews/PR-19-nginx-reresolve-api.md) / [`reviews/PR-20-filter-labels.md`](reviews/PR-20-filter-labels.md) / [`reviews/PR-21-web-pcre2.md`](reviews/PR-21-web-pcre2.md) for the per-PR review notes. The 5c43da9 sign-off is folded into the `153d719` section above (rather than kept separately, since the only change between them is PR #21's one-layer patch); the 41a279a and de70329 sign-offs are kept as history in [`signoff.md`](signoff.md#earlier-sign-off--focitodo--41a279a).
 
 ## Running the checks
 
