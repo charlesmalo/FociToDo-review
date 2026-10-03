@@ -1,0 +1,65 @@
+ Image foci-review-acceptance Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 558B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.tools
+#2 transferring dockerfile: 186B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/docker:29-cli
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/library/docker:29-cli@sha256:b1805116a6a86cc591b5d5f60a910a0715cdcc9d18d866ad68b1457ead25c35c
+#5 resolve docker.io/library/docker:29-cli@sha256:b1805116a6a86cc591b5d5f60a910a0715cdcc9d18d866ad68b1457ead25c35c done
+#5 DONE 0.0s
+
+#6 [2/2] RUN apk add --no-cache git bash curl jq coreutils
+#6 CACHED
+
+#7 exporting to image
+#7 exporting layers done
+#7 exporting manifest sha256:cdc2a94f0814b4a6f9d9bea77f882e116156a315f7c0a1f319b78e48f3c968f3 done
+#7 exporting config sha256:55d83e6d350359c148ae40fa760eb2d54db11ff72bf10da42586700460a21468 done
+#7 exporting attestation manifest sha256:927bfcab4534ec4a138ed9d2e7ad9d0dc3ae67f99ef77f6688dffe05599a1bcb done
+#7 exporting manifest list sha256:f31491086a10c02f01d11ae8b2a06fa3e7df8964e2b02150fd69dd3e9eba7053 done
+#7 naming to docker.io/library/foci-review-acceptance:latest done
+#7 unpacking to docker.io/library/foci-review-acceptance:latest done
+#7 DONE 0.1s
+
+#8 resolving provenance for metadata file
+#8 DONE 0.0s
+ Image foci-review-acceptance Built 
+ Container foci-review-acceptance-run-8d0482c41105 Creating 
+ Container foci-review-acceptance-run-8d0482c41105 Created 
+PASS BR-01
+PASS BR-02
+PASS BR-03
+PASS BR-04
+PASS BR-05
+PASS BR-06
+PASS BR-07
+PASS BR-08
+PASS BR-09
+PASS BR-10
+PASS BR-11
+PASS BR-12
+PASS BR-13
+PASS BR-14
+PASS BR-15
+PASS BR-16
+PASS BR-17
+PASS BR-18
+PASS BR-19
+acceptance.sh: harness error: api not healthy 90 s after restart
+
+# Exit code of this invocation (`docker compose run --rm --build acceptance`) was 2
+# (harness_fail), per the orchestrator's `trap teardown EXIT`; the trailing
+# "[exited with code 0]" above is an artifact of the capturing shell's own `tee`
+# pipeline, not the command's real exit status. See task-1-report.md for the
+# root-cause analysis (nginx caches a stale upstream IP for `api` across the
+# db+api restart and never recovers on its own).

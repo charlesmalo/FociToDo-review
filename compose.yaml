@@ -23,3 +23,6 @@ services:
   scans:
     <<: *tools
     command: ['bash', 'scripts/scans.sh']
+  acceptance:
+    <<: *tools
+    command: ['bash', 'scripts/acceptance.sh']

@@ -32,8 +32,10 @@ cp .env.example .env            # APP_REF is pinned to the signed-off release ca
 docker compose run --rm verify  # clean clone → --no-cache rebuild → tests → e2e → evidence
 docker compose run --rm stress  # k6 scenarios against a fresh stack + invariant checks
 docker compose run --rm scans   # Trivy (app images + pinned postgres image), Hadolint, npm audit
+docker compose run --rm acceptance   # black-box curl checks of every expectation (catalogue: acceptance/expectations.md)
 ```
 
+- `acceptance` starts its own app stack with no host port (so it runs even while a FociToDo stack already holds 8080), and writes `evidence/<timestamp>/acceptance/` (a results table plus a request/response transcript per expectation) independently of the app's own tests.
 - Stop anything on host port 8080 first (for example a running FociToDo): `verify` and `stress` start the app, which publishes `${WEB_PORT:-8080}`. Or pick another port with `-e WEB_PORT=18080`. A failed step names the log to read, and `verify` and `stress` tear their stacks down on any exit.
 - `-e APP_REF=<sha|tag|branch>` overrides `.env` for one run. Every script clones the app afresh and records the checked-out SHA in its evidence `summary.md`.
 - `scans` collects evidence and exits 0 when findings exist; it fails only when a scanner itself fails. Triage lives in [`findings/log.md`](findings/log.md).

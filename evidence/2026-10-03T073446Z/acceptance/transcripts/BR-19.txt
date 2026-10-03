@@ -1,0 +1,56 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR19-d2d1a843a0ab-apple\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:35:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 206
+Connection: keep-alive
+Location: /api/todos/832cead6-77d7-4fb1-8e9d-aec911cc92fe
+ETag: "1"
+
+{"id":"832cead6-77d7-4fb1-8e9d-aec911cc92fe","title":"acc-BR19-d2d1a843a0ab-apple","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.310Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR19-d2d1a843a0ab-Banana\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:35:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 207
+Connection: keep-alive
+Location: /api/todos/fae0f33c-a944-464e-b3b7-a41eae590bf0
+ETag: "1"
+
+{"id":"fae0f33c-a944-464e-b3b7-a41eae590bf0","title":"acc-BR19-d2d1a843a0ab-Banana","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.322Z","version":1,"isOverdue":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR19-d2d1a843a0ab-cherry\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:35:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 207
+Connection: keep-alive
+Location: /api/todos/dc83f68e-94e5-4f23-ac55-0f445d3d0c73
+ETag: "1"
+
+{"id":"dc83f68e-94e5-4f23-ac55-0f445d3d0c73","title":"acc-BR19-d2d1a843a0ab-cherry","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.334Z","version":1,"isOverdue":false}
+
+>>> GET /api/todos?sort=title&order=asc
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:35:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 7836
+Connection: keep-alive
+
+[{"id":"86d8478a-a248-440b-a285-d955f3004079","title":"acc-BR03-8de5a67f37a7-a","description":null,"dueDate":"2030-01-02","isCompleted":false,"createdAt":"2026-10-03T07:35:03.639Z","version":1,"isOverdue":false},{"id":"d44db02a-6844-42cf-8a38-a4bab0e3661a","title":"acc-BR11-978864c6cc30-done","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T07:35:03.854Z","version":2,"isOverdue":false},{"id":"40408908-a585-4051-b668-1b6ee458bb23","title":"acc-BR11-978864c6cc30-future","description":null,"dueDate":"2026-10-06","isCompleted":false,"createdAt":"2026-10-03T07:35:03.872Z","version":1,"isOverdue":false},{"id":"8cb76a83-84e5-41fb-8ba0-5550debde258","title":"acc-BR11-978864c6cc30-overdue","description":null,"dueDate":"2026-09-30","isCompleted":false,"createdAt":"2026-10-03T07:35:03.884Z","version":1,"isOverdue":true},{"id":"b6034c9b-25f2-417a-b6f1-801d36d193c9","title":"acc-BR12-c7134990222e-done","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T07:35:03.908Z","version":2,"isOverdue":false},{"id":"8781d975-8abb-4561-aac5-1839cb621201","title":"acc-BR12-c7134990222e-future","description":null,"dueDate":"2026-10-06","isCompleted":false,"createdAt":"2026-10-03T07:35:03.927Z","version":1,"isOverdue":false},{"id":"7d5e4f18-48bd-49cb-af82-291e899111ca","title":"acc-BR12-c7134990222e-overdue","description":null,"dueDate":"2026-09-30","isCompleted":false,"createdAt":"2026-10-03T07:35:03.939Z","version":1,"isOverdue":true},{"id":"3dbd8290-a4bd-454a-ace4-876dc8e70bd0","title":"acc-BR13-243a57c2bc4b-done","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T07:35:03.965Z","version":2,"isOverdue":false},{"id":"44490ff0-13b8-4fa2-b5ee-054944a32896","title":"acc-BR13-243a57c2bc4b-future","description":null,"dueDate":"2026-10-06","isCompleted":false,"createdAt":"2026-10-03T07:35:03.984Z","version":1,"isOverdue":false},{"id":"6ebd7ef4-67f3-4d92-9f78-168bdcc3f5ca","title":"acc-BR13-243a57c2bc4b-overdue","description":null,"dueDate":"2026-09-30","isCompleted":false,"createdAt":"2026-10-03T07:35:03.997Z","version":1,"isOverdue":true},{"id":"8ddece54-d951-47f6-a63c-946a6b6432f2","title":"acc-BR14-604a6aad5635-done","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T07:35:04.022Z","version":2,"isOverdue":false},{"id":"2510f55d-4f10-4b06-805e-33f4243e39e0","title":"acc-BR14-604a6aad5635-future","description":null,"dueDate":"2026-10-06","isCompleted":false,"createdAt":"2026-10-03T07:35:04.042Z","version":1,"isOverdue":false},{"id":"d3b16a72-73f6-4701-a395-6609b662f91d","title":"acc-BR14-604a6aad5635-overdue","description":null,"dueDate":"2026-09-30","isCompleted":false,"createdAt":"2026-10-03T07:35:04.054Z","version":1,"isOverdue":true},{"id":"fc232654-94d2-45d5-bfda-f2c2a319056e","title":"acc-BR15-67f9702d26b8-a","description":null,"dueDate":"2030-01-01","isCompleted":false,"createdAt":"2026-10-03T07:35:04.103Z","version":1,"isOverdue":false},{"id":"d62fb9a2-289c-4027-a113-d339cadd7adc","title":"acc-BR15-67f9702d26b8-b","description":null,"dueDate":"2030-05-01","isCompleted":false,"createdAt":"2026-10-03T07:35:04.091Z","version":1,"isOverdue":false},{"id":"8cc89204-bb0d-4f97-8cd6-5774da0f3d0f","title":"acc-BR15-67f9702d26b8-c","description":null,"dueDate":"2030-09-01","isCompleted":false,"createdAt":"2026-10-03T07:35:04.115Z","version":1,"isOverdue":false},{"id":"821cb659-72f6-4918-bfd5-19f686569d7b","title":"acc-BR15-67f9702d26b8-none","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.126Z","version":1,"isOverdue":false},{"id":"4ae893e1-3c09-416f-a1ce-0441a64721f4","title":"acc-BR16-371a2c71e616-a","description":null,"dueDate":"2030-01-01","isCompleted":false,"createdAt":"2026-10-03T07:35:04.163Z","version":1,"isOverdue":false},{"id":"1e7c6581-ae5d-4bd9-8c92-309490a6b038","title":"acc-BR16-371a2c71e616-b","description":null,"dueDate":"2030-05-01","isCompleted":false,"createdAt":"2026-10-03T07:35:04.152Z","version":
+
+>>> GET /api/todos?sort=title&order=desc
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 07:35:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 7836
+Connection: keep-alive
+
+[{"id":"c40dca33-5514-4c5d-81c7-e62d5e58489d","title":"View me","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:03.665Z","version":1,"isOverdue":false},{"id":"1f74173b-0454-4e94-8fd4-bc420d450cb1","title":"New","description":"keep","dueDate":"2030-01-02","isCompleted":false,"createdAt":"2026-10-03T07:35:03.694Z","version":2,"isOverdue":false},{"id":"5f4e54f2-eab2-492e-89d6-297700de2750","title":"Incomplete me","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:03.801Z","version":3,"isOverdue":false},{"id":"f6a7a3e7-cbe8-4414-b22b-24bb32d9fd7c","title":"Due","description":null,"dueDate":"2030-02-02","isCompleted":false,"createdAt":"2026-10-03T07:35:03.752Z","version":2,"isOverdue":false},{"id":"6805eed4-685a-4158-8757-f8d6c4ee2bbd","title":"Desc","description":"new","dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:03.727Z","version":2,"isOverdue":false},{"id":"e1db31bc-3144-4921-98a7-7529da2e0219","title":"Complete me","description":null,"dueDate":null,"isCompleted":true,"createdAt":"2026-10-03T07:35:03.777Z","version":2,"isOverdue":false},{"id":"c8a4214a-3f8c-44c2-bd6f-72ec97be8aba","title":"Buy milk","description":"2% organic","dueDate":"2030-01-02","isCompleted":false,"createdAt":"2026-10-03T07:35:03.619Z","version":1,"isOverdue":false},{"id":"039b9a35-f972-43b5-bf84-0a1d451a85fe","title":"Buy milk","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:03.578Z","version":1,"isOverdue":false},{"id":"dc83f68e-94e5-4f23-ac55-0f445d3d0c73","title":"acc-BR19-d2d1a843a0ab-cherry","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.334Z","version":1,"isOverdue":false},{"id":"fae0f33c-a944-464e-b3b7-a41eae590bf0","title":"acc-BR19-d2d1a843a0ab-Banana","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.322Z","version":1,"isOverdue":false},{"id":"832cead6-77d7-4fb1-8e9d-aec911cc92fe","title":"acc-BR19-d2d1a843a0ab-apple","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.310Z","version":1,"isOverdue":false},{"id":"ee521585-5ae4-4fb8-98b6-ad3a30fe2ce8","title":"acc-BR18-752a488b8216-third","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.286Z","version":1,"isOverdue":false},{"id":"180558f6-56a6-4919-8296-9ce06ce6b27a","title":"acc-BR18-752a488b8216-second","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.275Z","version":1,"isOverdue":false},{"id":"fb2603eb-0880-4375-a1a6-eee09b855814","title":"acc-BR18-752a488b8216-first","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.264Z","version":1,"isOverdue":false},{"id":"0dfc3783-9937-4a0f-ba02-32c7eb0390a8","title":"acc-BR17-81c9c669379b-third","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.239Z","version":1,"isOverdue":false},{"id":"0fe71d00-dcae-4b08-96a1-b77bf5568e22","title":"acc-BR17-81c9c669379b-second","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.226Z","version":1,"isOverdue":false},{"id":"53ef8e12-3178-4b5b-80fb-9fe26dffaecd","title":"acc-BR17-81c9c669379b-first","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.214Z","version":1,"isOverdue":false},{"id":"34c67e03-da62-458e-8019-302254e4f631","title":"acc-BR16-371a2c71e616-none","description":null,"dueDate":null,"isCompleted":false,"createdAt":"2026-10-03T07:35:04.190Z","version":1,"isOverdue":false},{"id":"36ad58b6-9f3a-4694-9a71-dad9e6057e30","title":"acc-BR16-371a2c71e616-c","description":null,"dueDate":"2030-09-01","isCompleted":false,"createdAt":"2026-10-03T07:35:04.177Z","version":1,"isOverdue":false},{"id":"1e7c6581-ae5d-4bd9-8c92-309490a6b038","title":"acc-BR16-371a2c71e616-b","description":null,"dueDate":"2030-05-01","isCompleted":false,"createdAt":"2026-10-03T07:35:04.152Z","ver
+
