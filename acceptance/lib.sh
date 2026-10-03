@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Black-box HTTP checks against the app under review, sourced by scripts/acceptance.sh.
-# Written from the brief, the spec and the README only — never from the app's own tests.
+# Written only from the allowed sources — the brief, the design spec, docs/api.md, the
+# README and the served /api/openapi.json — never from the app's own tests. See the
+# Independence section at the top of acceptance/expectations.md.
 
 BASE="${BASE:-http://web:8080}"
 SCRATCH="$(mktemp -d)"

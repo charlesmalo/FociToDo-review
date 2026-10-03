@@ -2,6 +2,10 @@
 
 Every expectation the independent acceptance run checks, with where it comes from. Each row is proven by `check_<ID>` in `checks/*.sh`, black-box over HTTP through nginx at `http://web:8080`, using the requests the web front end sends. Sources: the take-home **brief**; the design **spec** (`docs/superpowers/specs/2026-09-30-foci-todo-design.md` in the app); the app's **api** guide (`docs/api.md`); **README** assumptions; **robustness** (hostile input the app must reject cleanly — a 4xx with problem details, never a 5xx).
 
+## Independence
+
+This catalogue, its checks (`acceptance/checks/*.sh`) and the storyboard journeys (`storyboard/journeys/*.spec.ts`) are written only from these allowed sources: the take-home brief, the design spec (`docs/superpowers/specs/2026-09-30-foci-todo-design.md`), the app's API guide (`docs/api.md`), the app's README, and the served `/api/openapi.json`. They are never written from, or adapted from, the app's own test code (`apps/*/tests`, `packages/*/tests`, `e2e/`) — every check here interacts with a freshly started stack only as a black box, over HTTP or through a browser pointed at `http://web:8080`. Reading the app's UI source to find an element's accessible name (its label, role or text) is allowed (R49) and is how the storyboard's selectors were written; reading the app's test files is not. The plan's reference user journey was drafted by the app's own author, so some sample data in the storyboard (for example "Buy oat milk") coincides with the app's own `e2e` fixtures — this is a coincidence of authorship, not a dependency on the app's tests.
+
 ## Brief actions
 
 | ID | Source | Expectation |
@@ -64,7 +68,7 @@ Every expectation the independent acceptance run checks, with where it comes fro
 | EC-06 | api: Conventions | `DELETE` without `If-Match` → 428 |
 | EC-07 | api: Conventions | `DELETE` with a stale `If-Match` → 412 |
 | EC-08 | spec §5 | `If-Match: *` → 400 |
-| EC-09 | api: Conventions | a weak `If-Match: W/"1"` → 400 |
+| EC-09 | spec §5 | a weak `If-Match: W/"1"` → 400 |
 | EC-10 | api: Error precedence | invalid body and no `If-Match` → 400 (400 before 428) |
 | EC-11 | api: Error precedence | valid body, no `If-Match`, unknown id → 428 (428 before 404) |
 | EC-12 | api: Error precedence | valid body, `If-Match`, unknown id → 404 (404 before 412) |

@@ -52,6 +52,19 @@ for file in acceptance/checks/*.sh; do
   source "${file}"
 done
 
+# Guard against a catalogue row that looks like a table row (starts "| XX-") but doesn't parse
+# into three non-empty columns — a typo here would otherwise be silently skipped below.
+while IFS= read -r line; do
+  [[ "${line}" =~ ^\|\ [A-Z]{2}- ]] || continue
+  IFS='|' read -r _ col1 col2 col3 _ <<< "${line}"
+  col1="$(echo "${col1}" | sed 's/^ *//; s/ *$//')"
+  col2="$(echo "${col2}" | sed 's/^ *//; s/ *$//')"
+  col3="$(echo "${col3}" | sed 's/^ *//; s/ *$//')"
+  if [ -z "${col1}" ] || [ -z "${col2}" ] || [ -z "${col3}" ]; then
+    fail "acceptance/expectations.md: catalogue-looking row does not parse into three non-empty columns: ${line}"
+  fi
+done < acceptance/expectations.md
+
 # Catalogue rows: | ID | Source | Expectation |
 mapfile -t ROWS < <(awk -F'|' '/^\| [A-Z]{2}-[0-9]{2} \|/ { for (i = 2; i <= 4; i++) { gsub(/^ +| +$/, "", $i) } print $2 "\t" $3 "\t" $4 }' acceptance/expectations.md)
 [ "${#ROWS[@]}" -gt 0 ] || fail "acceptance/expectations.md has no catalogue rows"

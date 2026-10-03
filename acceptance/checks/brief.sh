@@ -238,12 +238,26 @@ check_BR_19() {
 check_BR_20() {
   create_todo '{"title":"Survives a restart"}'
   [ -n "${ID}" ] || return 0
+  local api_cid ip_before ip_after start_ts up=0
+  api_cid="$(cd "${APP}" && docker compose -p "${PROJECT}" ps -q api)"
+  ip_before="$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "${api_cid}" 2>/dev/null || echo unknown)"
   (cd "${APP}" && docker compose -p "${PROJECT}" restart db api > /dev/null 2>&1) || harness_fail "restart of db/api failed"
-  local up=0
+  ip_after="$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "${api_cid}" 2>/dev/null || echo unknown)"
+  start_ts="$(date +%s)"
   for _ in $(seq 1 90); do
     if curl -fsS --max-time 3 "${BASE}/api/health" > /dev/null 2>&1; then up=1; break; fi
     sleep 1
   done
+  {
+    printf 'api container: %s\n' "${api_cid}"
+    printf 'api container IP before restart: %s\n' "${ip_before}"
+    printf 'api container IP after restart: %s\n' "${ip_after}"
+    if [ "${up}" = 1 ]; then
+      printf 'seconds until /api/health was 200 again: %s\n' "$(( $(date +%s) - start_ts ))"
+    else
+      printf 'seconds until /api/health was 200 again: did not recover within 90s\n'
+    fi
+  } >> "${TRANSCRIPT}"
   if [ "${up}" != 1 ]; then
     (cd "${APP}" && docker compose -p "${PROJECT}" logs --no-color) > "${TRANSCRIPT%.txt}.logs.txt" 2>&1 || true
     fail_check "app not healthy 90 s after restarting db and api — see ${TRANSCRIPT%.txt}.logs.txt"

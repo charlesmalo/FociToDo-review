@@ -6,11 +6,10 @@ check_CS_01() {
   [ -n "${ID}" ] || return 0
   req POST "/api/todos/${ID}/complete"
   expect_status 200
-  local v1
-  v1="$(json .version)"
+  expect_json .version 2
   req POST "/api/todos/${ID}/complete"
   expect_status 200
-  expect_json .version "${v1}"
+  expect_json .version 2
 }
 
 check_CS_02() {
@@ -18,11 +17,10 @@ check_CS_02() {
   [ -n "${ID}" ] || return 0
   req POST "/api/todos/${ID}/incomplete"
   expect_status 200
-  local v1
-  v1="$(json .version)"
+  expect_json .version 1
   req POST "/api/todos/${ID}/incomplete"
   expect_status 200
-  expect_json .version "${v1}"
+  expect_json .version 1
 }
 
 check_CS_03() {
