@@ -42,10 +42,10 @@ app_compose down -v --remove-orphans > /dev/null 2>&1 || true
 app_compose up -d --build > "${OUT}/up.log" 2>&1 || fail "compose up failed — see ${OUT}/up.log"
 wait_healthy || { app_compose logs --no-color > "${OUT}/health-timeout.log" 2>&1 || true; fail "web did not become healthy within 180 s — see ${OUT}/health-timeout.log"; }
 
-docker build -q -t foci-review-storyboard storyboard > /dev/null || fail "storyboard image build failed"
+docker build -q -t foci-review-storyboard-pw storyboard > /dev/null || fail "storyboard image build failed"
 docker run --rm --network "${PROJECT}_default" \
   -e BASE_URL=http://web:8080 -e OUT=/out -e APP_DIAGRAMS=/app-diagrams -e APP_SHA="${SHA}" \
   -v "${HOST_DIR}/${OUT}:/out" -v "${HOST_DIR}/${APP}/docs/diagrams:/app-diagrams:ro" \
-  foci-review-storyboard > "${OUT}/playwright.log" 2>&1 \
+  foci-review-storyboard-pw > "${OUT}/playwright.log" 2>&1 \
   || fail "storyboard run failed — see ${OUT}/playwright.log"
 echo "Storyboard of ${APP_REPO} @ ${SHA}: $(tail -n 1 "${OUT}/playwright.log")" | tee "${OUT}/summary.md"

@@ -10,7 +10,7 @@ export function isoIn(offsetMs: number): string {
 
 /**
  * The deadline text the app should show for an instant in a timezone: "Due <date>, <time>",
- * medium date and short time in en-US. Whitespace is normalised (newer ICU puts a narrow
+ * medium date and short time in en-US (the display format of spec 2026-10-03 §3.4). Whitespace is normalised (newer ICU puts a narrow
  * no-break space before AM/PM) so it compares equal to what Playwright reads from the page.
  */
 export function deadlineText(iso: string, timeZone: string): string {
