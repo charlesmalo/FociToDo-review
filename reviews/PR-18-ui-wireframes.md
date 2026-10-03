@@ -28,7 +28,7 @@ No Critical/Important findings against this PR's own diffed code; BR-20 is a Hig
 | F-96 `scripts/acceptance.sh` did not tear down a stale `review-acceptance` Compose project before starting a new run | Important | tests | Fix | Fixed in this repository's commit `8a70e4b983793bdcca9d4d390ee717aa0128f49d` — `set -Eeuo pipefail` + an ERR trap naming the failing line, and a teardown of any stale stack before starting |
 | F-97 The design spec's §2 and the plan's Global Constraints section described the review-repository allowed-sources list in terms that didn't line up word-for-word | Important | docs | Fix | Fixed by this PR (merged `aeaa6020471392f2a1a970bc4b1c23175babd87d`) — Ruling R44: spec §2 marked binding, the plan's Global Constraints section reworded to name the identical list |
 
-(BR-20 itself — the Critical persistence defect this PR's new harness found in already-merged code — is tracked as **F-91** against PR #19, which fixed it; see `reviews/PR-19-nginx-reresolve-api.md` and `findings/log.md`.)
+(BR-20 itself — the High persistence defect this PR's new harness found in already-merged code — is tracked as **F-91** against PR #19, which fixed it; see `reviews/PR-19-nginx-reresolve-api.md` and `findings/log.md`.)
 
 ## CI
 

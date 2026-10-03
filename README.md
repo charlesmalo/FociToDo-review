@@ -38,6 +38,8 @@ docker compose run --rm acceptance   # black-box curl checks of every expectatio
 docker compose run --rm storyboard   # every UI journey as captioned screenshots beside its wireframe
 ```
 
+If you point `APP_REF` at an older app commit: `storyboard` needs a commit with `docs/diagrams/ui` (≥ `aeaa602`), and acceptance's `BR-20` needs ≥ `3b76cfa` (PR #19, the nginx re-resolve fix) to pass.
+
 - `acceptance` starts its own app stack with no host port (so it runs even while a FociToDo stack already holds 8080), and writes `evidence/<timestamp>/acceptance/` (a results table plus a request/response transcript per expectation) independently of the app's own tests. Independence — what this harness is and isn't allowed to read — is documented in the [Independence section of `acceptance/expectations.md`](acceptance/expectations.md#independence).
 - `storyboard` starts its own app stack with no host port and drives it with Playwright, writing `evidence/<timestamp>/storyboard/` (`frames/*.png`, the app's `docs/diagrams/ui/*.svg` wireframes, and `storyboard.md` pairing each captioned frame with the wireframe of the screen state it should match) independently of the app's own e2e suite; the latest run's report is linked from the Release sign-off section above. `storyboard` follows the same Independence rules as `acceptance`.
 - Stop anything on host port 8080 first (for example a running FociToDo): `verify` and `stress` start the app, which publishes `${WEB_PORT:-8080}`. Or pick another port with `-e WEB_PORT=18080`. A failed step names the log to read, and `verify` and `stress` tear their stacks down on any exit.

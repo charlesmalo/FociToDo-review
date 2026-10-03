@@ -113,5 +113,5 @@ Copy of `checklists/milestone-review.md` with results for PR #10:
 assumptions, and trade-offs; `docs/architecture.md`, `docs/api.md`, `docs/concurrency.md`, `docs/testing.md`;
 14 ADRs). Every factual claim, file reference, code snippet and diagram was independently cross-checked against
 the real source rather than trusted on the implementer's word, and all matched. The single recorded item
-(F-42 / R15, docs/api.md vs. openapi.json 415-on-PATCH drift) was already ruled at the controller level and is
-deferred to the final fix wave — no new Critical or Important findings.
+(F-42 / R15, docs/api.md vs. openapi.json 415-on-PATCH drift) was decided by the solution lead and deferred to
+the final fix wave — no new Critical or Important findings.
