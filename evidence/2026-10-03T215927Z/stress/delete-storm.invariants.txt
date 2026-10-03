@@ -1,0 +1,2 @@
+PASS exactly one successful delete per todo (actual 20, expected 20)
+PASS no deleted todo remains (actual 0, expected 0)

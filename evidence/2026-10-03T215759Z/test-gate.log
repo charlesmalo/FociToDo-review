@@ -1,0 +1,288 @@
+ Network review-test_default Creating 
+ Network review-test_default Creating 
+ Network review-test_default Created 
+ Network review-test_default Created 
+ Container review-test-db-test-1 Creating 
+ Container review-test-db-test-1 Created 
+ Container review-test-db-test-1 Starting 
+ Container review-test-db-test-1 Started 
+ Image review-test-test Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 570B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 4.39kB done
+#2 DONE 0.0s
+
+#3 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#3 DONE 0.1s
+
+#4 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#4 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e done
+#4 CACHED
+
+#5 [internal] load metadata for docker.io/library/node:24.21-alpine
+#5 DONE 0.1s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 135B done
+#6 DONE 0.0s
+
+#7 [base 1/2] FROM docker.io/library/node:24.21-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1
+#7 resolve docker.io/library/node:24.21-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1 0.0s done
+#7 DONE 0.0s
+
+#8 [internal] load build context
+#8 transferring context: 19.31kB 0.1s done
+#8 DONE 0.1s
+
+#9 [deps 1/1] RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
+#9 CACHED
+
+#10 [base 2/2] WORKDIR /repo
+#10 CACHED
+
+#11 [manifests 1/5] COPY package.json package-lock.json ./
+#11 CACHED
+
+#12 [manifests 3/5] COPY packages/diagrams/package.json packages/diagrams/
+#12 CACHED
+
+#13 [manifests 5/5] COPY apps/web/package.json apps/web/
+#13 CACHED
+
+#14 [manifests 4/5] COPY apps/api/package.json apps/api/
+#14 CACHED
+
+#15 [manifests 2/5] COPY packages/shared/package.json packages/shared/
+#15 CACHED
+
+#16 [source 1/1] COPY . .
+#16 CACHED
+
+#17 exporting to image
+#17 exporting layers
+#17 exporting layers 5.0s done
+#17 exporting manifest sha256:9babb96864d05220bf7b1dbd95e4536b1e850b740530c3cc26fcceb85b300224 done
+#17 exporting config sha256:2ee1c4c484a09787e4e314ac511260612f66f6245756fe07a5c3ac0ef4a2ee0a done
+#17 exporting attestation manifest sha256:6b0f3b3ec27548c94ead7f51f793b378b6915f905724eadd515a77a2f28d7668 done
+#17 exporting manifest list sha256:9951766f2c330908dceb8123800efcca377ab539dba2147ee077889bd5ec925a done
+#17 naming to docker.io/library/review-test-test:latest done
+#17 unpacking to docker.io/library/review-test-test:latest
+#17 unpacking to docker.io/library/review-test-test:latest 1.8s done
+#17 DONE 6.9s
+
+#18 resolving provenance for metadata file
+#18 DONE 0.0s
+ Image review-test-test Built 
+ Container review-test-db-test-1 Waiting 
+ Container review-test-db-test-1 Healthy 
+ Container review-test-test-run-913a713f1fdc Creating 
+ Container review-test-test-run-913a713f1fdc Created 
+
+> foci-todo@1.0.0 test:ci
+> npm run format:check && npm run lint && npm run typecheck && vitest run --coverage && node scripts/check-playwright-pin.mjs
+
+
+> foci-todo@1.0.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> foci-todo@1.0.0 lint
+> eslint .
+
+Multiple projects found, consider using a single `tsconfig` with `references` to speed up, or use `noWarnOnMultipleProjects` to suppress this warning
+
+> foci-todo@1.0.0 typecheck
+> npm run typecheck --workspaces --if-present && tsc -p e2e/tsconfig.json
+
+
+> @foci/diagrams@1.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @foci/shared@1.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @foci/api@1.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @foci/web@1.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/repo[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/domain/todo.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/repository/in-memory/ordering.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/service/TodoService.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/http/problems.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/http/openapi.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/repository/postgres/PgUnitOfWork.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/service/requestHash.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/http/errorHandler.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 49[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/http/validation.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/domain/errors.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/config.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/repository/in-memory/AsyncMutex.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/service/HealthService.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/repository/postgres/PgDatabaseProbe.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/app.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/domain/clock.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/domain/ids.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/logger.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/extract.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m [30m[45m api-unit [49m[39m apps/api/tests/repository/in-memory/createInMemoryStorage.test.ts [2m([22m[2m32 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/check.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/layout.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/render.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/inlineRefs.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/mmdc.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/readmeMap.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/manifest.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/slug.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/paths.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/repo.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[42m shared [49m[39m packages/shared/tests/todo.test.ts [2m([22m[2m53 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m [30m[42m shared [49m[39m packages/shared/tests/problem.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[42m shared [49m[39m packages/shared/tests/listQuery.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[42m shared [49m[39m packages/shared/tests/headers.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[42m shared [49m[39m packages/shared/tests/index.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m diagrams [49m[39m packages/diagrams/tests/apiDocs.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1806[2mms[22m[39m
+   [32m✓[39m this repository [2m(1)[22m
+     [33m[2m✓[22m[39m has docs/api/index.html in sync with apps/api/openapi.json (regenerate with UPDATE_API_DOCS=1)[33m 1801[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/TodoForm.test.tsx [2m([22m[2m23 tests[22m[2m)[22m[33m 822[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/api/todoClient.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/TodoDetailsPanel.test.tsx [2m([22m[2m18 tests[22m[2m)[22m[33m 1004[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/TodoItem.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 295[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/TodoDialog.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 549[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/TodoPage.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 576[2mms[22m[39m
+   [32m✓[39m TodoPage [2m(3)[22m
+     [33m[2m✓[22m[39m lists todos, refetches when filters change and opens details[33m 316[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/CreateTodoPanel.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 411[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/TodoFilters.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 280[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/TodoList.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 222[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/useTodos.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/format.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/api/ApiError.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/App.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 214[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/queryClient.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/api/TodoClientContext.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/todos/components/ErrorBanner.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 161[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/api/idempotencyKey.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[46m web [49m[39m apps/web/tests/api/describeError.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/http/todoRoutes.int.test.ts [2m([22m[2m45 tests[22m[2m)[22m[33m 318[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/http/todoRoutes.concurrency.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 631[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/http/openapi.int.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 100[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/migrations/dueAtMigration.int.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 130[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/migrations/schema.int.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 57[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/http/healthRoutes.int.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 47[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/repository/postgres/PgDatabaseProbe.int.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m [30m[43m api-db [49m[39m apps/api/tests/repository/postgres/createPostgresStorage.int.test.ts [2m([22m[2m32 tests[22m[2m)[22m[32m 139[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m62 passed[39m[22m[90m (62)[39m
+[2m      Tests [22m [1m[32m546 passed[39m[22m[90m (546)[39m
+[2m   Start at [22m 21:58:48
+[2m   Duration [22m 12.88s[2m (environment 34%, tests 33%, import 16%, setup 7%, worker 5%, transform 5%)[22m
+
+[2mEnvironment [22m [30m[46m web [49m[39m [33mjsdom was created 18 times[39m[2m · 8.45s total, 49% of tracked time[22m
+[2m            [22m [2mcreate it once per worker with [22m[33mpool: 'vmThreads'[39m[2m (keeps per-file isolation) or [22m[33misolate: false[39m[2m (shares it across files)[22m
+[2m            [22m [2mlearn more: https://vitest.dev/guide/improving-performance#test-environments[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |     100 |      100 |     100 |     100 |                   
+ apps/api/src      |     100 |      100 |     100 |     100 |                   
+  app.ts           |     100 |      100 |     100 |     100 |                   
+  config.ts        |     100 |      100 |     100 |     100 |                   
+  logger.ts        |     100 |      100 |     100 |     100 |                   
+ ...api/src/domain |     100 |      100 |     100 |     100 |                   
+  clock.ts         |     100 |      100 |     100 |     100 |                   
+  errors.ts        |     100 |      100 |     100 |     100 |                   
+  ids.ts           |     100 |      100 |     100 |     100 |                   
+  todo.ts          |     100 |      100 |     100 |     100 |                   
+ apps/api/src/http |     100 |      100 |     100 |     100 |                   
+  createHttpApp.ts |     100 |      100 |     100 |     100 |                   
+  errorHandler.ts  |     100 |      100 |     100 |     100 |                   
+  healthRoutes.ts  |     100 |      100 |     100 |     100 |                   
+  openapi.ts       |     100 |      100 |     100 |     100 |                   
+  problems.ts      |     100 |      100 |     100 |     100 |                   
+  todoRoutes.ts    |     100 |      100 |     100 |     100 |                   
+  validation.ts    |     100 |      100 |     100 |     100 |                   
+ ...src/repository |       0 |        0 |       0 |       0 |                   
+  ports.ts         |       0 |        0 |       0 |       0 |                   
+ ...tory/in-memory |     100 |      100 |     100 |     100 |                   
+  AsyncMutex.ts    |     100 |      100 |     100 |     100 |                   
+  ...ryDatabase.ts |     100 |      100 |     100 |     100 |                   
+  ...tencyStore.ts |     100 |      100 |     100 |     100 |                   
+  ...Repository.ts |     100 |      100 |     100 |     100 |                   
+  ...UnitOfWork.ts |     100 |      100 |     100 |     100 |                   
+  ...oryStorage.ts |     100 |      100 |     100 |     100 |                   
+  ordering.ts      |     100 |      100 |     100 |     100 |                   
+ ...itory/postgres |     100 |      100 |     100 |     100 |                   
+  ...abaseProbe.ts |     100 |      100 |     100 |     100 |                   
+  ...tencyStore.ts |     100 |      100 |     100 |     100 |                   
+  ...Repository.ts |     100 |      100 |     100 |     100 |                   
+  PgUnitOfWork.ts  |     100 |      100 |     100 |     100 |                   
+  ...resStorage.ts |     100 |      100 |     100 |     100 |                   
+  rows.ts          |     100 |      100 |     100 |     100 |                   
+ ...pi/src/service |     100 |      100 |     100 |     100 |                   
+  HealthService.ts |     100 |      100 |     100 |     100 |                   
+  TodoService.ts   |     100 |      100 |     100 |     100 |                   
+  requestHash.ts   |     100 |      100 |     100 |     100 |                   
+ apps/web/src      |     100 |      100 |     100 |     100 |                   
+  App.tsx          |     100 |      100 |     100 |     100 |                   
+  queryClient.ts   |     100 |      100 |     100 |     100 |                   
+ apps/web/src/api  |     100 |      100 |     100 |     100 |                   
+  ApiError.ts      |     100 |      100 |     100 |     100 |                   
+  ...ntContext.tsx |     100 |      100 |     100 |     100 |                   
+  describeError.ts |     100 |      100 |     100 |     100 |                   
+  ...potencyKey.ts |     100 |      100 |     100 |     100 |                   
+  todoClient.ts    |     100 |      100 |     100 |     100 |                   
+ .../web/src/todos |     100 |      100 |     100 |     100 |                   
+  format.ts        |     100 |      100 |     100 |     100 |                   
+  useTodos.ts      |     100 |      100 |     100 |     100 |                   
+ ...dos/components |     100 |      100 |     100 |     100 |                   
+  ...TodoPanel.tsx |     100 |      100 |     100 |     100 |                   
+  ErrorBanner.tsx  |     100 |      100 |     100 |     100 |                   
+  ...ailsPanel.tsx |     100 |      100 |     100 |     100 |                   
+  TodoDialog.tsx   |     100 |      100 |     100 |     100 |                   
+  TodoFilters.tsx  |     100 |      100 |     100 |     100 |                   
+  TodoForm.tsx     |     100 |      100 |     100 |     100 |                   
+  TodoItem.tsx     |     100 |      100 |     100 |     100 |                   
+  TodoList.tsx     |     100 |      100 |     100 |     100 |                   
+  TodoPage.tsx     |     100 |      100 |     100 |     100 |                   
+ ...s/diagrams/src |     100 |      100 |     100 |     100 |                   
+  apiDocs.ts       |     100 |      100 |     100 |     100 |                   
+  check.ts         |     100 |      100 |     100 |     100 |                   
+  extract.ts       |     100 |      100 |     100 |     100 |                   
+  inlineRefs.ts    |     100 |      100 |     100 |     100 |                   
+  layout.ts        |     100 |      100 |     100 |     100 |                   
+  manifest.ts      |     100 |      100 |     100 |     100 |                   
+  mmdc.ts          |     100 |      100 |     100 |     100 |                   
+  paths.ts         |     100 |      100 |     100 |     100 |                   
+  readmeMap.ts     |     100 |      100 |     100 |     100 |                   
+  render.ts        |     100 |      100 |     100 |     100 |                   
+  repo.ts          |     100 |      100 |     100 |     100 |                   
+  slug.ts          |     100 |      100 |     100 |     100 |                   
+ ...ges/shared/src |     100 |      100 |     100 |     100 |                   
+  headers.ts       |     100 |      100 |     100 |     100 |                   
+  index.ts         |       0 |        0 |       0 |       0 |                   
+  listQuery.ts     |     100 |      100 |     100 |     100 |                   
+  problem.ts       |     100 |      100 |     100 |     100 |                   
+  todo.ts          |     100 |      100 |     100 |     100 |                   
+-------------------|---------|----------|---------|---------|-------------------
+Playwright pinned consistently at 1.63.0
+npm notice
+npm notice New major version of npm available! 11.19.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

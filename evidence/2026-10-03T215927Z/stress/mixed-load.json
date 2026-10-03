@@ -1,0 +1,165 @@
+{
+    "metrics": {
+        "iteration_duration": {
+            "min": 2.37806,
+            "med": 35.238147,
+            "max": 83.654808,
+            "p(90)": 44.6121507,
+            "p(95)": 48.93994395,
+            "avg": 33.026842031815555
+        },
+        "vus_max": {
+            "value": 50,
+            "min": 50,
+            "max": 50
+        },
+        "http_req_waiting": {
+            "avg": 6.42415338085501,
+            "min": 0.29962,
+            "med": 6.5980265,
+            "max": 35.49811,
+            "p(90)": 9.210611700000001,
+            "p(95)": 10.641664249999998
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 50
+        },
+        "http_req_duration{expected_response:true}": {
+            "p(95)": 10.788535399999997,
+            "avg": 6.500749440946379,
+            "min": 0.309495,
+            "med": 6.6472549999999995,
+            "max": 43.877672,
+            "p(90)": 9.2980058
+        },
+        "data_sent": {
+            "count": 46300629,
+            "rate": 925981.540432058
+        },
+        "http_req_blocked": {
+            "min": 0.000458,
+            "med": 0.000917,
+            "max": 20.675875,
+            "p(90)": 0.001709,
+            "p(95)": 0.00225,
+            "avg": 0.004701379803603071
+        },
+        "http_req_receiving": {
+            "p(95)": 0.12787354999999997,
+            "avg": 0.054465002580156456,
+            "min": 0.003125,
+            "med": 0.010541,
+            "max": 24.243564,
+            "p(90)": 0.04991610000000001
+        },
+        "checks": {
+            "passes": 242776,
+            "fails": 0,
+            "thresholds": {
+                "rate==1": false
+            },
+            "value": 1
+        },
+        "http_req_sending": {
+            "avg": 0.022131057511446436,
+            "min": 0.001417,
+            "med": 0.003167,
+            "max": 26.492472,
+            "p(90)": 0.007666,
+            "p(95)": 0.034417
+        },
+        "data_received": {
+            "count": 540320138,
+            "rate": 10806040.53374096
+        },
+        "iterations": {
+            "count": 60694,
+            "rate": 1213.839311232323
+        },
+        "http_req_tls_handshaking": {
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0
+        },
+        "http_req_duration{name:GET /todos}": {
+            "avg": 6.199233146818438,
+            "min": 0.309495,
+            "med": 6.384278,
+            "max": 40.235184,
+            "p(90)": 8.975486400000001,
+            "p(95)": 10.350214349999998,
+            "thresholds": {
+                "p(95)<250": false
+            }
+        },
+        "http_req_duration": {
+            "med": 6.6472549999999995,
+            "max": 43.877672,
+            "p(90)": 9.2980058,
+            "p(95)": 10.788535399999997,
+            "avg": 6.500749440946379,
+            "min": 0.309495
+        },
+        "http_reqs": {
+            "count": 303470,
+            "rate": 6069.196556161616
+        },
+        "http_req_connecting": {
+            "p(95)": 0,
+            "avg": 0.0007404600191122686,
+            "min": 0,
+            "med": 0,
+            "max": 16.574007,
+            "p(90)": 0
+        },
+        "http_req_failed": {
+            "fails": 303470,
+            "passes": 0,
+            "thresholds": {
+                "rate==0": false
+            },
+            "value": 0
+        }
+    },
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "list 200": {
+                    "name": "list 200",
+                    "path": "::list 200",
+                    "id": "bb957fc3b3b94304050fa1ff782f2f89",
+                    "passes": 60694,
+                    "fails": 0
+                },
+                "edit 200": {
+                    "id": "164dde81ed2dd6649577a59f47156bf8",
+                    "passes": 60694,
+                    "fails": 0,
+                    "name": "edit 200",
+                    "path": "::edit 200"
+                },
+                "complete 200": {
+                    "name": "complete 200",
+                    "path": "::complete 200",
+                    "id": "2596e0ceacf121d4e6191001050c217a",
+                    "passes": 60694,
+                    "fails": 0
+                },
+                "delete 204": {
+                    "name": "delete 204",
+                    "path": "::delete 204",
+                    "id": "64a47c6a524c056844e665ff7d06a25c",
+                    "passes": 60694,
+                    "fails": 0
+                }
+            },
+        "name": "",
+        "path": ""
+    }
+}
