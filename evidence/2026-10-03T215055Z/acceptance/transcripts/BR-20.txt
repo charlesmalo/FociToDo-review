@@ -1,0 +1,27 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"Survives\ a\ restart\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:14 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 213
+Connection: keep-alive
+Location: /api/todos/c47793cd-8a17-4813-9eb0-48e8bc049153
+ETag: "1"
+
+{"id":"c47793cd-8a17-4813-9eb0-48e8bc049153","title":"Survives a restart","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:51:14.004Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+api container: 2918cf62459cb3b814bf9b9cb992b3764ee9f4f4cc5a6ceaa4d035ae5780c85c
+api container IP before restart: 172.22.0.3
+api container IP after restart: 172.22.0.2
+seconds until /api/health was 200 again: 4
+>>> GET /api/todos/c47793cd-8a17-4813-9eb0-48e8bc049153
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:18 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 213
+Connection: keep-alive
+ETag: "1"
+
+{"id":"c47793cd-8a17-4813-9eb0-48e8bc049153","title":"Survives a restart","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:51:14.004Z","version":1,"isOverdue":false,"isDueSoon":false}
+

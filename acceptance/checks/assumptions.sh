@@ -8,10 +8,10 @@ check_RA_01() {
 }
 
 check_RA_02() {
-  local at east west
-  at='-2 hours'
-  east="$(at_offset "${at}" +14:00)"
-  west="$(at_offset "${at}" -12:00)"
+  local epoch east west
+  epoch="$(date -u -d '-2 hours' +%s)"
+  east="$(at_offset "${epoch}" +14:00)"
+  west="$(at_offset "${epoch}" -12:00)"
   printf 'one instant, two spellings: %s and %s\n' "${east}" "${west}" >>"${TRANSCRIPT}"
   create_todo "{\"title\":\"overdue east\",\"dueAt\":\"${east}\"}"
   expect_json .isOverdue true

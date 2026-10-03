@@ -1,0 +1,10 @@
+>>> GET /api/openapi.json
+HTTP/1.1 404 Not Found
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 140
+Connection: keep-alive
+
+{"type":"/problems/not-found","title":"Not found","status":404,"detail":"No route for GET /api/openapi.json","instance":"/api/openapi.json"}
+

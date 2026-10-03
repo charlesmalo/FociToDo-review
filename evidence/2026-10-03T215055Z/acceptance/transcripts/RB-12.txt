@@ -1,0 +1,10 @@
+>>> GET /api/todos?status=bogus
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:20 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 298
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"status","message":"Invalid option: expected one of \"all\"|\"completed\"|\"incomplete\"|\"overdue\"|\"due-soon\""}],"instance":"/api/todos?status=bogus"}
+

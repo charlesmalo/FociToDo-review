@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"acc-BR03-07c6d6d2dfee-a\"\,\"dueAt\":\"2030-01-02T12:00:00Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:13 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 240
+Connection: keep-alive
+Location: /api/todos/2f89345f-abb0-42a0-a50a-e0c581a73bb6
+ETag: "1"
+
+{"id":"2f89345f-abb0-42a0-a50a-e0c581a73bb6","title":"acc-BR03-07c6d6d2dfee-a","description":null,"dueAt":"2030-01-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:51:13.290Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> GET /api/todos
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:13 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 680
+Connection: keep-alive
+
+[{"id":"2f89345f-abb0-42a0-a50a-e0c581a73bb6","title":"acc-BR03-07c6d6d2dfee-a","description":null,"dueAt":"2030-01-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:51:13.290Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"51914d9b-e8d3-4831-97a1-6427a39fe5f1","title":"Buy milk","description":"2% organic","dueAt":"2030-01-02T12:00:00.000Z","isCompleted":false,"createdAt":"2026-10-03T21:51:13.269Z","version":1,"isOverdue":false,"isDueSoon":false},{"id":"8b8a7e12-f71e-409f-b050-2c96ac6e3400","title":"Buy milk","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:51:13.230Z","version":1,"isOverdue":false,"isDueSoon":false}]
+

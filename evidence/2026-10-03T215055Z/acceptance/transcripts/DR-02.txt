@@ -1,0 +1,12 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"createdAt\ check\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:18 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 210
+Connection: keep-alive
+Location: /api/todos/d3eaeeaa-9eab-4c2a-84d2-9665fed1d5be
+ETag: "1"
+
+{"id":"d3eaeeaa-9eab-4c2a-84d2-9665fed1d5be","title":"createdAt check","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:51:18.432Z","version":1,"isOverdue":false,"isDueSoon":false}
+

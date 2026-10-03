@@ -1,0 +1,20 @@
+>>> GET /api/todos?sort=dueDate
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 268
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"sort","message":"Invalid option: expected one of \"createdAt\"|\"dueAt\"|\"title\""}],"instance":"/api/todos?sort=dueDate"}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"old\ key\"\,\"dueDate\":\"2030-01-01\"\}
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 206
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"dueDate","message":"Unknown field"}],"instance":"/api/todos"}
+

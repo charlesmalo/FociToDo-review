@@ -1,0 +1,22 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"huge\ if-match\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:20 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 208
+Connection: keep-alive
+Location: /api/todos/09d51f37-424e-4262-a7cd-eacf6b6c62a8
+ETag: "1"
+
+{"id":"09d51f37-424e-4262-a7cd-eacf6b6c62a8","title":"huge if-match","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:51:20.952Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> PATCH /api/todos/09d51f37-424e-4262-a7cd-eacf6b6c62a8 -H Content-Type:\ application/json --data-binary \{\"title\":\"x\"\} -H If-Match:\ \"9999999999\"
+HTTP/1.1 400 Bad Request
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:20 GMT
+Content-Type: application/problem+json; charset=utf-8
+Content-Length: 282
+Connection: keep-alive
+
+{"type":"/problems/validation-error","title":"Validation failed","status":400,"detail":"The request contains invalid fields","errors":[{"field":"If-Match","message":"If-Match must be a single strong ETag such as \"3\""}],"instance":"/api/todos/09d51f37-424e-4262-a7cd-eacf6b6c62a8"}
+

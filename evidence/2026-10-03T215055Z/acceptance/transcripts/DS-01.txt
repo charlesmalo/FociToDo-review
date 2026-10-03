@@ -1,0 +1,59 @@
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"soon\"\,\"dueAt\":\"2026-10-03T23:51:21Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 220
+Connection: keep-alive
+Location: /api/todos/9f0e6db4-9ebb-4b21-a214-733ad04b2236
+ETag: "1"
+
+{"id":"9f0e6db4-9ebb-4b21-a214-733ad04b2236","title":"soon","description":null,"dueAt":"2026-10-03T23:51:21.000Z","isCompleted":false,"createdAt":"2026-10-03T21:51:21.086Z","version":1,"isOverdue":false,"isDueSoon":true}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"later\"\,\"dueAt\":\"2026-10-04T22:51:21Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 222
+Connection: keep-alive
+Location: /api/todos/2d569e3a-7142-42c4-a108-52961b1a89fa
+ETag: "1"
+
+{"id":"2d569e3a-7142-42c4-a108-52961b1a89fa","title":"later","description":null,"dueAt":"2026-10-04T22:51:21.000Z","isCompleted":false,"createdAt":"2026-10-03T21:51:21.103Z","version":1,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"soon\ but\ done\"\,\"dueAt\":\"2026-10-03T23:51:21Z\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 229
+Connection: keep-alive
+Location: /api/todos/892403ec-c207-422e-b39c-b29565ad7a37
+ETag: "1"
+
+{"id":"892403ec-c207-422e-b39c-b29565ad7a37","title":"soon but done","description":null,"dueAt":"2026-10-03T23:51:21.000Z","isCompleted":false,"createdAt":"2026-10-03T21:51:21.118Z","version":1,"isOverdue":false,"isDueSoon":true}
+
+>>> POST /api/todos/892403ec-c207-422e-b39c-b29565ad7a37/complete
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 229
+Connection: keep-alive
+ETag: "2"
+
+{"id":"892403ec-c207-422e-b39c-b29565ad7a37","title":"soon but done","description":null,"dueAt":"2026-10-03T23:51:21.000Z","isCompleted":true,"createdAt":"2026-10-03T21:51:21.118Z","version":2,"isOverdue":false,"isDueSoon":false}
+
+>>> POST /api/todos -H Content-Type:\ application/json --data-binary \{\"title\":\"no\ deadline\"\}
+HTTP/1.1 201 Created
+Server: nginx/1.31.6
+Date: Sat, 03 Oct 2026 21:51:21 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 206
+Connection: keep-alive
+Location: /api/todos/5aaec621-65c8-414f-95dd-7747b96d2a48
+ETag: "1"
+
+{"id":"5aaec621-65c8-414f-95dd-7747b96d2a48","title":"no deadline","description":null,"dueAt":null,"isCompleted":false,"createdAt":"2026-10-03T21:51:21.138Z","version":1,"isOverdue":false,"isDueSoon":false}
+

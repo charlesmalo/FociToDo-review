@@ -99,10 +99,10 @@ mine() {
 # utc_at WHEN: an instant relative to now (GNU date syntax, e.g. '+2 hours') as RFC 3339 UTC.
 utc_at() { date -u -d "$1" +%Y-%m-%dT%H:%M:%SZ; }
 
-# at_offset WHEN OFFSET: the same instant as utc_at, written with a numeric offset such as +14:00 or -12:00.
+# at_offset EPOCH OFFSET: the instant EPOCH (seconds) written with a numeric offset such as +14:00 or -12:00.
+# Callers read the clock once and pass the same EPOCH for every spelling of one instant.
 at_offset() {
-  local epoch sign secs
-  epoch="$(date -u -d "$1" +%s)"
+  local epoch="$1" sign secs
   sign="${2:0:1}"
   secs=$(( 10#${2:1:2} * 3600 + 10#${2:4:2} * 60 ))
   [ "${sign}" = '-' ] && secs=$(( -secs ))
